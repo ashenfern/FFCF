@@ -191,6 +191,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\ForecastController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -227,6 +228,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FFCModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ForecastModel.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>FFCModel.tt</DependentUpon>
     </Compile>
@@ -392,6 +394,7 @@
     <Content Include="Views\Customer\Create.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Delete.cshtml" />
+    <Content Include="Views\Forecast\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -401,6 +404,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FFC.Framework.Common\FFC.Framework.Common.csproj">
+      <Project>{7c598820-1e4e-4291-9cec-cbbbdb760d94}</Project>
+      <Name>FFC.Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FFC.Framework.Data\FFC.Framework.Data.csproj">
+      <Project>{71e5d0ac-b2e9-44eb-907a-bd51933e3842}</Project>
+      <Name>FFC.Framework.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -7,25 +7,43 @@
 
 <h2>Index</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>ForecastModel</legend>
-        <!-- Doctor -->
+        <!-- Method -->
         <div class="editor-label">
-            @Html.LabelFor(model => model.ForecastMethods, "Forecast Methods")
+            @Html.LabelFor(model => model.ForecastMethods, "Methods")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ForecastMethods", (IEnumerable<SelectListItem>)ViewBag.ForecastMethods, "--- Select a Forecast Method ---")
+            @Html.DropDownList("ForecastMethods", (IEnumerable<SelectListItem>)ViewBag.ForecastMethods, "--- Select a  Method ---")
             @Html.ValidationMessageFor(model => model.ForecastMethods)
         </div>
+
+        <!-- Date Type -->
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateTypes, "Date Type")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DateTypes", (IEnumerable<SelectListItem>)ViewBag.DateTypes, "--- Select a  DateType ---")
+            @Html.ValidationMessageFor(model => model.DateTypes)
+        </div>
+
         <p>
-            <input type="submit" value="Save" />
+            <button type="submit" id="search">Search</button>
         </p>
     </fieldset>
 }
+
+<h1>Forecast Result </h1>
+@if (Model != null && Model.ForecastResult != null)
+{
+    Html.RenderPartial("_ForecastResultPartial", Model.ForecastResult);
+}
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -33,4 +51,23 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //alert("hi");
+        });
+
+        //var url = '@Url.Action("DisplaySearchResults", "Search")';
+        //$('#search').click(function () {
+        //    alert("Search Button clicked");
+
+
+        //return false;
+        //var keyWord = $('#Keyword').val();
+        //$('#searchResults').load(url, { searchText: keyWord });
+        //})
+
+    </script>
 }
+
+

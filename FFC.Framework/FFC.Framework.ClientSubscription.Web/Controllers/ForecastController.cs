@@ -1,5 +1,6 @@
 ﻿using FFC.Framework.ClientSubscription.Web.Models;
 using FFC.Framework.Common;
+using FFC.Framework.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,37 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         {
             //ForecastModel forecastModel = new ForecastModel();
 
-            List<string> list = Enum.GetNames(typeof(Methods)).ToList();
-            ViewBag.ForecastMethods = new SelectList(list.Select(x => new { Value = x, Text = x }),"Value","Text");
-            
+            List<string> listMethods = Enum.GetNames(typeof(Methods)).ToList();
+            List<string> listDateTypes = Enum.GetNames(typeof(DataPeriod)).ToList();
+
+            ViewBag.ForecastMethods = new SelectList(listMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
+            ViewBag.DateTypes = new SelectList(listDateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
+
             return View();
+        }
+
+        //
+        // POST: /Forecast/Index
+
+        [HttpPost]
+        public ActionResult Index(ForecastModel model)
+        {
+            try
+            {
+                ViewBag.ForecastMethods = new SelectList(model.ForecastMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
+                ViewBag.DateTypes = new SelectList(model.DateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
+                  
+                //TODO: Calling the web api and get the result
+                ForecastResult forecastResult = new ForecastResult() { Method = Methods.Arima, results = new List<double>() { 1.0 } };
+                model.ForecastResult = forecastResult;
+
+                //return RedirectToAction("Index");
+                return View("Index", model);
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         //

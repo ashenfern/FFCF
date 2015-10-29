@@ -67,6 +67,21 @@
           <Property Name="ReportsTo" Type="int" />
           <Property Name="PhotoPath" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="Forecast_DatePeriods">
+          <Key>
+            <PropertyRef Name="DatePeriodID" />
+          </Key>
+          <Property Name="DatePeriodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatePeriod" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Forecast_Methods">
+          <Key>
+            <PropertyRef Name="ForecastMethodID" />
+          </Key>
+          <Property Name="ForecastMethodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ForecastMethod" Type="nvarchar(max)" />
+          <Property Name="ForecastIdentifier" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="ProductID" />
@@ -200,6 +215,8 @@
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forecast_DatePeriods" EntityType="Self.Forecast_DatePeriods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forecast_Methods" EntityType="Self.Forecast_Methods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
@@ -304,6 +321,21 @@
           <NavigationProperty Name="Employees1" Relationship="Self.FK_Employees_Employees" FromRole="Employees" ToRole="Employees1" />
           <NavigationProperty Name="Employee1" Relationship="Self.FK_Employees_Employees" FromRole="Employees1" ToRole="Employees" />
           <NavigationProperty Name="Transactions" Relationship="Self.FK_Transactions_Employees" FromRole="Employees" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="Forecast_DatePeriods">
+          <Key>
+            <PropertyRef Name="DatePeriodID" />
+          </Key>
+          <Property Name="DatePeriodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatePeriod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Forecast_Methods">
+          <Key>
+            <PropertyRef Name="ForecastMethodID" />
+          </Key>
+          <Property Name="ForecastMethodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ForecastMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ForecastIdentifier" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -433,6 +465,8 @@
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Forecast_DatePeriods" EntityType="Self.Forecast_DatePeriods" />
+          <EntitySet Name="Forecast_Methods" EntityType="Self.Forecast_Methods" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetail" />
           <EntitySet Name="Transactions" EntityType="Self.Transaction" />
@@ -585,6 +619,23 @@
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="ReportsTo" ColumnName="ReportsTo" />
                 <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forecast_DatePeriods">
+            <EntityTypeMapping TypeName="FFCModel.Forecast_DatePeriods">
+              <MappingFragment StoreEntitySet="Forecast_DatePeriods">
+                <ScalarProperty Name="DatePeriodID" ColumnName="DatePeriodID" />
+                <ScalarProperty Name="DatePeriod" ColumnName="DatePeriod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forecast_Methods">
+            <EntityTypeMapping TypeName="FFCModel.Forecast_Methods">
+              <MappingFragment StoreEntitySet="Forecast_Methods">
+                <ScalarProperty Name="ForecastMethodID" ColumnName="ForecastMethodID" />
+                <ScalarProperty Name="ForecastMethod" ColumnName="ForecastMethod" />
+                <ScalarProperty Name="ForecastIdentifier" ColumnName="ForecastIdentifier" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

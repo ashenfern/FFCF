@@ -7,13 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FFC.Framework.ClientSubscription.Web.Models
+namespace FFC.Framework.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class C__RefactorLog
+    public partial class Forecast_Methods
     {
-        public System.Guid OperationKey { get; set; }
+        public int ForecastMethodID { get; set; }
+        public string ForecastMethod { get; set; }
+        public string ForecastIdentifier { get; set; }
     }
 }

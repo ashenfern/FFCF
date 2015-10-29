@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FFC.Framework.ClientSubscription.Web.Models;
+using FFC.Framework.Data;
 
 namespace FFC.Framework.ClientSubscription.Web.Controllers
 {

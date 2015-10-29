@@ -33,6 +33,8 @@ namespace FFC.Framework.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Forecast_DatePeriods> Forecast_DatePeriods { get; set; }
+        public DbSet<Forecast_Methods> Forecast_Methods { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<TransactionDetail> TransactionDetails { get; set; }
         public DbSet<Transaction> Transactions { get; set; }

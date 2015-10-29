@@ -54,7 +54,6 @@
     <Compile Include="Category.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ForecastResult.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
@@ -79,7 +78,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FFC.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ForecastResult.cs" />
     <Compile Include="ForecastSearchCriteria.cs" />
+    <Compile Include="Forecast_DatePeriods.cs">
+      <DependentUpon>FFC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forecast_Methods.cs">
+      <DependentUpon>FFC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
@@ -113,13 +119,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="FFC.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FFC.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="FFC.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>FFC.edmx</DependentUpon>

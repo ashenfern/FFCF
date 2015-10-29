@@ -204,67 +204,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Branch.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Category.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Customer.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\C__RefactorLog.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Employee.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FFCModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FFCModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FFCModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FFCModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FFCModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\ForecastModel.cs" />
-    <Compile Include="Models\Product.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Forecast_GetDailyAvereageProductTransactions_Result.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Forecast_GetDailyTimeSpecificAvereageProductTransactions_Result.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Forecast_GetProductCountDayByProductId_Result.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Forecast_GetProductCountMonthDayByProductId_Result.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Forecast_GetProductCountYearDayByProductId_Result.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Forecast_GetWeeklyAverageTransactions_Result.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Forecast_GetWeeklyAvereageProductTransactions_Result.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Transaction.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TransactionDetail.cs">
-      <DependentUpon>FFCModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -324,23 +264,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="Models\FFCModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>FFCModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\FFCModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FFCModel.edmx</DependentUpon>
-      <LastGenOutput>FFCModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\FFCModel.edmx.diagram">
-      <DependentUpon>FFCModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\FFCModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FFCModel.edmx</DependentUpon>
-      <LastGenOutput>FFCModel.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />

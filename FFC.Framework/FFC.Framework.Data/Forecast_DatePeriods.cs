@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FFC.Framework.ClientSubscription.Web.Models
+namespace FFC.Framework.Data
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_Forecast_GetDailyTimeSpecificAvereageProductTransactions_Result
+    public partial class Forecast_DatePeriods
     {
-        public Nullable<int> Day { get; set; }
-        public int ProductID { get; set; }
-        public Nullable<int> TransactionCount { get; set; }
+        public int DatePeriodID { get; set; }
+        public string DatePeriod { get; set; }
     }
 }

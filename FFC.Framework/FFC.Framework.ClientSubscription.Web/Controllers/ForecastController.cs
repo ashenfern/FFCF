@@ -1,4 +1,5 @@
-﻿using FFC.Framework.ClientSubscription.Web.Models;
+﻿using FFC.Framework.ClientSubscription.Business;
+using FFC.Framework.ClientSubscription.Web.Models;
 using FFC.Framework.Common;
 using FFC.Framework.Data;
 using System;
@@ -11,6 +12,8 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
 {
     public class ForecastController : Controller
     {
+        FFCEntities db = new FFCEntities();
+
         //
         // GET: /Forecast/
 
@@ -18,11 +21,14 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         {
             //ForecastModel forecastModel = new ForecastModel();
 
-            List<string> listMethods = Enum.GetNames(typeof(Methods)).ToList();
-            List<string> listDateTypes = Enum.GetNames(typeof(DataPeriod)).ToList();
+            //List<string> listMethods = Enum.GetNames(typeof(Methods)).ToList();
+            //List<string> listDateTypes = Enum.GetNames(typeof(DataPeriod)).ToList();
 
-            ViewBag.ForecastMethods = new SelectList(listMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
-            ViewBag.DateTypes = new SelectList(listDateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
+            //ViewBag.ForecastMethods = new SelectList(listMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
+            //ViewBag.DateTypes = new SelectList(listDateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
+
+            ViewBag.ForecastMethods = new SelectList(db.Forecast_Methods, "ForecastMethodID", "ForecastMethod");
+            ViewBag.DateTypes = new SelectList(db.Forecast_DatePeriods, "DatePeriodID", "DatePeriod");
 
             return View();
         }
@@ -35,10 +41,15 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         {
             try
             {
-                ViewBag.ForecastMethods = new SelectList(model.ForecastMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
-                ViewBag.DateTypes = new SelectList(model.DateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
-                  
+                //ViewBag.ForecastMethods = new SelectList(model.ForecastMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
+                //ViewBag.DateTypes = new SelectList(model.DateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
+                ViewBag.ForecastMethods = new SelectList(db.Forecast_Methods, "ForecastMethodID", "ForecastMethod");
+                ViewBag.DateTypes = new SelectList(db.Forecast_DatePeriods, "DatePeriodID", "DatePeriod");
+
                 //TODO: Calling the web api and get the result
+                ForecastBusinessManger fcastManager = new ForecastBusinessManger();
+                var result = fcastManager.GetForecastResults();
+
                 ForecastResult forecastResult = new ForecastResult() { Method = Methods.Arima, results = new List<double>() { 1.0 } };
                 model.ForecastResult = forecastResult;
 

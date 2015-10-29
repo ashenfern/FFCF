@@ -29,7 +29,7 @@ namespace FFC.Framework.WebServices.Controllers
         [System.Web.Http.HttpGet]
         public ForecastResult ForecastTest(int id)
         {
-            var result = ForecastManager.Fcast1();
+            var result = ForecastManager.fcast2();
             return result;
         }
 

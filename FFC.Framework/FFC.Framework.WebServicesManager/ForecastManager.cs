@@ -114,6 +114,12 @@ namespace FFC.Framework.WebServicesManager
             return fcastResult;
         }
 
+        public static ForecastResult fcast2()
+        {
+            ForecastResult forecastResult = new ForecastResult() { Method = Methods.Arima, results = new List<double>() { 1.0 } };
+           // model.ForecastResult = forecastResult;
+            return forecastResult;
+        }
 
         public static void SetupPath(string Rversion = "R-3.2.2")
         {
@@ -132,7 +138,7 @@ namespace FFC.Framework.WebServicesManager
 
         public static void Plot(REngine engine)
         {
-            engine.Evaluate(@"png(filename='C:\\Users\\ashen\\Desktop\\Images\\Test2.png')");
+            engine.Evaluate(@"png(filename='C:\\Users\\ashfernando\\Desktop\\Test\\Test2.png')");
             engine.Evaluate("plot(fcast)");
             engine.Evaluate("dev.off()");
         }

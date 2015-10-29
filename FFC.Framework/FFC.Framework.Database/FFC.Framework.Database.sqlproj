@@ -78,5 +78,7 @@
     <Build Include="dbo\Stored Procedures\sp_Forecast_GetProductCountYearDayByProductId.sql" />
     <Build Include="dbo\Stored Procedures\sp_Forecast_GetWeeklyAverageTransactions.sql" />
     <Build Include="dbo\Stored Procedures\sp_Forecast_GetWeeklyAvereageProductTransactions.sql" />
+    <Build Include="dbo\Tables\Forecast_Methods.sql" />
+    <Build Include="dbo\Tables\Forecast_DatePeriods.sql" />
   </ItemGroup>
 </Project>

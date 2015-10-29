@@ -1,0 +1,43 @@
+﻿@model FFC.Framework.Data.Transaction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Transaction</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Customer.CustomerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Customer.CustomerName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Employee.LastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Employee.LastName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TransactionDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TransactionDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Branch.BranchName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Branch.BranchName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.TransactionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

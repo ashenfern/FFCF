@@ -1,0 +1,68 @@
+﻿@model FFC.Framework.Data.TransactionDetail
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>TransactionDetail</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TransactionID, "Transaction")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("TransactionID", String.Empty)
+            @Html.ValidationMessageFor(model => model.TransactionID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductID, "Product")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ProductID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ProductID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UnitPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UnitPrice)
+            @Html.ValidationMessageFor(model => model.UnitPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Quantity)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Quantity)
+            @Html.ValidationMessageFor(model => model.Quantity)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Discount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Discount)
+            @Html.ValidationMessageFor(model => model.Discount)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

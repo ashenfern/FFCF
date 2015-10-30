@@ -72,6 +72,18 @@ namespace FFC.Framework.ClientSubscription.Business
             }
         }
 
+        public List<T> GetDataList(int id = -1)
+        {
+            //string uri = webUrl;
+            string uri = baseURL + Resource;
+            using (HttpClient httpClient = new HttpClient())
+            {
+                Task<String> response = httpClient.GetStringAsync(uri);
+                var data = JsonConvert.DeserializeObjectAsync<List<T>>(response.Result).Result;
+                return data == null ? new List<T>() : data; ;
+            }
+        }
+
         public T GetDataById(int id = -1)
         {
             string uri = baseURL + Resource + id;

@@ -76,12 +76,14 @@ namespace FFC.Framework.WebServicesManager
 
             //SetupPath();
             //Log();
+
+           
             REngine.SetEnvironmentVariables();
 
             // There are several options to initialize the engine, but by default the following suffice:
             REngine engine = REngine.GetInstance();
-
-            engine.Initialize();
+           
+            //engine.Initialize();
 
             // .NET Framework array to R vector.
             //NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99, 1000 });
@@ -109,7 +111,7 @@ namespace FFC.Framework.WebServicesManager
             //    Console.WriteLine(item);
             //}
 
-            engine.Dispose();
+            //engine.Dispose();
 
             return fcastResult;
         }

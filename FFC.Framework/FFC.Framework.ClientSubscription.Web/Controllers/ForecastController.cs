@@ -51,8 +51,8 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
 
                 ForecastSearchCriteria fcastSearchCriteria = new ForecastSearchCriteria();
                 fcastSearchCriteria.ProductId = 1;
-                fcastSearchCriteria.Method.ForecastIdentifier = model.ForecastSearchCriteria.Method.ForecastIdentifier;
-                fcastSearchCriteria.DataPeriod.DatePeriod = model.ForecastSearchCriteria.DataPeriod.DatePeriod;
+                fcastSearchCriteria.Method = new Forecast_Methods() { ForecastIdentifier = model.ForecastSearchCriteria.Method.ForecastIdentifier };
+                fcastSearchCriteria.DatePeriod = new Forecast_DatePeriods(){DatePeriod = model.ForecastSearchCriteria.DatePeriod.DatePeriod};
                 fcastSearchCriteria.ForecastPeriod = 5;
                 var result = fcastManager.GetForecastResults(fcastSearchCriteria);
 

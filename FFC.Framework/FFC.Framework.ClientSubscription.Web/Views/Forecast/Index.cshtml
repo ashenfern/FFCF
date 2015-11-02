@@ -1,7 +1,7 @@
 ﻿@model FFC.Framework.ClientSubscription.Web.Models.ForecastModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Search Forecast";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,10 +16,10 @@
         <legend>ForecastModel</legend>
         <!-- Method -->
         <div class="editor-label">
-            @Html.LabelFor(model => model.ForecastSearchCriteria.Method, "Methods")
+            @Html.LabelFor(model => model.ForecastSearchCriteria.Method, "Forecast Methods:")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.ForecastSearchCriteria.Method.ForecastMethod, (IEnumerable<SelectListItem>)ViewBag.ForecastMethods, "--- Select a  Method ---")
+            @Html.DropDownListFor(model => model.ForecastSearchCriteria.Method.ForecastIdentifier, (IEnumerable<SelectListItem>)ViewBag.ForecastMethods, "--- Select a Forecast Method ---")
             @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.Method)
         </div>
 
@@ -28,7 +28,7 @@
             @Html.LabelFor(model => model.ForecastSearchCriteria.DataPeriod.DatePeriodID, "Date Type")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model=> model.ForecastSearchCriteria.DataPeriod.DatePeriod, (IEnumerable<SelectListItem>)ViewBag.DateTypes, "--- Select a  DateType ---")
+            @Html.DropDownListFor(model=> model.ForecastSearchCriteria.DataPeriod.DatePeriod, (IEnumerable<SelectListItem>)ViewBag.DateTypes, "--- Select a DateType ---")
             @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.DataPeriod.DatePeriodID)
         </div>
 

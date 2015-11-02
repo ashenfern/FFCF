@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="FFCModel.Category" Width="1.5" PointX="0.75" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FFCModel.Customer" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="FFCModel.Employee" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FFCModel.Forecast_DatePeriods" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FFCModel.Forecast_DatePeriods" Width="1.5" PointX="3.375" PointY="6.75" IsExpanded="false" />
         <EntityTypeShape EntityType="FFCModel.Forecast_Methods" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FFCModel.Product" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FFCModel.TransactionDetail" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />

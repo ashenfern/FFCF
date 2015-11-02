@@ -15,7 +15,7 @@ namespace FFC.Framework.ClientSubscription.Business
         {
             int productId = searchCriteria.ProductId;
             string method = searchCriteria.Method.ForecastIdentifier.ToString();
-            string dataType = searchCriteria.DataPeriod.DatePeriod.ToString();
+            string dataType = searchCriteria.DatePeriod.DatePeriod.ToString();
             int periods = searchCriteria.ForecastPeriod;
 
             //service.Resource = "api/Forecast/ForecastByMethod/1";

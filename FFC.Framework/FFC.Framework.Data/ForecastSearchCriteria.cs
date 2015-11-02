@@ -9,11 +9,13 @@ namespace FFC.Framework.Data
 {
     public class ForecastSearchCriteria
     {
-        public DateTime StartDate { get; set; }
+        public Branch Branch { get; set; }
+        public Product Product { get; set; }
         public Forecast_Methods Method { get; set; }
-        public Forecast_DatePeriods DataPeriod { get; set; }
+        public Forecast_DatePeriods DatePeriod { get; set; }
         public int ForecastPeriod { get; set; }
         public int ProductId { get; set; }
+        public DateTime StartDate { get; set; }
     }
 
 }

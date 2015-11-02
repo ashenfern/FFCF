@@ -59,6 +59,66 @@ namespace FFC.Framework.WebServicesManager
         #endregion
 
         #region R_Related
+
+        public static ForecastResult ForecastByMethod(int productId, string method, string dataType, int periods)
+        {
+            ForecastResult fcastResult = new ForecastResult();
+
+            Methods method1 = (Methods)Enum.Parse(typeof(Methods), method, true);
+            DataPeriod datatype1 = (DataPeriod)Enum.Parse(typeof(DataPeriod), dataType, true);
+
+            //int productId = 1;
+            //Methods method = Methods.rwf; //meanf(YYMMDD,MMDD,MMWWDD,DD), rtw, rtw(with Drift), Moving AVG,ets, Arima, HoltWinters, msts
+            //DataPeriod dataType = DataPeriod.Daily;
+            //int periods = 50;
+
+            var values = GetCorrespondingData(datatype1, productId);
+            //FFCEntities db = new FFCEntities();
+            //var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
+            //List<double> values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
+            //REngine.SetEnvironmentVariables(@"C:\Program Files\R\R-2.13.1\bin\i386");
+
+            //SetupPath();
+            //Log();
+
+            REngine.SetEnvironmentVariables();
+
+            // There are several options to initialize the engine, but by default the following suffice:
+            REngine engine = REngine.GetInstance();
+           
+            //engine.Initialize();
+
+            // .NET Framework array to R vector.
+            //NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99, 1000 });
+            NumericVector testTs = engine.CreateNumericVector(new double[] { 6, 5, 6, 5, 6, 5 });
+            //NumericVector testTs = engine.CreateNumericVector(values);
+
+            engine.SetSymbol("testTs", testTs);
+            //auto arima for monthly
+            engine.Evaluate("tsValue <- ts(testTs, frequency=1, start=c(2010, 1, 1))");
+            engine.Evaluate("library(forecast)");
+            engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method.ToString())); // Fit <- Arima(tsValue)
+            //MethodManipulation(engine, method);
+            engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
+
+            Plot(engine);
+
+            //var a = engine.Evaluate("fcast <- forecast(tsValue, h=5)").AsCharacter();
+            NumericVector forecasts = engine.Evaluate("fcast$mean").AsNumeric();
+
+            fcastResult.results = forecasts.ToList();
+           
+
+            //foreach (var item in forecasts)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //engine.Dispose();
+
+            return fcastResult;
+        }
+
         public static ForecastResult Fcast1()
         {
             ForecastResult fcastResult = new ForecastResult();
@@ -77,12 +137,12 @@ namespace FFC.Framework.WebServicesManager
             //SetupPath();
             //Log();
 
-           
+
             REngine.SetEnvironmentVariables();
 
             // There are several options to initialize the engine, but by default the following suffice:
             REngine engine = REngine.GetInstance();
-           
+
             //engine.Initialize();
 
             // .NET Framework array to R vector.

@@ -16,20 +16,20 @@
         <legend>ForecastModel</legend>
         <!-- Method -->
         <div class="editor-label">
-            @Html.LabelFor(model => model.ForecastMethod, "Methods")
+            @Html.LabelFor(model => model.ForecastSearchCriteria.Method, "Methods")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ForecastMethod.ForecastMethodID", (IEnumerable<SelectListItem>)ViewBag.ForecastMethods, "--- Select a  Method ---")
-            @Html.ValidationMessageFor(model => model.ForecastMethod)
+            @Html.DropDownListFor(model => model.ForecastSearchCriteria.Method.ForecastMethod, (IEnumerable<SelectListItem>)ViewBag.ForecastMethods, "--- Select a  Method ---")
+            @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.Method)
         </div>
 
         <!-- Date Type -->
         <div class="editor-label">
-            @Html.LabelFor(model => model.ForecastDateType, "Date Type")
+            @Html.LabelFor(model => model.ForecastSearchCriteria.DataPeriod.DatePeriodID, "Date Type")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ForecastDateType.DatePeriodID", (IEnumerable<SelectListItem>)ViewBag.DateTypes, "--- Select a  DateType ---")
-            @Html.ValidationMessageFor(model => model.ForecastDateType)
+            @Html.DropDownListFor(model=> model.ForecastSearchCriteria.DataPeriod.DatePeriod, (IEnumerable<SelectListItem>)ViewBag.DateTypes, "--- Select a  DateType ---")
+            @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.DataPeriod.DatePeriodID)
         </div>
 
         <p>

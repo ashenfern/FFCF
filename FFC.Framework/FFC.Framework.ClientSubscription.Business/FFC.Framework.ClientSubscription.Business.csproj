@@ -57,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FFC.Framework.Common\FFC.Framework.Common.csproj">
+      <Project>{7c598820-1e4e-4291-9cec-cbbbdb760d94}</Project>
+      <Name>FFC.Framework.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FFC.Framework.Data\FFC.Framework.Data.csproj">
       <Project>{71e5d0ac-b2e9-44eb-907a-bd51933e3842}</Project>
       <Name>FFC.Framework.Data</Name>

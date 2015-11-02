@@ -27,8 +27,8 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
             //ViewBag.ForecastMethods = new SelectList(listMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
             //ViewBag.DateTypes = new SelectList(listDateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
 
-            ViewBag.ForecastMethods = new SelectList(db.Forecast_Methods, "ForecastMethodID", "ForecastMethod");
-            ViewBag.DateTypes = new SelectList(db.Forecast_DatePeriods, "DatePeriodID", "DatePeriod");
+            ViewBag.ForecastMethods = new SelectList(db.Forecast_Methods, "ForecastIdentifier", "ForecastMethod");
+            ViewBag.DateTypes = new SelectList(db.Forecast_DatePeriods, "DatePeriod", "DatePeriod");
 
             return View();
         }
@@ -43,15 +43,21 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
             {
                 //ViewBag.ForecastMethods = new SelectList(model.ForecastMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
                 //ViewBag.DateTypes = new SelectList(model.DateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
-                ViewBag.ForecastMethods = new SelectList(db.Forecast_Methods, "ForecastMethodID", "ForecastMethod");
-                ViewBag.DateTypes = new SelectList(db.Forecast_DatePeriods, "DatePeriodID", "DatePeriod");
+                ViewBag.ForecastMethods = new SelectList(db.Forecast_Methods, "ForecastIdentifier", "ForecastMethod");
+                ViewBag.DateTypes = new SelectList(db.Forecast_DatePeriods, "DatePeriod", "DatePeriod");
 
                 //TODO: Calling the web api and get the result
                 ForecastBusinessManger fcastManager = new ForecastBusinessManger();
-                var result = fcastManager.GetForecastResults();
 
-                ForecastResult forecastResult = new ForecastResult() { Method = Methods.Arima, results = new List<double>() { 1.0 } };
-                model.ForecastResult = forecastResult;
+                ForecastSearchCriteria fcastSearchCriteria = new ForecastSearchCriteria();
+                fcastSearchCriteria.ProductId = 1;
+                fcastSearchCriteria.Method.ForecastIdentifier = model.ForecastSearchCriteria.Method.ForecastIdentifier;
+                fcastSearchCriteria.DataPeriod.DatePeriod = model.ForecastSearchCriteria.DataPeriod.DatePeriod;
+                fcastSearchCriteria.ForecastPeriod = 5;
+                var result = fcastManager.GetForecastResults(fcastSearchCriteria);
+
+                //ForecastResult forecastResult = new ForecastResult() { Method = Methods.Arima, results = new List<double>() { 1.0 } };
+                model.ForecastResult = result;
 
                 //return RedirectToAction("Index");
                 return View("Index", model);

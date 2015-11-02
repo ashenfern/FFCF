@@ -25,11 +25,20 @@ namespace FFC.Framework.WebServices.Controllers
             return result;
         }
 
+
         [ActionName("TestForecast")]
         [System.Web.Http.HttpGet]
         public ForecastResult ForecastTest(int id)
         {
             var result = ForecastManager.Fcast1();
+            return result;
+        }
+
+        [ActionName("ForecastByMethod")]
+        [System.Web.Http.HttpGet]
+        public ForecastResult ForecastByMethod(int productId, string method, string dataPeriod, int periods, int ab)
+        {
+            var result = ForecastManager.ForecastByMethod(productId, method, dataPeriod, periods);
             return result;
         }
 

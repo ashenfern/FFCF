@@ -29,6 +29,12 @@ namespace FFC.Framework.WebServices
               defaults: new { id = RouteParameter.Optional }
           );
 
+            config.Routes.MapHttpRoute(
+              name: "ApiForecastByAction",
+              routeTemplate: "api/{controller}/{action}/{productId}/{method}/{dataPeriod}/{periods}/{ab}",
+              defaults: new { id = RouteParameter.Optional }
+          );
+
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Re‌ferenceLoopHandling = ReferenceLoopHandling.Ignore;
 

@@ -12,59 +12,59 @@ namespace FFC.Framework.WebServicesManager
 {
     public class ForecastManager
     {
-        FFCEntities context = new FFCEntities();
+        FFCEntities db = new FFCEntities();
 
         #region SP_Calls
         public List<sp_Forecast_GetDailyAvereageProductTransactions_Result> GetDailyAvereageProductTransactions()
         {
-            var result = context.sp_Forecast_GetDailyAvereageProductTransactions();
+            var result = db.sp_Forecast_GetDailyAvereageProductTransactions();
             return result.ToList();
         }
 
         public List<sp_Forecast_GetDailyTimeSpecificAvereageProductTransactions_Result> GetDailyTimeSpecificAvereageProductTransactions()
         {
-            var result = context.sp_Forecast_GetDailyTimeSpecificAvereageProductTransactions();
+            var result = db.sp_Forecast_GetDailyTimeSpecificAvereageProductTransactions();
             return result.ToList();
         }
 
         public List<sp_Forecast_GetWeeklyAverageTransactions_Result> GetWeeklyAverageTransactions()
         {
-            var result = context.sp_Forecast_GetWeeklyAverageTransactions();
+            var result = db.sp_Forecast_GetWeeklyAverageTransactions();
             return result.ToList();
         }
 
         public List<sp_Forecast_GetWeeklyAvereageProductTransactions_Result> GetWeeklyAvereageProductTransactions()
         {
-            var result = context.sp_Forecast_GetWeeklyAvereageProductTransactions();
+            var result = db.sp_Forecast_GetWeeklyAvereageProductTransactions();
             return result.ToList();
         }
 
         public List<sp_Forecast_GetProductCountYearDayByProductId_Result> GetProductCountYearDayByProductId(int productId)
         {
-            var result = context.sp_Forecast_GetProductCountYearDayByProductId(productId);
+            var result = db.sp_Forecast_GetProductCountYearDayByProductId(productId);
             return result.ToList();
         }
 
         public List<sp_Forecast_GetProductCountMonthDayByProductId_Result> GetProductCountMonthDayByProductId(int productId)
         {
-            var result = context.sp_Forecast_GetProductCountMonthDayByProductId(productId);
+            var result = db.sp_Forecast_GetProductCountMonthDayByProductId(productId);
             return result.ToList();
         }
 
         public List<sp_Forecast_GetProductCountDayByProductId_Result> GetProductCountDayByProductId(int productId)
         {
-            var result = context.sp_Forecast_GetProductCountDayByProductId(productId);
+            var result = db.sp_Forecast_GetProductCountDayByProductId(productId);
             return result.ToList();
-        } 
+        }
         #endregion
 
         #region R_Related
 
-        public static ForecastResult ForecastByMethod(int branchId,int productId, string method, string dataType, int periods)
+        public ForecastResult ForecastByMethod(int branchId, int productId, string method, string dataType, int periods)
         {
-            ForecastResult fcastResult = new ForecastResult();
+            ForecastResult forecastResult = new ForecastResult();
 
-            Methods method1 = (Methods)Enum.Parse(typeof(Methods), method, true);
+            //Methods method1 = (Methods)Enum.Parse(typeof(Methods), method, true);
             DataPeriod datatype1 = (DataPeriod)Enum.Parse(typeof(DataPeriod), dataType, true);
 
             //int productId = 1;
@@ -85,13 +85,13 @@ namespace FFC.Framework.WebServicesManager
 
             // There are several options to initialize the engine, but by default the following suffice:
             REngine engine = REngine.GetInstance();
-           
+
             //engine.Initialize();
 
             // .NET Framework array to R vector.
             //NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99, 1000 });
-            NumericVector testTs = engine.CreateNumericVector(new double[] { 6, 5, 6, 5, 6, 5 });
-            //NumericVector testTs = engine.CreateNumericVector(values);
+            //NumericVector testTs = engine.CreateNumericVector(new double[] { 10, 20, 30, 40, 50 });
+            NumericVector testTs = engine.CreateNumericVector(values);
 
             engine.SetSymbol("testTs", testTs);
             //auto arima for monthly
@@ -99,15 +99,21 @@ namespace FFC.Framework.WebServicesManager
             engine.Evaluate("library(forecast)");
             engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method.ToString())); // Fit <- Arima(tsValue)
             //MethodManipulation(engine, method);
-            engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
+            //engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
+            engine.Evaluate("fcast <- forecast(Fit, h=50)");
 
             Plot(engine);
 
             //var a = engine.Evaluate("fcast <- forecast(tsValue, h=5)").AsCharacter();
             NumericVector forecasts = engine.Evaluate("fcast$mean").AsNumeric();
+            //NumericVector forecasts = engine.Evaluate("fcast$lower[,2]").AsNumeric();
 
-            fcastResult.results = forecasts.ToList();
-           
+            forecastResult.BranchId = branchId;
+            forecastResult.ProductId = productId;
+            forecastResult.Method = db.Forecast_Methods.Where(r => r.ForecastIdentifier == method).Select(a => a.ForecastMethod).FirstOrDefault();
+            forecastResult.DatePeriod = datatype1.ToString();
+            forecastResult.ForecastPeriod = periods;
+            forecastResult.Values = forecasts.ToList();
 
             //foreach (var item in forecasts)
             //{
@@ -116,72 +122,72 @@ namespace FFC.Framework.WebServicesManager
 
             //engine.Dispose();
 
-            return fcastResult;
-        }
-
-        public static ForecastResult Fcast1()
-        {
-            ForecastResult fcastResult = new ForecastResult();
-
-            int productId = 1;
-            Methods method = Methods.rwf; //meanf(YYMMDD,MMDD,MMWWDD,DD), rtw, rtw(with Drift), Moving AVG,ets, Arima, HoltWinters, msts
-            DataPeriod dataType = DataPeriod.Daily;
-            int periods = 50;
-
-            var values = GetCorrespondingData(dataType, productId);
-            //FFCEntities db = new FFCEntities();
-            //var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
-            //List<double> values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
-            //REngine.SetEnvironmentVariables(@"C:\Program Files\R\R-2.13.1\bin\i386");
-
-            //SetupPath();
-            //Log();
-
-
-            REngine.SetEnvironmentVariables();
-
-            // There are several options to initialize the engine, but by default the following suffice:
-            REngine engine = REngine.GetInstance();
-
-            //engine.Initialize();
-
-            // .NET Framework array to R vector.
-            //NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99, 1000 });
-            NumericVector testTs = engine.CreateNumericVector(new double[] { 6, 5, 6, 5, 6, 5 });
-            //NumericVector testTs = engine.CreateNumericVector(values);
-
-            engine.SetSymbol("testTs", testTs);
-            engine.Evaluate("n <- c(1,2,3)");
-            //auto arima for monthly
-            engine.Evaluate("tsValue <- ts(testTs, frequency=1, start=c(2010, 1, 1))");
-            engine.Evaluate("library(forecast)");
-            //engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method)); // Fit <- Arima(tsValue)
-            MethodManipulation(engine, method);
-            engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
-
-            Plot(engine);
-
-            //var a = engine.Evaluate("fcast <- forecast(tsValue, h=5)").AsCharacter();
-            NumericVector forecasts = engine.Evaluate("fcast$mean").AsNumeric();
-
-            fcastResult.results = forecasts.ToList();
-
-            //foreach (var item in forecasts)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            //engine.Dispose();
-
-            return fcastResult;
-        }
-
-        public static ForecastResult fcast2()
-        {
-            ForecastResult forecastResult = new ForecastResult() { Method = Methods.Arima, results = new List<double>() { 1.0 } };
-           // model.ForecastResult = forecastResult;
             return forecastResult;
         }
+
+        //public ForecastResult Fcast1()
+        //{
+        //    ForecastResult fcastResult = new ForecastResult();
+
+        //    int productId = 1;
+        //    Methods method = Methods.rwf; //meanf(YYMMDD,MMDD,MMWWDD,DD), rtw, rtw(with Drift), Moving AVG,ets, Arima, HoltWinters, msts
+        //    DataPeriod dataType = DataPeriod.Daily;
+        //    int periods = 50;
+
+        //    var values = GetCorrespondingData(dataType, productId);
+        //    //FFCEntities db = new FFCEntities();
+        //    //var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
+        //    //List<double> values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
+        //    //REngine.SetEnvironmentVariables(@"C:\Program Files\R\R-2.13.1\bin\i386");
+
+        //    //SetupPath();
+        //    //Log();
+
+
+        //    REngine.SetEnvironmentVariables();
+
+        //    // There are several options to initialize the engine, but by default the following suffice:
+        //    REngine engine = REngine.GetInstance();
+
+        //    //engine.Initialize();
+
+        //    // .NET Framework array to R vector.
+        //    //NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99, 1000 });
+        //    NumericVector testTs = engine.CreateNumericVector(new double[] { 6, 5, 6, 5, 6, 5 });
+        //    //NumericVector testTs = engine.CreateNumericVector(values);
+
+        //    engine.SetSymbol("testTs", testTs);
+        //    engine.Evaluate("n <- c(1,2,3)");
+        //    //auto arima for monthly
+        //    engine.Evaluate("tsValue <- ts(testTs, frequency=1, start=c(2010, 1, 1))");
+        //    engine.Evaluate("library(forecast)");
+        //    //engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method)); // Fit <- Arima(tsValue)
+        //    MethodManipulation(engine, method);
+        //    engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
+
+        //    Plot(engine);
+
+        //    //var a = engine.Evaluate("fcast <- forecast(tsValue, h=5)").AsCharacter();
+        //    NumericVector forecasts = engine.Evaluate("fcast$mean").AsNumeric();
+
+        //    fcastResult.Values = forecasts.ToList();
+
+        //    //foreach (var item in forecasts)
+        //    //{
+        //    //    Console.WriteLine(item);
+        //    //}
+
+        //    //engine.Dispose();
+
+        //    return fcastResult;
+        //}
+
+        //public static ForecastResult fcast2()
+        //{
+        //    ForecastResult forecastResult = new ForecastResult() { Method = Methods.Arima, results = new List<double>() { 1.0 } };
+        //   // model.ForecastResult = forecastResult;
+        //    return forecastResult;
+        //}
 
         public static void SetupPath(string Rversion = "R-3.2.2")
         {
@@ -198,11 +204,13 @@ namespace FFC.Framework.WebServicesManager
             System.Environment.SetEnvironmentVariable("PATH", newPath);
         }
 
-        public static void Plot(REngine engine)
+        public void Plot(REngine engine)
         {
-
+            string imagePath = @"C:\\Users\\ashfernando\\Desktop\\Test\\";
+            string fileName = "Test2.png";
+            engine.Evaluate(String.Format(@"png(filename='{0}\\{1}')", imagePath, fileName));
             //engine.Evaluate(@"png(filename='C:\\Users\\ashfernando\\Desktop\\Test\\Test2.png')");
-            engine.Evaluate(@"png(filename='C:\\Users\\ashen\\Desktop\\Images\\Test2.png')");
+            //engine.Evaluate(@"png(filename='C:\\Users\\ashen\\Desktop\\Images\\Test2.png')");
             engine.Evaluate("plot(fcast)");
             engine.Evaluate("dev.off()");
         }
@@ -212,9 +220,9 @@ namespace FFC.Framework.WebServicesManager
             engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method.ToString())); // Fit <- Arima(tsValue)
         }
 
-        public static List<double> GetCorrespondingData(DataPeriod data, int productId)
+        public List<double> GetCorrespondingData(DataPeriod data, int productId)
         {
-            FFCEntities db = new FFCEntities();
+            //FFCEntities db = new FFCEntities();
             List<double> values = new List<double>();
 
             if (data == DataPeriod.Daily)
@@ -229,7 +237,7 @@ namespace FFC.Framework.WebServicesManager
             }
 
             return values;
-        } 
+        }
         #endregion
 
     }

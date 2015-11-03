@@ -56,6 +56,7 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
                 fcastSearchCriteria.Method = new Forecast_Methods() { ForecastIdentifier = model.ForecastSearchCriteria.Method.ForecastIdentifier };
                 fcastSearchCriteria.DatePeriod = new Forecast_DatePeriods(){DatePeriod = model.ForecastSearchCriteria.DatePeriod.DatePeriod};
                 fcastSearchCriteria.ForecastPeriod = model.ForecastSearchCriteria.ForecastPeriod;
+                
                 var result = fcastManager.GetForecastResults(fcastSearchCriteria);
 
                 //ForecastResult forecastResult = new ForecastResult() { Method = Methods.Arima, results = new List<double>() { 1.0 } };

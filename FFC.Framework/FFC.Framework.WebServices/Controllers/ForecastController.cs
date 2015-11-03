@@ -13,7 +13,7 @@ namespace FFC.Framework.WebServices.Controllers
     {
 
         private FFCEntities db = new FFCEntities();
-        private ForecastManager fm = new ForecastManager();
+        private ForecastManager forecastManager = new ForecastManager();
         //private RManager rm = new RManager();
 
         // GET 
@@ -21,24 +21,24 @@ namespace FFC.Framework.WebServices.Controllers
         [ActionName("ByProductDayTime")]
         public List<sp_Forecast_GetDailyTimeSpecificAvereageProductTransactions_Result> GetProducts(int day, int productId, int start, int end)
         {
-            var result = fm.GetDailyTimeSpecificAvereageProductTransactions().Where(r => r.Day == day).ToList();
+            var result = forecastManager.GetDailyTimeSpecificAvereageProductTransactions().Where(r => r.Day == day).ToList();
             return result;
         }
 
 
-        [ActionName("TestForecast")]
-        [System.Web.Http.HttpGet]
-        public ForecastResult ForecastTest(int id)
-        {
-            var result = ForecastManager.Fcast1();
-            return result;
-        }
+        //[ActionName("TestForecast")]
+        //[System.Web.Http.HttpGet]
+        //public ForecastResult ForecastTest(int id)
+        //{
+        //    var result = forecastManager.Fcast1();
+        //    return result;
+        //}
 
         [ActionName("ForecastByMethod")]
         [System.Web.Http.HttpGet]
         public ForecastResult ForecastByMethod(int branchId, int productId, string method, string dataPeriod, int periods)
         {
-            var result = ForecastManager.ForecastByMethod(branchId, productId, method, dataPeriod, periods);
+            var result = forecastManager.ForecastByMethod(branchId, productId, method, dataPeriod, periods);
             return result;
         }
 

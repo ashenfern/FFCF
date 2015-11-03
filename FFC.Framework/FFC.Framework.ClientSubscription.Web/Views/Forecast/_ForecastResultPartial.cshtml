@@ -2,7 +2,15 @@
 <table>
     <tr>
         <td>Method: @Model.Method</td>
-        <td>Result: @Model.results[0] <td/>
     </tr>
+    <tr>
+        <td>Result : </td>
+    </tr>
+        @foreach (var value in Model.Values)
+        {
+            <tr>
+                <td>@value</td>
+            </tr>
+        }
 </table>
 

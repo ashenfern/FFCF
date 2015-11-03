@@ -6,11 +6,14 @@
     <tr>
         <td>Result : </td>
     </tr>
+    <tr>
         @foreach (var value in Model.Values)
         {
-            <tr>
-                <td>@value</td>
-            </tr>
+            <td>@value</td>
         }
+    </tr>
+         
 </table>
-
+<div>
+     <img src= "@Url.Content(Model.ImagePath)" alt="Image" />
+</div>

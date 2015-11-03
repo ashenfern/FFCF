@@ -102,7 +102,7 @@ namespace FFC.Framework.WebServicesManager
             //engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
             engine.Evaluate("fcast <- forecast(Fit, h=50)");
 
-            Plot(engine);
+            //string image = Plot(engine);
 
             //var a = engine.Evaluate("fcast <- forecast(tsValue, h=5)").AsCharacter();
             NumericVector forecasts = engine.Evaluate("fcast$mean").AsNumeric();
@@ -114,6 +114,7 @@ namespace FFC.Framework.WebServicesManager
             forecastResult.DatePeriod = datatype1.ToString();
             forecastResult.ForecastPeriod = periods;
             forecastResult.Values = forecasts.ToList();
+            forecastResult.ImagePath = "~/Content/Images/Test1.png";
 
             //foreach (var item in forecasts)
             //{
@@ -204,15 +205,18 @@ namespace FFC.Framework.WebServicesManager
             System.Environment.SetEnvironmentVariable("PATH", newPath);
         }
 
-        public void Plot(REngine engine)
+        public string Plot(REngine engine)
         {
             string imagePath = @"C:\\Users\\ashfernando\\Desktop\\Test\\";
             string fileName = "Test2.png";
-            engine.Evaluate(String.Format(@"png(filename='{0}\\{1}')", imagePath, fileName));
+
+            engine.Evaluate(@"png(filename='~\\Content\Images\\Test2.png')");
+            //engine.Evaluate(String.Format(@"png(filename='{0}\\{1}')", imagePath, fileName));
             //engine.Evaluate(@"png(filename='C:\\Users\\ashfernando\\Desktop\\Test\\Test2.png')");
             //engine.Evaluate(@"png(filename='C:\\Users\\ashen\\Desktop\\Images\\Test2.png')");
             engine.Evaluate("plot(fcast)");
             engine.Evaluate("dev.off()");
+            return imagePath + fileName;
         }
 
         public static void MethodManipulation(REngine engine, Methods method)

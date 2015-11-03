@@ -60,7 +60,7 @@ namespace FFC.Framework.WebServicesManager
 
         #region R_Related
 
-        public static ForecastResult ForecastByMethod(int productId, string method, string dataType, int periods)
+        public static ForecastResult ForecastByMethod(int branchId,int productId, string method, string dataType, int periods)
         {
             ForecastResult fcastResult = new ForecastResult();
 
@@ -200,7 +200,9 @@ namespace FFC.Framework.WebServicesManager
 
         public static void Plot(REngine engine)
         {
-            engine.Evaluate(@"png(filename='C:\\Users\\ashfernando\\Desktop\\Test\\Test2.png')");
+
+            //engine.Evaluate(@"png(filename='C:\\Users\\ashfernando\\Desktop\\Test\\Test2.png')");
+            engine.Evaluate(@"png(filename='C:\\Users\\ashen\\Desktop\\Images\\Test2.png')");
             engine.Evaluate("plot(fcast)");
             engine.Evaluate("dev.off()");
         }

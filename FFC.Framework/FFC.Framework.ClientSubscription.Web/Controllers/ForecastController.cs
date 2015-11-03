@@ -24,9 +24,8 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
             //List<string> listMethods = Enum.GetNames(typeof(Methods)).ToList();
             //List<string> listDateTypes = Enum.GetNames(typeof(DataPeriod)).ToList();
 
-            //ViewBag.ForecastMethods = new SelectList(listMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
-            //ViewBag.DateTypes = new SelectList(listDateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
-
+            ViewBag.Branches = new SelectList(db.Branches, "BranchID", "BranchName");
+            ViewBag.Products = new SelectList(db.Products, "ProductID", "ProductName");
             ViewBag.ForecastMethods = new SelectList(db.Forecast_Methods, "ForecastIdentifier", "ForecastMethod");
             ViewBag.DateTypes = new SelectList(db.Forecast_DatePeriods, "DatePeriod", "DatePeriod");
 
@@ -43,6 +42,8 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
             {
                 //ViewBag.ForecastMethods = new SelectList(model.ForecastMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
                 //ViewBag.DateTypes = new SelectList(model.DateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
+                ViewBag.Branches = new SelectList(db.Branches, "BranchID", "BranchName");
+                ViewBag.Products = new SelectList(db.Products, "ProductID", "ProductName");
                 ViewBag.ForecastMethods = new SelectList(db.Forecast_Methods, "ForecastIdentifier", "ForecastMethod");
                 ViewBag.DateTypes = new SelectList(db.Forecast_DatePeriods, "DatePeriod", "DatePeriod");
 
@@ -50,10 +51,11 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
                 ForecastBusinessManger fcastManager = new ForecastBusinessManger();
 
                 ForecastSearchCriteria fcastSearchCriteria = new ForecastSearchCriteria();
-                fcastSearchCriteria.ProductId = 1;
+                fcastSearchCriteria.BranchId = model.ForecastSearchCriteria.BranchId;
+                fcastSearchCriteria.ProductId = model.ForecastSearchCriteria.ProductId;
                 fcastSearchCriteria.Method = new Forecast_Methods() { ForecastIdentifier = model.ForecastSearchCriteria.Method.ForecastIdentifier };
                 fcastSearchCriteria.DatePeriod = new Forecast_DatePeriods(){DatePeriod = model.ForecastSearchCriteria.DatePeriod.DatePeriod};
-                fcastSearchCriteria.ForecastPeriod = 5;
+                fcastSearchCriteria.ForecastPeriod = model.ForecastSearchCriteria.ForecastPeriod;
                 var result = fcastManager.GetForecastResults(fcastSearchCriteria);
 
                 //ForecastResult forecastResult = new ForecastResult() { Method = Methods.Arima, results = new List<double>() { 1.0 } };

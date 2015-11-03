@@ -36,9 +36,9 @@ namespace FFC.Framework.WebServices.Controllers
 
         [ActionName("ForecastByMethod")]
         [System.Web.Http.HttpGet]
-        public ForecastResult ForecastByMethod(int productId, string method, string dataPeriod, int periods, int ab)
+        public ForecastResult ForecastByMethod(int branchId, int productId, string method, string dataPeriod, int periods)
         {
-            var result = ForecastManager.ForecastByMethod(productId, method, dataPeriod, periods);
+            var result = ForecastManager.ForecastByMethod(branchId, productId, method, dataPeriod, periods);
             return result;
         }
 

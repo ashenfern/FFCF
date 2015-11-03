@@ -14,6 +14,25 @@
 
     <fieldset>
         <legend>ForecastModel</legend>
+
+        <!-- Branch -->
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ForecastSearchCriteria.BranchId, "Branch")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.ForecastSearchCriteria.BranchId, (IEnumerable<SelectListItem>)ViewBag.Branches, "--- Select a Forecast Method Branch ---")
+            @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.BranchId)
+        </div>
+
+        <!-- Product -->
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ForecastSearchCriteria.ProductId, "Branch")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.ForecastSearchCriteria.ProductId, (IEnumerable<SelectListItem>)ViewBag.Products, "--- Select a Forecast Product ---")
+            @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.ProductId)
+        </div>
+
         <!-- Method -->
         <div class="editor-label">
             @Html.LabelFor(model => model.ForecastSearchCriteria.Method, "Forecast Methods:")
@@ -25,11 +44,20 @@
 
         <!-- Date Type -->
         <div class="editor-label">
-            @Html.LabelFor(model => model.ForecastSearchCriteria.DataPeriod.DatePeriodID, "Date Type")
+            @Html.LabelFor(model => model.ForecastSearchCriteria.DatePeriod.DatePeriodID, "Date Type")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model=> model.ForecastSearchCriteria.DataPeriod.DatePeriod, (IEnumerable<SelectListItem>)ViewBag.DateTypes, "--- Select a DateType ---")
-            @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.DataPeriod.DatePeriodID)
+            @Html.DropDownListFor(model=> model.ForecastSearchCriteria.DatePeriod.DatePeriod, (IEnumerable<SelectListItem>)ViewBag.DateTypes, "--- Select a DateType ---")
+            @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.DatePeriod.DatePeriodID)
+        </div>
+
+        <!-- Forecast Period -->
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ForecastSearchCriteria.ForecastPeriod, "Forecast Period:")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.ForecastSearchCriteria.ForecastPeriod)
+            @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.ForecastPeriod)
         </div>
 
         <p>

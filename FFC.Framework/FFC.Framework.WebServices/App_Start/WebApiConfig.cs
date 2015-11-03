@@ -31,7 +31,7 @@ namespace FFC.Framework.WebServices
 
             config.Routes.MapHttpRoute(
               name: "ApiForecastByAction",
-              routeTemplate: "api/{controller}/{action}/{productId}/{method}/{dataPeriod}/{periods}/{ab}",
+              routeTemplate: "api/{controller}/{action}/{branchId}/{productId}/{method}/{dataPeriod}/{periods}",
               defaults: new { id = RouteParameter.Optional }
           );
 

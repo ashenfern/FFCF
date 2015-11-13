@@ -147,6 +147,10 @@
       <LastGenOutput>FFC.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="Scripts\R\FFC.R" />
+    <None Include="Scripts\R\ForecastSeminar.R" />
+    <None Include="Scripts\R\PlotSave.R" />
+    <None Include="Scripts\R\TimeSeries.R" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FFC.Framework.Common\FFC.Framework.Common.csproj">
@@ -156,6 +160,10 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\DB\RequiredData.sql" />
+    <Content Include="Scripts\DB\SQLQuery.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -27,26 +27,27 @@ namespace FFC.Framework.WebServicesManager.Utility
             ScheduleDefinition schedule = new ScheduleDefinition();
 
             //Make start date time as the begining of the current day
-            schedule.StartDateTime = DateTime.Today.Add(reportSchedule.Time_to_Execute_the_Report);
+            schedule.StartDateTime = DateTime.Today.Add(reportSchedule.ScheduleTime);
 
-            if (reportSchedule.Expiration_Date_for_the_Schedule != null)
-            {
-                if (schedule.StartDateTime < schedule.EndDate)
-                {
-                    schedule.EndDateSpecified = true;
-                    schedule.EndDate = schedule.EndDate;
-                }
-                else
-                {
-                    schedule.EndDate = schedule.StartDateTime.AddMinutes(20);
-                    schedule.EndDateSpecified = true;
-                }
-            }
-            else
-            {
-                schedule.EndDateSpecified = false;
-            }
-            schedule.Item = GetPattern(reportSchedule.Report_Schedule_Type_Code, reportSchedule.Report_Schedule_Day);
+            //if (reportSchedule.Expiration_Date_for_the_Schedule != null)
+            //{
+            //    if (schedule.StartDateTime < schedule.EndDate)
+            //    {
+            //        schedule.EndDateSpecified = true;
+            //        schedule.EndDate = schedule.EndDate;
+            //    }
+            //    else
+            //    {
+            //        schedule.EndDate = schedule.StartDateTime.AddMinutes(20);
+            //        schedule.EndDateSpecified = true;
+            //    }
+            //}
+            //else
+            //{
+            //    schedule.EndDateSpecified = false;
+            //}
+            schedule.EndDateSpecified = false;
+            schedule.Item = GetPattern(reportSchedule.ScheduleType, reportSchedule.ScheduleDay);
 
             XmlDocument xmlDoc = GetScheduleAsXml(schedule);
             return xmlDoc.OuterXml;

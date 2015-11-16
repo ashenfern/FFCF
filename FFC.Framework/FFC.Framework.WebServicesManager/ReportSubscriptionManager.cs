@@ -60,12 +60,12 @@ namespace FFC.Framework.WebServicesManager
 
             //Check whether the subscription already exist
             //bool isExist = IsSubscriptionExist(rs, reportSchedule);
-            bool isExist =  false;
+            bool isExist = false;
 
             if (!isExist)
             {
-                string report = reportSchedule.RDL_Path;
-                string desc = reportSchedule.Report_Name_Description;
+                string report = reportSchedule.Report.Path;
+                string desc = reportSchedule.Report.Description;
                 string eventType = TimedSubscription;
 
                 //Getting the schedule data
@@ -75,7 +75,7 @@ namespace FFC.Framework.WebServicesManager
                 ParameterValue[] extensionParams = new ParameterValue[7]
                     {
                         new ParameterValue{Name = Path, Value = shareFolderPath},
-                        new ParameterValue{Name = FileName, Value = String.Concat(reportSchedule.Schedule_ID, FileNameSplitter ,reportSchedule.Report_Name_Code,  FileNameSplitter, TimestampParameter)},
+                        new ParameterValue{Name = FileName, Value = String.Concat(/*reportSchedule.Schedule_ID,*/ FileNameSplitter ,reportSchedule.Report.Name,  FileNameSplitter, TimestampParameter)},
                         new ParameterValue{Name = FileExtention, Value = "TRUE"},
                         new ParameterValue{Name = UserName, Value = ConfigurationManager.AppSettings[ReportUsername]},
                         new ParameterValue{Name = Password, Value = ConfigurationManager.AppSettings[ReportPassword]},
@@ -118,8 +118,8 @@ namespace FFC.Framework.WebServicesManager
             Subscription[] subscriptions = null;
             bool isExist = false;
 
-            string subscriptionFileName = String.Concat(reportSchedule.Schedule_ID, FileNameSplitter, reportSchedule.Report_Name_Code, FileNameSplitter, TimestampParameter);
-            subscriptions = rs.ListSubscriptions(reportSchedule.RDL_Path);
+            string subscriptionFileName = String.Concat(/*reportSchedule.Schedule_ID, */FileNameSplitter, reportSchedule.Report.Name, FileNameSplitter, TimestampParameter);
+            subscriptions = rs.ListSubscriptions(reportSchedule.Report.Path);
 
             //Check whether the subscription is exist
             isExist = subscriptions.ToList().Select(r => { r.DeliverySettings.ParameterValues.Cast<ParameterValue>().Where(d => d.Name == FileName && d.Value == subscriptionFileName); return r; }).Any();
@@ -149,8 +149,8 @@ namespace FFC.Framework.WebServicesManager
 
             Subscription[] subscriptions = null;
 
-            string subscriptionFileName = String.Concat(reportSchedule.Schedule_ID, FileNameSplitter, reportSchedule.Report_Name_Code, FileNameSplitter, TimestampParameter);
-            subscriptions = rs.ListSubscriptions(reportSchedule.RDL_Path);
+            string subscriptionFileName = String.Concat(/*reportSchedule.Schedule_ID,*/ FileNameSplitter, reportSchedule.Report.Name, FileNameSplitter, TimestampParameter);
+            subscriptions = rs.ListSubscriptions(reportSchedule.Report.Path);
 
             //Get the subscription from the filename
             var subscription = subscriptions.ToList().Select(r => { r.DeliverySettings.ParameterValues.Cast<ParameterValue>().Where(d => d.Name == FileName && d.Value == subscriptionFileName); return r; }).FirstOrDefault();
@@ -161,7 +161,7 @@ namespace FFC.Framework.WebServicesManager
             //Get  the schedule data
             matchData = new ReportScheduleFormatter().GetMatchData(reportSchedule);
             //Set the Report Name Descriptions
-            desc = reportSchedule.Report_Name_Description;
+            desc = reportSchedule.Report.Name;
 
             //TODO: Below code is needed because for the password. Giving an error with out the password
             ParameterValue[] extensionParamsTemp = new ParameterValue[extSettings.ParameterValues.Count() + 1];
@@ -189,7 +189,7 @@ namespace FFC.Framework.WebServicesManager
             rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
 
             //string report = "/Report_Sample_Subscription/Release_Details_Report_RUM";
-            string report = reportSchedule.RDL_Path;
+            string report = reportSchedule.Report.Path;
             bool forRendering = false;
             string historyID = null;
             ParameterValue[] values = null;
@@ -209,11 +209,11 @@ namespace FFC.Framework.WebServicesManager
 
                         if (parameter.Name == "Market")
                         {
-                            param.Value = reportSchedule.Hierarchy_ID.ToString();
+                            //param.Value = reportSchedule.Hierarchy_ID.ToString();
                         }
                         else if (parameter.Name == "Releases")
                         {
-                            param.Value = reportSchedule.Release_ID.ToString();
+                            //param.Value = reportSchedule.Release_ID.ToString();
                             //param.Value = "3013";
                         }
                         //else if (parameter.Name == "StoreStatus")

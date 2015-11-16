@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FFCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FFCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -90,6 +90,16 @@
           <Property Name="ProductName" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="CategoryID" Type="int" />
           <Property Name="UnitPrice" Type="money" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="FileName" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TransactionDetails">
           <Key>
@@ -218,6 +228,7 @@
           <EntitySet Name="Forecast_DatePeriods" EntityType="Self.Forecast_DatePeriods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Forecast_Methods" EntityType="Self.Forecast_Methods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Employees_Employees" Association="Self.FK_Employees_Employees">
@@ -249,8 +260,7 @@
             <End Role="Transactions" EntitySet="Transactions" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FFCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -501,16 +511,17 @@
           <FunctionImport Name="sp_Forecast_GetDailyAvereageProductTransactions" ReturnType="Collection(FFCModel.sp_Forecast_GetDailyAvereageProductTransactions_Result)" />
           <FunctionImport Name="sp_Forecast_GetDailyTimeSpecificAvereageProductTransactions" ReturnType="Collection(FFCModel.sp_Forecast_GetDailyTimeSpecificAvereageProductTransactions_Result)" />
           <FunctionImport Name="sp_Forecast_GetProductCountDayByProductId" ReturnType="Collection(FFCModel.sp_Forecast_GetProductCountDayByProductId_Result)">
-            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+          <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Forecast_GetProductCountMonthDayByProductId" ReturnType="Collection(FFCModel.sp_Forecast_GetProductCountMonthDayByProductId_Result)">
-            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+          <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Forecast_GetProductCountYearDayByProductId" ReturnType="Collection(FFCModel.sp_Forecast_GetProductCountYearDayByProductId_Result)">
-            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+          <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Forecast_GetWeeklyAverageTransactions" ReturnType="Collection(FFCModel.sp_Forecast_GetWeeklyAverageTransactions_Result)" />
           <FunctionImport Name="sp_Forecast_GetWeeklyAvereageProductTransactions" ReturnType="Collection(FFCModel.sp_Forecast_GetWeeklyAvereageProductTransactions_Result)" />
+          <EntitySet Name="Reports" EntityType="FFCModel.Report" />
         </EntityContainer>
         <ComplexType Name="sp_Forecast_GetDailyAvereageProductTransactions_Result">
           <Property Type="Int32" Name="Day" Nullable="true" />
@@ -549,6 +560,16 @@
           <Property Type="Int32" Name="ProductID" Nullable="false" />
           <Property Type="Int32" Name="TransactionCount" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -736,6 +757,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="FFCModel.Report">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

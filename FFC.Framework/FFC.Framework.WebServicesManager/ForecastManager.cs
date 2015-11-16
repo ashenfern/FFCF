@@ -99,8 +99,7 @@ namespace FFC.Framework.WebServicesManager
             engine.Evaluate("library(forecast)");
             engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method.ToString())); // Fit <- Arima(tsValue)
             //MethodManipulation(engine, method);
-            //engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
-            engine.Evaluate("fcast <- forecast(Fit, h=50)");
+            engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
 
             string image = Plot(engine, method.ToString());
 
@@ -208,7 +207,7 @@ namespace FFC.Framework.WebServicesManager
         public string Plot(REngine engine, string method)
         {
             //string imagePath = @"C:\\Users\\ashfernando\\Desktop\\Test\\";
-            string imagePath = @"D:\\Ashen\\Developoment\\GitHub\\FFCF\\FFC.Framework\\FFC.Framework.ClientSubscription.Web\\Content\\Images";
+            string imagePath = @"C:\\Ashen\\Development\\GitHub\\FFCF\\FFC.Framework\\FFC.Framework.ClientSubscription.Web\\Content\\Images";
             //string imagePath = @"~\\Content\\Images";
 
             string fileName = String.Format("{0}_image.png", method);
@@ -249,4 +248,3 @@ namespace FFC.Framework.WebServicesManager
 
     }
 }
-

@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportSchedule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

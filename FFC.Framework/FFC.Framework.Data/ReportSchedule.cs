@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FFC.Framework.Common
+namespace FFC.Framework.Data
 {
     public class ReportSchedule
     {

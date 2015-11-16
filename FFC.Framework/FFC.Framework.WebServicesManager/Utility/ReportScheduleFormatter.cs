@@ -1,4 +1,5 @@
 ﻿using FFC.Framework.Common;
+using FFC.Framework.Data;
 using FFC.Framework.WebServicesManager.RS2010;
 using System;
 using System.Collections.Generic;

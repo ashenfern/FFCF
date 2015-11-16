@@ -1,4 +1,5 @@
 ﻿using FFC.Framework.Common;
+using FFC.Framework.Data;
 using FFC.Framework.WebServicesManager.RS2010;
 using FFC.Framework.WebServicesManager.Utility;
 using System;
@@ -58,7 +59,8 @@ namespace FFC.Framework.WebServicesManager
             rs.UseDefaultCredentials = true;
 
             //Check whether the subscription already exist
-            bool isExist = IsSubscriptionExist(rs, reportSchedule);
+            //bool isExist = IsSubscriptionExist(rs, reportSchedule);
+            bool isExist =  false;
 
             if (!isExist)
             {

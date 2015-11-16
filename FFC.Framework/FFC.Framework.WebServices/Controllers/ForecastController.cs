@@ -11,7 +11,6 @@ namespace FFC.Framework.WebServices.Controllers
 {
     public class ForecastController : ApiController
     {
-
         private FFCEntities db = new FFCEntities();
         private ForecastManager forecastManager = new ForecastManager();
         //private RManager rm = new RManager();

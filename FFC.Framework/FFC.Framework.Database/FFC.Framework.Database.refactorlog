@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="ecc1d920-182b-475a-8867-31effb84aa93" ChangeDateTime="10/28/2015 11:37:05">
+    <Property Name="ElementName" Value="[dbo].[Forecast_Methods].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Forecast_Methods]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ForecastMethodId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a1547c29-b5e8-4db4-8f45-3ed481915e01" ChangeDateTime="10/28/2015 11:37:29">
+    <Property Name="ElementName" Value="[dbo].[Forecast_Methods].[ForecastMethodId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Forecast_Methods]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ForecastMethodID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e2a34542-da92-4414-8869-5f40634b560a" ChangeDateTime="10/28/2015 11:45:53">
+    <Property Name="ElementName" Value="[dbo].[Forecast_Methods].[ForecastFullName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Forecast_Methods]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ForecastIdentifier" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="556facf0-284b-45a2-bac1-f5359c0afd7a" ChangeDateTime="10/28/2015 11:51:27">
+    <Property Name="ElementName" Value="[dbo].[Forecast_DatePeriods].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Forecast_DatePeriods]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DatePeriodID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1f5e219f-3817-43e6-98bd-9b565825cb12" ChangeDateTime="11/16/2015 08:29:17">
+    <Property Name="ElementName" Value="[dbo].[Reports].[SheduleTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ShceduleTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="07b7b9d5-46c2-4cdb-bca2-5ed67ec7dfac" ChangeDateTime="11/16/2015 08:29:24">
+    <Property Name="ElementName" Value="[dbo].[Reports].[ShceduleTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ScheduleTime" />
+  </Operation>
+</Operations>

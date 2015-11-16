@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Forecast Search</h2>
 
 @using (Html.BeginForm())
 {
@@ -20,16 +20,16 @@
             @Html.LabelFor(model => model.ForecastSearchCriteria.BranchId, "Branch")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.ForecastSearchCriteria.BranchId, (IEnumerable<SelectListItem>)ViewBag.Branches, "--- Select a Forecast Method Branch ---")
+            @Html.DropDownListFor(model => model.ForecastSearchCriteria.BranchId, (IEnumerable<SelectListItem>)ViewBag.Branches, "--- Select Branch ---")
             @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.BranchId)
         </div>
 
         <!-- Product -->
         <div class="editor-label">
-            @Html.LabelFor(model => model.ForecastSearchCriteria.ProductId, "Branch")
+            @Html.LabelFor(model => model.ForecastSearchCriteria.ProductId, "Product")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.ForecastSearchCriteria.ProductId, (IEnumerable<SelectListItem>)ViewBag.Products, "--- Select a Forecast Product ---")
+            @Html.DropDownListFor(model => model.ForecastSearchCriteria.ProductId, (IEnumerable<SelectListItem>)ViewBag.Products, "--- Select Product ---")
             @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.ProductId)
         </div>
 
@@ -38,7 +38,7 @@
             @Html.LabelFor(model => model.ForecastSearchCriteria.Method, "Forecast Methods:")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.ForecastSearchCriteria.Method.ForecastIdentifier, (IEnumerable<SelectListItem>)ViewBag.ForecastMethods, "--- Select a Forecast Method ---")
+            @Html.DropDownListFor(model => model.ForecastSearchCriteria.Method.ForecastIdentifier, (IEnumerable<SelectListItem>)ViewBag.ForecastMethods, "--- Select Forecast Method ---")
             @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.Method)
         </div>
 
@@ -47,7 +47,7 @@
             @Html.LabelFor(model => model.ForecastSearchCriteria.DatePeriod.DatePeriodID, "Date Type")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model=> model.ForecastSearchCriteria.DatePeriod.DatePeriod, (IEnumerable<SelectListItem>)ViewBag.DateTypes, "--- Select a DateType ---")
+            @Html.DropDownListFor(model=> model.ForecastSearchCriteria.DatePeriod.DatePeriod, (IEnumerable<SelectListItem>)ViewBag.DateTypes, "--- Select DateType ---")
             @Html.ValidationMessageFor(model => model.ForecastSearchCriteria.DatePeriod.DatePeriodID)
         </div>
 
@@ -66,7 +66,7 @@
     </fieldset>
 }
 
-<h1>Test </h1>
+<h1>Forecast Results </h1>
 @if (Model != null && Model.ForecastResult != null)
 {
     Html.RenderPartial("_ForecastResultPartial", Model.ForecastResult);

@@ -59,3 +59,17 @@ fcast2
 f3
 #summary(f1)
 #?meanf
+
+
+#### Holt winters
+
+require(forecast)
+list <- runif(800,100, 200)
+
+tsValue = ts(list, start=c(2014,1), frequency = 365 )
+#auto.arima, arima
+fit <- HoltWinters(tsValue)
+fcast <- forecast(fit, h =100)
+fcast
+plot(fcast)
+

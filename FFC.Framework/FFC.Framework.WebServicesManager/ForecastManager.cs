@@ -91,11 +91,11 @@ namespace FFC.Framework.WebServicesManager
             // .NET Framework array to R vector.
             //NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99, 1000 });
             //NumericVector testTs = engine.CreateNumericVector(new double[] { 10, 20, 30, 40, 50 });
-            NumericVector testTs = engine.CreateNumericVector(values);
+            NumericVector data = engine.CreateNumericVector(values);
 
-            engine.SetSymbol("testTs", testTs);
+            engine.SetSymbol("data", data);
             //auto arima for monthly
-            engine.Evaluate("tsValue <- ts(testTs, frequency=1, start=c(2010, 1, 1))");
+            engine.Evaluate("tsValue <- ts(data, frequency=160, start=c(2014,1))");
             engine.Evaluate("library(forecast)");
             engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method.ToString())); // Fit <- Arima(tsValue)
             //MethodManipulation(engine, method);

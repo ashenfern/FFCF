@@ -11,10 +11,10 @@ namespace FFC.Framework.ClientSubscription.Business
     {
         WebServiceConnector<ReportSchedule> service = new WebServiceConnector<ReportSchedule>();
 
-        public ReportSchedule GetReportSubscriptions()
+        public List<ReportSchedule> GetReportSubscriptions()
         {
-            service.Resource = "api/Report/1/";
-            var result = service.GetData();
+            service.Resource = "api/Report/";
+            var result = service.GetDataList();
             
             return result;
         }

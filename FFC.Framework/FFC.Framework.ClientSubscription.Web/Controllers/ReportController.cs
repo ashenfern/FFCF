@@ -21,8 +21,12 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         public ActionResult Index()
         {
             //Getting report schedules from the report DB
-            //var result = reportBusinessManager.GetReportSubscriptions();
+            //var subscriptions = reportBusinessManager.GetSubscriptions();
 
+            //foreach (var subscription in subscriptions)
+            //{
+            //    //subscription.
+            //}
 
             var reportschedules = db.ReportSchedules.Include(r => r.Report);
             return View(reportschedules.ToList());
@@ -57,7 +61,7 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ReportSchedule reportschedule)
         {
-            var result = reportBusinessManager.CreateSubscription(reportschedule);
+            //var result = reportBusinessManager.CreateSubscription(reportschedule);
 
             if (ModelState.IsValid)
             {

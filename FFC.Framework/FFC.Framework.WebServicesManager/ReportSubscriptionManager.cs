@@ -37,6 +37,18 @@ namespace FFC.Framework.WebServicesManager
 
         #endregion
 
+        ReportingService2010 rs;
+
+        public ReportSubscriptionManager()
+        {
+            ReportingService2010 rs = new ReportingService2010();
+            rs.Url = ConfigurationManager.AppSettings[ReportServerURL];
+
+            rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
+
+            rs.UseDefaultCredentials = true;
+        }
+
         /// <summary>
         /// This method will create required subscription if not exist
         /// </summary>
@@ -51,12 +63,12 @@ namespace FFC.Framework.WebServicesManager
 
             bool isSuccessful = false;
 
-            ReportingService2010 rs = new ReportingService2010();
-            rs.Url = ConfigurationManager.AppSettings[ReportServerURL];
+            //ReportingService2010 rs = new ReportingService2010();
+            //rs.Url = ConfigurationManager.AppSettings[ReportServerURL];
 
-            rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            //rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
 
-            rs.UseDefaultCredentials = true;
+            //rs.UseDefaultCredentials = true;
 
             //Check whether the subscription already exist
             //bool isExist = IsSubscriptionExist(rs, reportSchedule);
@@ -113,18 +125,23 @@ namespace FFC.Framework.WebServicesManager
         /// <param name="reportPath">path of the report</param>
         /// <param name="description">Description of the report</param>
         /// <returns>bool</returns>
-        public bool IsSubscriptionExist(ReportingService2010 rs, ReportSchedule reportSchedule)
+        public bool IsSubscriptionExist(ReportSchedule reportSchedule)
         {
-            Subscription[] subscriptions = null;
+            List<Subscription> subscriptions = GetSubscriptions(reportSchedule);
             bool isExist = false;
-
             string subscriptionFileName = String.Concat(/*reportSchedule.Schedule_ID, */FileNameSplitter, reportSchedule.Report.ReportName, FileNameSplitter, TimestampParameter);
-            subscriptions = rs.ListSubscriptions(reportSchedule.Report.ReportPath);
-
             //Check whether the subscription is exist
-            isExist = subscriptions.ToList().Select(r => { r.DeliverySettings.ParameterValues.Cast<ParameterValue>().Where(d => d.Name == FileName && d.Value == subscriptionFileName); return r; }).Any();
+            isExist = subscriptions.Select(r => { r.DeliverySettings.ParameterValues.Cast<ParameterValue>().Where(d => d.Name == FileName && d.Value == subscriptionFileName); return r; }).Any();
 
             return isExist;
+        }
+
+        public List<Subscription> GetSubscriptions(ReportSchedule reportSchedule)
+        {
+            Subscription[] subscriptions = null;
+            subscriptions = rs.ListSubscriptions(reportSchedule.Report.ReportPath);
+
+            return subscriptions.ToList();
         }
 
         /// <summary>

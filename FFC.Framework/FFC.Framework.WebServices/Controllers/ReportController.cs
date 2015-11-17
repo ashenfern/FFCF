@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FFC.Framework.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,7 +10,6 @@ namespace FFC.Framework.WebServices.Controllers
 {
     public class ReportController : ApiController
     {
-        
 
         #region Default Methods
         // GET api/report
@@ -25,7 +25,7 @@ namespace FFC.Framework.WebServices.Controllers
         }
 
         // POST api/report
-        public void Post([FromBody]string value)
+        public void Post(ReportSchedule value)
         {
         }
 

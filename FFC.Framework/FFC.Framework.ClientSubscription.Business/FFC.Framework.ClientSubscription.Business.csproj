@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ForecastBusinessManger.cs" />
+    <Compile Include="ReportBusinessManager.cs" />
     <Compile Include="WebServiceConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

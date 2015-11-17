@@ -6,18 +6,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FFC.Framework.Data;
+using FFC.Framework.ClientSubscription.Business;
 
 namespace FFC.Framework.ClientSubscription.Web.Controllers
 {
     public class ReportController : Controller
     {
         private FFCEntities db = new FFCEntities();
+        private ReportBusinessManager reportBusinessManager = new ReportBusinessManager();
 
         //
         // GET: /Report/
 
         public ActionResult Index()
         {
+            //Getting report schedules from the report DB
+            //var result = reportBusinessManager.GetReportSubscriptions();
+
+
             var reportschedules = db.ReportSchedules.Include(r => r.Report);
             return View(reportschedules.ToList());
         }
@@ -51,6 +57,8 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ReportSchedule reportschedule)
         {
+            var result = reportBusinessManager.CreateSubscription(reportschedule);
+
             if (ModelState.IsValid)
             {
                 db.ReportSchedules.Add(reportschedule);

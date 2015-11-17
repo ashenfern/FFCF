@@ -1,0 +1,54 @@
+﻿@model FFC.Framework.Data.ReportSchedule
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>ReportSchedule</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Report.ReportName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Report.ReportName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ScheduleType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScheduleType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ScheduleDay)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScheduleDay)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ScheduleTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScheduleTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ScheduleDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScheduleDescription)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

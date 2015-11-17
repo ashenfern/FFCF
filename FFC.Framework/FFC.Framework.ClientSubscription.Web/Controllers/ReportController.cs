@@ -1,27 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FFC.Framework.Data;
 
 namespace FFC.Framework.ClientSubscription.Web.Controllers
 {
     public class ReportController : Controller
     {
+        private FFCEntities db = new FFCEntities();
+
         //
         // GET: /Report/
 
         public ActionResult Index()
         {
-            return View();
+            var reportschedules = db.ReportSchedules.Include(r => r.Report);
+            return View(reportschedules.ToList());
         }
 
         //
         // GET: /Report/Details/5
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id = 0)
         {
-            return View();
+            ReportSchedule reportschedule = db.ReportSchedules.Find(id);
+            if (reportschedule == null)
+            {
+                return HttpNotFound();
+            }
+            return View(reportschedule);
         }
 
         //
@@ -29,6 +40,7 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName");
             return View();
         }
 
@@ -36,70 +48,81 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         // POST: /Report/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ReportSchedule reportschedule)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                db.ReportSchedules.Add(reportschedule);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName", reportschedule.ReportId);
+            return View(reportschedule);
         }
 
         //
         // GET: /Report/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id = 0)
         {
-            return View();
+            ReportSchedule reportschedule = db.ReportSchedules.Find(id);
+            if (reportschedule == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName", reportschedule.ReportId);
+            return View(reportschedule);
         }
 
         //
         // POST: /Report/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ReportSchedule reportschedule)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(reportschedule).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName", reportschedule.ReportId);
+            return View(reportschedule);
         }
 
         //
         // GET: /Report/Delete/5
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id = 0)
         {
-            return View();
+            ReportSchedule reportschedule = db.ReportSchedules.Find(id);
+            if (reportschedule == null)
+            {
+                return HttpNotFound();
+            }
+            return View(reportschedule);
         }
 
         //
         // POST: /Report/Delete/5
 
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            ReportSchedule reportschedule = db.ReportSchedules.Find(id);
+            db.ReportSchedules.Remove(reportschedule);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

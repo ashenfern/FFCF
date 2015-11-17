@@ -101,6 +101,17 @@
           <Property Name="ReportPath" Type="nvarchar(max)" />
           <Property Name="ReportFileName" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="ReportSchedules">
+          <Key>
+            <PropertyRef Name="ReportScheduleId" />
+          </Key>
+          <Property Name="ReportScheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportId" Type="int" Nullable="false" />
+          <Property Name="ScheduleType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ScheduleDay" Type="int" Nullable="false" />
+          <Property Name="ScheduleTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="ScheduleDescription" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="TransactionDetails">
           <Key>
             <PropertyRef Name="TransactionID" />
@@ -143,6 +154,18 @@
             </Principal>
             <Dependent Role="Products">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportSchedules_Reports">
+          <End Role="Reports" Type="Self.Reports" Multiplicity="1" />
+          <End Role="ReportSchedules" Type="Self.ReportSchedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="ReportSchedules">
+              <PropertyRef Name="ReportId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -229,6 +252,7 @@
           <EntitySet Name="Forecast_Methods" EntityType="Self.Forecast_Methods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportSchedules" EntityType="Self.ReportSchedules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Employees_Employees" Association="Self.FK_Employees_Employees">
@@ -238,6 +262,10 @@
           <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportSchedules_Reports" Association="Self.FK_ReportSchedules_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="ReportSchedules" EntitySet="ReportSchedules" />
           </AssociationSet>
           <AssociationSet Name="FK_Transaction_Details_Products" Association="Self.FK_Transaction_Details_Products">
             <End Role="Products" EntitySet="Products" />
@@ -522,6 +550,11 @@
           <FunctionImport Name="sp_Forecast_GetWeeklyAverageTransactions" ReturnType="Collection(FFCModel.sp_Forecast_GetWeeklyAverageTransactions_Result)" />
           <FunctionImport Name="sp_Forecast_GetWeeklyAvereageProductTransactions" ReturnType="Collection(FFCModel.sp_Forecast_GetWeeklyAvereageProductTransactions_Result)" />
           <EntitySet Name="Reports" EntityType="FFCModel.Report" />
+          <EntitySet Name="ReportSchedules" EntityType="FFCModel.ReportSchedule" />
+          <AssociationSet Name="FK_ReportSchedules_Reports" Association="FFCModel.FK_ReportSchedules_Reports">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="ReportSchedule" EntitySet="ReportSchedules" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_Forecast_GetDailyAvereageProductTransactions_Result">
           <Property Type="Int32" Name="Day" Nullable="true" />
@@ -569,7 +602,32 @@
           <Property Name="ReportDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ReportPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ReportFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReportSchedules" Relationship="FFCModel.FK_ReportSchedules_Reports" FromRole="Report" ToRole="ReportSchedule" />
         </EntityType>
+        <EntityType Name="ReportSchedule">
+          <Key>
+            <PropertyRef Name="ReportScheduleId" />
+          </Key>
+          <Property Name="ReportScheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportId" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ScheduleDay" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleTime" Type="Time" Precision="7" Nullable="false" />
+          <Property Name="ScheduleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Report" Relationship="FFCModel.FK_ReportSchedules_Reports" FromRole="ReportSchedule" ToRole="Report" />
+        </EntityType>
+        <Association Name="FK_ReportSchedules_Reports">
+          <End Type="FFCModel.Report" Role="Report" Multiplicity="1" />
+          <End Type="FFCModel.ReportSchedule" Role="ReportSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="ReportSchedule">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -765,6 +823,18 @@
                 <ScalarProperty Name="ReportDescription" ColumnName="ReportDescription" />
                 <ScalarProperty Name="ReportName" ColumnName="ReportName" />
                 <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportSchedules">
+            <EntityTypeMapping TypeName="FFCModel.ReportSchedule">
+              <MappingFragment StoreEntitySet="ReportSchedules">
+                <ScalarProperty Name="ScheduleDescription" ColumnName="ScheduleDescription" />
+                <ScalarProperty Name="ScheduleTime" ColumnName="ScheduleTime" />
+                <ScalarProperty Name="ScheduleDay" ColumnName="ScheduleDay" />
+                <ScalarProperty Name="ScheduleType" ColumnName="ScheduleType" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="ReportScheduleId" ColumnName="ReportScheduleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

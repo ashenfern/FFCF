@@ -93,7 +93,9 @@
     <Compile Include="Report.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ReportSchedule.cs" />
+    <Compile Include="ReportSchedule.cs">
+      <DependentUpon>FFC.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_Forecast_GetDailyAvereageProductTransactions_Result.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>

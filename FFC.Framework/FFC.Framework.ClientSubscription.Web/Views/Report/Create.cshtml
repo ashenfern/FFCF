@@ -1,0 +1,68 @@
+﻿@model FFC.Framework.Data.ReportSchedule
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ReportSchedule</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReportId, "Report")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ReportId", String.Empty)
+            @Html.ValidationMessageFor(model => model.ReportId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ScheduleType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ScheduleType)
+            @Html.ValidationMessageFor(model => model.ScheduleType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ScheduleDay)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ScheduleDay)
+            @Html.ValidationMessageFor(model => model.ScheduleDay)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ScheduleTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ScheduleTime)
+            @Html.ValidationMessageFor(model => model.ScheduleTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ScheduleDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ScheduleDescription)
+            @Html.ValidationMessageFor(model => model.ScheduleDescription)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

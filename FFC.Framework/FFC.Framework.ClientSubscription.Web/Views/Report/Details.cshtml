@@ -1,0 +1,50 @@
+﻿@model FFC.Framework.Data.ReportSchedule
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ReportSchedule</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Report.ReportName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Report.ReportName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ScheduleType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScheduleType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ScheduleDay)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScheduleDay)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ScheduleTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScheduleTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ScheduleDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScheduleDescription)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ReportScheduleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

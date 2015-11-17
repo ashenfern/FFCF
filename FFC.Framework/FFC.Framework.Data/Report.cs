@@ -14,10 +14,17 @@ namespace FFC.Framework.Data
     
     public partial class Report
     {
+        public Report()
+        {
+            this.ReportSchedules = new HashSet<ReportSchedule>();
+        }
+    
         public int ReportId { get; set; }
         public string ReportName { get; set; }
         public string ReportDescription { get; set; }
         public string ReportPath { get; set; }
         public string ReportFileName { get; set; }
+    
+        public virtual ICollection<ReportSchedule> ReportSchedules { get; set; }
     }
 }

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<FFC.Framework.Data.ReportSchedule>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Report.ReportName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Report.ReportName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReportScheduleId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReportScheduleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReportScheduleId })
+        </td>
+    </tr>
+}
+
+</table>

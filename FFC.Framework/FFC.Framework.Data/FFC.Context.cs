@@ -39,6 +39,7 @@ namespace FFC.Framework.Data
         public DbSet<TransactionDetail> TransactionDetails { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<ReportSchedule> ReportSchedules { get; set; }
     
         public virtual ObjectResult<sp_Forecast_GetDailyAvereageProductTransactions_Result> sp_Forecast_GetDailyAvereageProductTransactions()
         {

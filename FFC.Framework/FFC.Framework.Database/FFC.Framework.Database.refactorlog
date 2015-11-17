@@ -42,4 +42,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ScheduleTime" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="ccb1a567-9944-4692-a793-ca76e5cf347c" ChangeDateTime="11/17/2015 05:43:51">
+    <Property Name="ElementName" Value="[dbo].[Reports].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReportId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4b4a8b9e-b264-4ac6-be8f-5b8cc7b0cb52" ChangeDateTime="11/17/2015 05:43:55">
+    <Property Name="ElementName" Value="[dbo].[Reports].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReportName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bd57726e-bd78-4179-8b2c-e706ae7278a7" ChangeDateTime="11/17/2015 05:43:58">
+    <Property Name="ElementName" Value="[dbo].[Reports].[Description]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReportDescription" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="468db2f3-b880-42ad-99c4-fc0bb04a5a3b" ChangeDateTime="11/17/2015 05:44:04">
+    <Property Name="ElementName" Value="[dbo].[Reports].[Path]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReportPath" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d5dd9740-083f-4cd7-9ce8-7bd8cd0bb7f2" ChangeDateTime="11/17/2015 05:44:08">
+    <Property Name="ElementName" Value="[dbo].[Reports].[FileName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReportFileName" />
+  </Operation>
 </Operations>

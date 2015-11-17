@@ -14,10 +14,10 @@ namespace FFC.Framework.Data
     
     public partial class Report
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Path { get; set; }
-        public string FileName { get; set; }
+        public int ReportId { get; set; }
+        public string ReportName { get; set; }
+        public string ReportDescription { get; set; }
+        public string ReportPath { get; set; }
+        public string ReportFileName { get; set; }
     }
 }

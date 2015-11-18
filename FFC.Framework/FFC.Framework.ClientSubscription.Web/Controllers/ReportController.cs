@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using FFC.Framework.Data;
 using FFC.Framework.ClientSubscription.Business;
+using FFC.Framework.ClientSubscription.Web.Models;
 
 namespace FFC.Framework.ClientSubscription.Web.Controllers
 {
@@ -28,8 +29,22 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
             //    //subscription.
             //}
 
-            var reportschedules = db.ReportSchedules.Include(r => r.Report);
-            return View(reportschedules.ToList());
+            //var reportschedules = db.ReportSchedules.Include(r => r.Report);
+            ViewBag.Reports = new SelectList(db.Reports, "ReportId", "ReportName");
+            //ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName");
+            return View();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Index(ReportModel model)
+        {
+            ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName");
+            model.ResultSchedules = db.ReportSchedules.Include(r => r.Report).Where(r => r.ReportId == model.ReportId).ToList();
+            return View(model);
         }
 
         //
@@ -61,7 +76,7 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ReportSchedule reportschedule)
         {
-            //var result = reportBusinessManager.CreateSubscription(reportschedule);
+            var result = reportBusinessManager.CreateSubscription(reportschedule);
 
             if (ModelState.IsValid)
             {

@@ -207,6 +207,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ForecastModel.cs" />
+    <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -362,6 +363,7 @@
     <Content Include="Views\Report\Create.cshtml" />
     <Content Include="Views\Report\Edit.cshtml" />
     <Content Include="Views\Report\Delete.cshtml" />
+    <Content Include="Views\Report\_ReportResultPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

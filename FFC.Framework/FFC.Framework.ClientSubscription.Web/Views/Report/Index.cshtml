@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FFC.Framework.Data.ReportSchedule>
+﻿@model  FFC.Framework.ClientSubscription.Web.Models.ReportModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,52 +6,39 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Report.ReportName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ScheduleType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ScheduleDay)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ScheduleTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ScheduleDescription)
-        </th>
-        <th></th>
-    </tr>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Report.ReportName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ScheduleType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ScheduleDay)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ScheduleTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ScheduleDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReportScheduleId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ReportScheduleId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReportScheduleId })
-        </td>
-    </tr>
+    <fieldset>
+        <legend>ReportSchedule</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReportId, "Report")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model=>model.ReportId,(IEnumerable<SelectListItem>)ViewBag.Reports, "---Select Report---")
+            @Html.ValidationMessageFor(model => model.ReportId)
+        </div>
+
+        <p>
+            <input type="submit" value="View" />
+        </p>
+    </fieldset>
 }
 
-</table>
+
+<h3>Report Subscription Results </h3>
+@if (Model != null && Model.ResultSchedules != null)
+{
+    Html.RenderPartial("_ReportResultPartial", Model.ResultSchedules);
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

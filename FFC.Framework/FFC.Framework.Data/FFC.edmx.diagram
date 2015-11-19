@@ -23,7 +23,7 @@
         <AssociationConnector Association="FFCModel.FK_Transaction_Details_Products" ManuallyRouted="false" />
         <AssociationConnector Association="FFCModel.FK_Transaction_Details_Transactions" ManuallyRouted="false" />
         <EntityTypeShape EntityType="FFCModel.Report" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="FFCModel.ReportSchedule" Width="1.5" PointX="9.625" PointY="5" />
+        <EntityTypeShape EntityType="FFCModel.ReportSchedule" Width="1.5" PointX="12.25" PointY="2.5" />
         <AssociationConnector Association="FFCModel.FK_ReportSchedules_Reports" />
       </Diagram>
     </edmx:Diagrams>

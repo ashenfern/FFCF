@@ -111,11 +111,12 @@ namespace FFC.Framework.ClientSubscription.Business
 
         public void PutData(T data)
         {
+            string uri = baseURL + Resource;
             HttpClient client = new HttpClient();
             HttpContent contentPost = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8,
             "application/json");
 
-            client.PostAsync(new Uri(webUrl), contentPost);
+            client.PostAsync(new Uri(uri), contentPost);
 
             //.ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
         }

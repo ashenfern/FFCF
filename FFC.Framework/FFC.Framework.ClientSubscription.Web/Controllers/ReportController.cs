@@ -76,17 +76,19 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ReportSchedule reportschedule)
         {
+
+            reportschedule.Report = db.Reports.Where(r => r.ReportId == reportschedule.ReportId).FirstOrDefault();
             var result = reportBusinessManager.CreateSubscription(reportschedule);
 
-            if (ModelState.IsValid)
-            {
-                db.ReportSchedules.Add(reportschedule);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            //if (ModelState.IsValid)
+            //{
+                //db.ReportSchedules.Add(reportschedule);
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
+            //}
 
             ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName", reportschedule.ReportId);
-            return View(reportschedule);
+            return RedirectToAction("Index");
         }
 
         //

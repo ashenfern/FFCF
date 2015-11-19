@@ -41,7 +41,7 @@ namespace FFC.Framework.WebServicesManager
 
         public ReportSubscriptionManager()
         {
-            ReportingService2010 rs = new ReportingService2010();
+            rs = new ReportingService2010();
             rs.Url = ConfigurationManager.AppSettings[ReportServerURL];
 
             rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
@@ -224,9 +224,9 @@ namespace FFC.Framework.WebServicesManager
                         ParameterValue param = new ParameterValue();
                         param.Name = parameter.Name;
 
-                        if (parameter.Name == "Market")
+                        if (parameter.Name == "Id")
                         {
-                            //param.Value = reportSchedule.Hierarchy_ID.ToString();
+                            param.Value = "1";
                         }
                         else if (parameter.Name == "Releases")
                         {

@@ -35,19 +35,19 @@ namespace FFC.Framework.WebServices.Controllers
         }
 
         // POST api/report
-        [ActionName("GetSubscriptions")]
-        public List<ReportSchedule> Post(ReportSchedule value)
-        {
-            var result = reportManager.GetSubscriptions(value);
+        //[ActionName("GetSubscriptions")]
+        //public List<ReportSchedule> Post(ReportSchedule value)
+        //{
+        //    var result = reportManager.GetSubscriptions(value);
 
-            List<ReportSchedule> listReportSchedule = new List<ReportSchedule>();
-            return listReportSchedule;
-        }
+        //    List<ReportSchedule> listReportSchedule = new List<ReportSchedule>();
+        //    return listReportSchedule;
+        //}
 
         [ActionName("CreateSubscriptions")]
-        public void Post1(ReportSchedule value)
+        public void Post(ReportSchedule reportSchedule)
         {
-            var result = reportManager.CreateSubscription(value,"a");
+            var result = reportManager.CreateSubscription(reportSchedule, @"\\CMLASHFERNANDO\Shared");
         }
 
         // PUT api/report/5

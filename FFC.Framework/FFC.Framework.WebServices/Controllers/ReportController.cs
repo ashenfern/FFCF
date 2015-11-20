@@ -14,10 +14,11 @@ namespace FFC.Framework.WebServices.Controllers
 
         private ReportSubscriptionManager  reportManager = new ReportSubscriptionManager();
 
-        public void Get()
+        [ActionName("GetByName")]
+        public List<ReportSchedule> Get(int id)
         {
-           //var result = reportManager.GetSubscriptions("ReportName");
-           // return result;
+            var result = reportManager.GetSubscriptions(id);
+            return result;
             //return new string[] { "value1", "value2" };
         }
 
@@ -29,10 +30,11 @@ namespace FFC.Framework.WebServices.Controllers
         //}
 
         // GET api/report/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/report
         //[ActionName("GetSubscriptions")]

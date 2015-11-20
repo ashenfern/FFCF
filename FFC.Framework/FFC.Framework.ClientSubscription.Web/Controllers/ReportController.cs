@@ -43,7 +43,10 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         public ActionResult Index(ReportModel model)
         {
             ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName");
-            model.ResultSchedules = db.ReportSchedules.Include(r => r.Report).Where(r => r.ReportId == model.ReportId).ToList();
+            //model.ResultSchedules = db.ReportSchedules.Include(r => r.Report).Where(r => r.ReportId == model.ReportId).ToList();
+            //var reportName = db.Reports.Where(r => r.ReportId == model.ReportId).Select(r=>r.ReportName).FirstOrDefault();
+
+            model.ResultSchedules = reportBusinessManager.GetReportSubscriptions(model.ReportId);
             return View(model);
         }
 
@@ -88,6 +91,7 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
             //}
 
             ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName", reportschedule.ReportId);
+            
             return RedirectToAction("Index");
         }
 

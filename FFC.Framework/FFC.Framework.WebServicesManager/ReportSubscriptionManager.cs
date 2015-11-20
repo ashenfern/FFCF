@@ -38,6 +38,7 @@ namespace FFC.Framework.WebServicesManager
         #endregion
 
         ReportingService2010 rs;
+        private FFCEntities db = new FFCEntities();
 
         public ReportSubscriptionManager()
         {
@@ -101,10 +102,13 @@ namespace FFC.Framework.WebServicesManager
 
                 ParameterValue[] parameters = PopulateParamters(reportSchedule);
 
-                rs.CreateSubscription(report, extSettings, desc,
+                var subscriptionId = rs.CreateSubscription(report, extSettings, desc,
                                       eventType, scheduleXml, parameters);
 
                 isSuccessful = true;
+
+                //Add the subscription to the Schedule table
+                
 
                 //Console.WriteLine("Report subscription successFully created");
             }
@@ -125,23 +129,38 @@ namespace FFC.Framework.WebServicesManager
         /// <param name="reportPath">path of the report</param>
         /// <param name="description">Description of the report</param>
         /// <returns>bool</returns>
-        public bool IsSubscriptionExist(ReportSchedule reportSchedule)
+        public bool IsSubscriptionExist(int reportId)
         {
-            List<Subscription> subscriptions = GetSubscriptions(reportSchedule);
+            List<ReportSchedule> subscriptions = GetSubscriptions(reportId);
             bool isExist = false;
-            string subscriptionFileName = String.Concat(/*reportSchedule.Schedule_ID, */FileNameSplitter, reportSchedule.Report.ReportName, FileNameSplitter, TimestampParameter);
+            //string subscriptionFileName = String.Concat(/*reportSchedule.Schedule_ID, */FileNameSplitter, reportSchedule.Report.ReportName, FileNameSplitter, TimestampParameter);
             //Check whether the subscription is exist
-            isExist = subscriptions.Select(r => { r.DeliverySettings.ParameterValues.Cast<ParameterValue>().Where(d => d.Name == FileName && d.Value == subscriptionFileName); return r; }).Any();
+            //isExist = subscriptions.Select(r => { r.DeliverySettings.ParameterValues.Cast<ParameterValue>().Where(d => d.Name == FileName && d.Value == subscriptionFileName); return r; }).Any();
 
             return isExist;
         }
 
-        public List<Subscription> GetSubscriptions(ReportSchedule reportSchedule)
+        public List<ReportSchedule> GetSubscriptions(int reportId)
         {
-            Subscription[] subscriptions = null;
-            subscriptions = rs.ListSubscriptions(reportSchedule.Report.ReportPath);
 
-            return subscriptions.ToList();
+            List<ReportSchedule> schdeuleList = new List<ReportSchedule>();
+            //string reportPath = @"/Report_Sample_Subscription/ReportStudentWithParmas";
+
+            //Subscription[] subscriptions = null;
+            //subscriptions = rs.ListSubscriptions(reportPath);
+
+            //foreach (var subscription in subscriptions)
+            //{
+            //    ReportSchedule reportSchedule = new ReportSchedule();
+            //    //var isExist = ;
+
+             
+            //}
+            //int reportId = 1;
+
+            schdeuleList = db.ReportSchedules.Where(r => r.ReportId == reportId).ToList();
+
+            return schdeuleList;
         }
 
         /// <summary>

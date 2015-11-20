@@ -54,14 +54,17 @@ namespace FFC.Framework.WebServices.Controllers
 
         // PUT api/report/5
 
-        public void Put(int id, [FromBody]string value)
+        public void Put(ReportSchedule value)
         {
+            reportManager.UpdateSubscription(value);
         }
 
         // DELETE api/report/5
         public void Delete(int id)
         {
+            reportManager.DeleteSubscription(id);
         } 
+
         #endregion
     }
 }

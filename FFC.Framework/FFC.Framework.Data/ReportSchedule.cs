@@ -20,6 +20,7 @@ namespace FFC.Framework.Data
         public int ScheduleDay { get; set; }
         public System.TimeSpan ScheduleTime { get; set; }
         public string ScheduleDescription { get; set; }
+        public string ReportSubscriptionId { get; set; }
     
         public virtual Report Report { get; set; }
     }

@@ -106,6 +106,7 @@
             <PropertyRef Name="ReportScheduleId" />
           </Key>
           <Property Name="ReportScheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportSubscriptionId" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ReportId" Type="int" Nullable="false" />
           <Property Name="ScheduleType" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ScheduleDay" Type="int" Nullable="false" />
@@ -615,6 +616,7 @@
           <Property Name="ScheduleTime" Type="Time" Precision="7" Nullable="false" />
           <Property Name="ScheduleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Report" Relationship="FFCModel.FK_ReportSchedules_Reports" FromRole="ReportSchedule" ToRole="Report" />
+          <Property Name="ReportSubscriptionId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ReportSchedules_Reports">
           <End Type="FFCModel.Report" Role="Report" Multiplicity="1" />
@@ -829,6 +831,7 @@
           <EntitySetMapping Name="ReportSchedules">
             <EntityTypeMapping TypeName="FFCModel.ReportSchedule">
               <MappingFragment StoreEntitySet="ReportSchedules">
+                <ScalarProperty Name="ReportSubscriptionId" ColumnName="ReportSubscriptionId" />
                 <ScalarProperty Name="ScheduleDescription" ColumnName="ScheduleDescription" />
                 <ScalarProperty Name="ScheduleTime" ColumnName="ScheduleTime" />
                 <ScalarProperty Name="ScheduleDay" ColumnName="ScheduleDay" />

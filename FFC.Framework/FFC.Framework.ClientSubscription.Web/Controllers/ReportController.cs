@@ -116,14 +116,19 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ReportSchedule reportschedule)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(reportschedule).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName", reportschedule.ReportId);
-            return View(reportschedule);
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(reportschedule).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            //ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName", reportschedule.ReportId);
+
+           // reportschedule.ReportSubscriptionId = db.ReportSchedules.Where(r => r.ReportId == reportschedule.ReportId).Select(r => r.ReportSubscriptionId).FirstOrDefault();
+
+            reportBusinessManager.EditSubscription(reportschedule);
+            ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName");
+            return RedirectToAction("Index");
         }
 
         //
@@ -146,9 +151,11 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ReportSchedule reportschedule = db.ReportSchedules.Find(id);
-            db.ReportSchedules.Remove(reportschedule);
-            db.SaveChanges();
+            reportBusinessManager.DeleteSubscription(id);
+
+            //ReportSchedule reportschedule = db.ReportSchedules.Find(id);
+            //db.ReportSchedules.Remove(reportschedule);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 

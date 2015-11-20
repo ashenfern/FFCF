@@ -120,7 +120,7 @@ namespace FFC.Framework.ClientSubscription.Business
         }
 
 
-        public void PutData(T data)
+        public void PostData(T data)
         {
             string uri = baseURL + Resource;
             HttpClient client = new HttpClient();
@@ -128,6 +128,18 @@ namespace FFC.Framework.ClientSubscription.Business
             "application/json");
 
             client.PostAsync(new Uri(uri), contentPost);
+
+            //.ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
+        }
+
+        public void PutData(T data)
+        {
+            string uri = baseURL + Resource;
+            HttpClient client = new HttpClient();
+            HttpContent contentPost = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8,
+            "application/json");
+
+            client.PutAsync(new Uri(uri), contentPost);
 
             //.ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
         }

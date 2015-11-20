@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[ReportSchedules]
 (
-	[ReportScheduleId] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[ReportScheduleId] INT NOT NULL PRIMARY KEY IDENTITY,
+	 [ReportSubscriptionId] NVARCHAR(MAX) NOT NULL,  
     [ReportId] INT NOT NULL, 
     [ScheduleType] NVARCHAR(MAX) NOT NULL, 
     [ScheduleDay] INT NOT NULL, 

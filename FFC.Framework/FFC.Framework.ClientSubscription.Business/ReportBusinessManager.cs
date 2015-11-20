@@ -22,7 +22,23 @@ namespace FFC.Framework.ClientSubscription.Business
         public bool CreateSubscription(ReportSchedule reportSchedule)
         {
             service.Resource = "api/Report/";
+            service.PostData(reportSchedule);
+
+            return true;
+        }
+
+        public bool EditSubscription(ReportSchedule reportSchedule)
+        {
+            service.Resource = "api/Report/";
             service.PutData(reportSchedule);
+
+            return true;
+        }
+
+        public bool DeleteSubscription(int id)
+        {
+            service.Resource = "api/Report/";
+            service.DeleteResult(id);
 
             return true;
         }

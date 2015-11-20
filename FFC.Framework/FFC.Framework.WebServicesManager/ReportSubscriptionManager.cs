@@ -5,6 +5,7 @@ using FFC.Framework.WebServicesManager.Utility;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,6 +108,12 @@ namespace FFC.Framework.WebServicesManager
 
                 isSuccessful = true;
 
+                reportSchedule.ReportSubscriptionId = subscriptionId;
+                reportSchedule.Report = null;
+
+                db.ReportSchedules.Add(reportSchedule);
+                db.SaveChanges();
+
                 //Add the subscription to the Schedule table
                 
 
@@ -169,6 +176,9 @@ namespace FFC.Framework.WebServicesManager
         /// <param name="reportSchedule">report schedule parmater</param>
         public void UpdateSubscription(ReportSchedule reportSchedule)
         {
+            reportSchedule.ReportSubscriptionId = db.ReportSchedules.Where(r => r.ReportId == reportSchedule.ReportId).Select(r => r.ReportSubscriptionId).FirstOrDefault();
+            reportSchedule.Report = db.Reports.Where(r => r.ReportId == reportSchedule.ReportId).FirstOrDefault();
+
             ReportingService2010 rs = new ReportingService2010();
             rs.Url = ConfigurationManager.AppSettings[ReportServerURL];
 
@@ -185,17 +195,18 @@ namespace FFC.Framework.WebServicesManager
 
             Subscription[] subscriptions = null;
 
-            string subscriptionFileName = String.Concat(/*reportSchedule.Schedule_ID,*/ FileNameSplitter, reportSchedule.Report.ReportName, FileNameSplitter, TimestampParameter);
-            subscriptions = rs.ListSubscriptions(reportSchedule.Report.ReportPath);
+            //string subscriptionFileName = String.Concat(/*reportSchedule.Schedule_ID,*/ FileNameSplitter, reportSchedule.Report.ReportName, FileNameSplitter, TimestampParameter);
+            //subscriptions = rs.ListSubscriptions(reportSchedule.Report.ReportPath);
 
-            //Get the subscription from the filename
-            var subscription = subscriptions.ToList().Select(r => { r.DeliverySettings.ParameterValues.Cast<ParameterValue>().Where(d => d.Name == FileName && d.Value == subscriptionFileName); return r; }).FirstOrDefault();
+            ////Get the subscription from the filename
+            //var subscription = subscriptions.ToList().Select(r => { r.DeliverySettings.ParameterValues.Cast<ParameterValue>().Where(d => d.Name == FileName && d.Value == subscriptionFileName); return r; }).FirstOrDefault();
 
             //Get Subscription properties
-            rs.GetSubscriptionProperties(subscription.SubscriptionID, out extSettings, out desc, out active, out status, out eventType, out matchData, out values);
+            rs.GetSubscriptionProperties(reportSchedule.ReportSubscriptionId, out extSettings, out desc, out active, out status, out eventType, out matchData, out values);
 
             //Get  the schedule data
             matchData = new ReportScheduleFormatter().GetMatchData(reportSchedule);
+
             //Set the Report Name Descriptions
             desc = reportSchedule.Report.ReportName;
 
@@ -207,9 +218,24 @@ namespace FFC.Framework.WebServicesManager
 
             extSettings.ParameterValues = extensionParamsTemp;
 
-            rs.SetSubscriptionProperties(subscription.SubscriptionID, extSettings, desc, eventType, matchData, values);
+            rs.SetSubscriptionProperties(reportSchedule.ReportSubscriptionId, extSettings, desc, eventType, matchData, values);
+
+            db.Entry(reportSchedule).State = EntityState.Modified;
+            db.SaveChanges();
 
             //Console.WriteLine("Report Succesfully Updated");
+        }
+
+
+        public void DeleteSubscription(int id)
+        {
+            ReportSchedule reportschedule = db.ReportSchedules.Find(id);
+
+            rs.DeleteSubscription(reportschedule.ReportSubscriptionId);
+
+            db.ReportSchedules.Remove(reportschedule);
+            db.SaveChanges();
+
         }
 
         /// <summary>
@@ -306,3 +332,4 @@ namespace FFC.Framework.WebServicesManager
         }
     }
 }
+

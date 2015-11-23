@@ -26,7 +26,7 @@ namespace FFC.Framework.Data
         public string ReportDescription { get; set; }
         public string ReportPath { get; set; }
         public string ReportFileName { get; set; }
-        
+
         [JsonIgnore]
         [IgnoreDataMember]
         public virtual ICollection<ReportSchedule> ReportSchedules { get; set; }

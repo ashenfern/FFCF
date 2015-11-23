@@ -25,6 +25,8 @@
         <EntityTypeShape EntityType="FFCModel.Report" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="FFCModel.ReportSchedule" Width="1.5" PointX="12.25" PointY="2.5" />
         <AssociationConnector Association="FFCModel.FK_ReportSchedules_Reports" />
+        <EntityTypeShape EntityType="FFCModel.FileDeliveryType" Width="1.5" PointX="6.875" PointY="7.875" />
+        <AssociationConnector Association="FFCModel.FK_ReportSchedules_ToFileDeliveryType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

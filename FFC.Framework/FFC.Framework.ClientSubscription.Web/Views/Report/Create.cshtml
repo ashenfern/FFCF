@@ -22,18 +22,26 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ScheduleType)
+            @Html.LabelFor(model => model.DeliveryTypeId, "Delivery Type")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ScheduleType)
-            @Html.ValidationMessageFor(model => model.ScheduleType)
+            @Html.DropDownList("DeliveryTypeId", String.Empty)
+            @Html.ValidationMessageFor(model => model.DeliveryTypeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SchedulePeriod)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("SchedulePeriod", string.Empty)
+            @Html.ValidationMessageFor(model => model.SchedulePeriod)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ScheduleDay)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ScheduleDay)
+            @Html.DropDownList("ScheduleDay",  string.Empty)
             @Html.ValidationMessageFor(model => model.ScheduleDay)
         </div>
 

@@ -47,7 +47,7 @@ namespace FFC.Framework.WebServicesManager.Utility
             //    schedule.EndDateSpecified = false;
             //}
             schedule.EndDateSpecified = false;
-            schedule.Item = GetPattern(reportSchedule.ScheduleType, reportSchedule.ScheduleDay);
+            schedule.Item = GetPattern(reportSchedule.SchedulePeriod, reportSchedule.ScheduleDay);
 
             XmlDocument xmlDoc = GetScheduleAsXml(schedule);
             return xmlDoc.OuterXml;
@@ -60,15 +60,15 @@ namespace FFC.Framework.WebServicesManager.Utility
         /// <returns></returns>
         private RecurrencePattern GetPattern(string scheduleTypeParam, int scheduleDay)
         {
-            ScheduleType scheduleType = (ScheduleType)Enum.Parse(typeof(ScheduleType), scheduleTypeParam, true);
+            SchedulePeriod scheduleType = (SchedulePeriod)Enum.Parse(typeof(SchedulePeriod), scheduleTypeParam, true);
 
             switch (scheduleType)
             {
-                case ScheduleType.Daily:
+                case SchedulePeriod.Daily:
                     DailyRecurrence dailyPattern = new DailyRecurrence();
                     dailyPattern.DaysInterval = 1;
                     return dailyPattern;
-                case ScheduleType.Monthly:
+                case SchedulePeriod.Monthly:
                     MonthlyDOWRecurrence monthlyPattern = new MonthlyDOWRecurrence();
                     monthlyPattern.WhichWeekSpecified = true;
                     monthlyPattern.WhichWeek = WeekNumberEnum.LastWeek;
@@ -92,7 +92,7 @@ namespace FFC.Framework.WebServicesManager.Utility
                     monthlyPattern.DaysOfWeek = days;
 
                     return monthlyPattern;
-                case ScheduleType.Weekdays:
+                case SchedulePeriod.Weekdays:
                     WeeklyRecurrence weekdaysRecurrence = new WeeklyRecurrence();
 
                     DaysOfWeekSelector Weekdays = new DaysOfWeekSelector();
@@ -108,7 +108,7 @@ namespace FFC.Framework.WebServicesManager.Utility
                     weekdaysRecurrence.WeeksInterval = 1;
 
                     return weekdaysRecurrence;
-                case ScheduleType.Weekly:
+                case SchedulePeriod.Weekly:
                     WeeklyRecurrence weeklyRecurrence = new WeeklyRecurrence();
 
                     DaysOfWeekSelector weeklydays = GetExecutionDay(scheduleDay);

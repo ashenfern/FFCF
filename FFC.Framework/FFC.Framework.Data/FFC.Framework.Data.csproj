@@ -82,6 +82,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FFC.edmx</DependentUpon>
     </Compile>
+    <Compile Include="FileDeliveryType.cs">
+      <DependentUpon>FFC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ForecastResult.cs" />
     <Compile Include="ForecastSearchCriteria.cs" />
     <Compile Include="Forecast_DatePeriods.cs">

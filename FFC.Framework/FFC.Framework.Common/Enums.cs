@@ -24,7 +24,7 @@ namespace FFC.Framework.Common
         MonthDate,      //All month date data (April 8th)
     }
 
-    public enum ScheduleType
+    public enum SchedulePeriod
     {
         Daily = 1,
         Monthly,

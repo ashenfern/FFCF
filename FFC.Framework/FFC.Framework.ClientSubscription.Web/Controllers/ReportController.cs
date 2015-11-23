@@ -69,6 +69,11 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName");
+
+            ViewBag.SchedulePeriod = GetDropdownDataByName("SchedulePeriod");
+            ViewBag.ScheduleDay = GetDropdownDataByName("ScheduleDay");
+            ViewBag.DeliveryTypeId = new SelectList(db.FileDeliveryTypes, "DeliveryTypeId", "DeliveryMethod");
+
             return View();
         }
 
@@ -79,7 +84,6 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ReportSchedule reportschedule)
         {
-
             reportschedule.Report = db.Reports.Where(r => r.ReportId == reportschedule.ReportId).FirstOrDefault();
             var result = reportBusinessManager.CreateSubscription(reportschedule);
 
@@ -106,6 +110,10 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.ReportId = new SelectList(db.Reports, "ReportId", "ReportName", reportschedule.ReportId);
+
+            ViewBag.SchedulePeriod = new SelectList(GetDropdownDataByName("SchedulePeriod"), "Value", "Text", reportschedule.SchedulePeriod);
+            ViewBag.ScheduleDay = new SelectList(GetDropdownDataByName("ScheduleDay"), "Value", "Text", reportschedule.ScheduleDay);
+            ViewBag.DeliveryTypeId = new SelectList(db.FileDeliveryTypes, "DeliveryTypeId", "DeliveryMethod", reportschedule.DeliveryTypeId);
             return View(reportschedule);
         }
 
@@ -164,5 +172,32 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        public List<SelectListItem> GetDropdownDataByName(string name)
+        {
+            List<SelectListItem> selectList = new List<SelectListItem>();
+
+            if (name == "SchedulePeriod")
+            {
+              selectList.Add(new SelectListItem {Text = "Daily", Value = "Daily"});
+              selectList.Add(new SelectListItem {Text = "Weekly", Value = "Weekly"});
+              selectList.Add(new SelectListItem {Text = "Monthly", Value = "Monthly"});
+              selectList.Add(new SelectListItem {Text = "Yearly", Value = "Yearly"});
+            }
+            else if (name == "ScheduleDay")
+            {
+               selectList.Add(new SelectListItem {Text = "Sunday", Value = "0"});
+               selectList.Add(new SelectListItem {Text = "Monday", Value = "1"});
+               selectList.Add(new SelectListItem {Text = "Tuesday", Value = "2"});
+               selectList.Add(new SelectListItem {Text = "Wednesday", Value = "3"});
+               selectList.Add(new SelectListItem {Text = "Thurseday", Value = "4"});
+               selectList.Add(new SelectListItem {Text = "Friday", Value = "5"});
+               selectList.Add(new SelectListItem { Text = "Saturday", Value = "6" });
+            }
+
+            
+            return selectList;
+        }
+
     }
 }

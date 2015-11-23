@@ -98,4 +98,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ReportId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="785f4102-f0e5-4c20-ae8e-699801e8f2b6" ChangeDateTime="11/23/2015 06:50:40">
+    <Property Name="ElementName" Value="[dbo].[FileDeliveryType].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FileDeliveryType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DeliveryTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e65fc05c-d8cb-4f0a-96ee-f58134a83d48" ChangeDateTime="11/23/2015 06:53:29">
+    <Property Name="ElementName" Value="[dbo].[ReportSchedules].[DeliveryType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ReportSchedules]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DeliveryTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="002d0fcb-9c47-44b2-ac14-8203f1f6ee7e" ChangeDateTime="11/23/2015 06:55:05">
+    <Property Name="ElementName" Value="[dbo].[ReportSchedules].[ScheduleType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ReportSchedules]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SchedulePeriod" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a9106096-c967-471c-afac-26d593b339ef" ChangeDateTime="11/23/2015 07:00:55">
+    <Property Name="ElementName" Value="[dbo].[FileDeliveryType]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[FileDeliveryTypes]" />
+  </Operation>
 </Operations>

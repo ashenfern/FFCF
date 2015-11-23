@@ -8,6 +8,9 @@ namespace TestConsole
 {
     class Program
     {
+        //[JsonIgnore]
+        //[IgnoreDataMember]
+
         public static FFCEntities context = new FFCEntities();
         public static Random random = new Random();
 

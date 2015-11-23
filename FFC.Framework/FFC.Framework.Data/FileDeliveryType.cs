@@ -12,18 +12,16 @@ namespace FFC.Framework.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ReportSchedule
+    public partial class FileDeliveryType
     {
-        public int ReportScheduleId { get; set; }
-        public int ReportId { get; set; }
-        public int ScheduleDay { get; set; }
-        public System.TimeSpan ScheduleTime { get; set; }
-        public string ScheduleDescription { get; set; }
-        public string ReportSubscriptionId { get; set; }
-        public int DeliveryTypeId { get; set; }
-        public string SchedulePeriod { get; set; }
+        public FileDeliveryType()
+        {
+            this.ReportSchedules = new HashSet<ReportSchedule>();
+        }
     
-        public virtual Report Report { get; set; }
-        public virtual FileDeliveryType FileDeliveryType { get; set; }
+        public int DeliveryTypeId { get; set; }
+        public string DeliveryMethod { get; set; }
+    
+        public virtual ICollection<ReportSchedule> ReportSchedules { get; set; }
     }
 }

@@ -360,10 +360,10 @@
     <Content Include="Views\Transaction\Delete.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Report\Details.cshtml" />
-    <Content Include="Views\Report\Create.cshtml" />
     <Content Include="Views\Report\Edit.cshtml" />
     <Content Include="Views\Report\Delete.cshtml" />
     <Content Include="Views\Report\_ReportResultPartial.cshtml" />
+    <Content Include="Views\Report\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

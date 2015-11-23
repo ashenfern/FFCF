@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.Report.ReportName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ScheduleType)
+            @Html.DisplayNameFor(model => model.SchedulePeriod)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ScheduleDay)
@@ -35,10 +35,11 @@
             @Html.DisplayFor(modelItem => item.Report.ReportName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ScheduleType)
+            @Html.DisplayFor(modelItem => item.SchedulePeriod)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ScheduleDay)
+              @Enum.GetName(typeof(DayOfWeek), item.ScheduleDay)
+           @* @Html.DisplayFor(modelItem => item.ScheduleDay)*@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ScheduleTime)

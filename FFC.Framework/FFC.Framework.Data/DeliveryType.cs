@@ -12,9 +12,9 @@ namespace FFC.Framework.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class FileDeliveryType
+    public partial class DeliveryType
     {
-        public FileDeliveryType()
+        public DeliveryType()
         {
             this.ReportSchedules = new HashSet<ReportSchedule>();
         }

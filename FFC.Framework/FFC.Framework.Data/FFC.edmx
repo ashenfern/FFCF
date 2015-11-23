@@ -44,6 +44,13 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="24" />
           <Property Name="Fax" Type="nvarchar" MaxLength="24" />
         </EntityType>
+        <EntityType Name="DeliveryTypes">
+          <Key>
+            <PropertyRef Name="DeliveryTypeId" />
+          </Key>
+          <Property Name="DeliveryTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeliveryMethod" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -66,13 +73,6 @@
           <Property Name="Notes" Type="ntext" />
           <Property Name="ReportsTo" Type="int" />
           <Property Name="PhotoPath" Type="nvarchar" MaxLength="255" />
-        </EntityType>
-        <EntityType Name="FileDeliveryTypes">
-          <Key>
-            <PropertyRef Name="DeliveryTypeId" />
-          </Key>
-          <Property Name="DeliveryTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DeliveryMethod" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Forecast_DatePeriods">
           <Key>
@@ -167,10 +167,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ReportSchedules_ToFileDeliveryType">
-          <End Role="FileDeliveryTypes" Type="Self.FileDeliveryTypes" Multiplicity="1" />
+          <End Role="DeliveryTypes" Type="Self.DeliveryTypes" Multiplicity="1" />
           <End Role="ReportSchedules" Type="Self.ReportSchedules" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FileDeliveryTypes">
+            <Principal Role="DeliveryTypes">
               <PropertyRef Name="DeliveryTypeId" />
             </Principal>
             <Dependent Role="ReportSchedules">
@@ -268,8 +268,8 @@
           <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryTypes" EntityType="Self.DeliveryTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FileDeliveryTypes" EntityType="Self.FileDeliveryTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Forecast_DatePeriods" EntityType="Self.Forecast_DatePeriods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Forecast_Methods" EntityType="Self.Forecast_Methods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -286,7 +286,7 @@
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_ReportSchedules_ToFileDeliveryType" Association="Self.FK_ReportSchedules_ToFileDeliveryType">
-            <End Role="FileDeliveryTypes" EntitySet="FileDeliveryTypes" />
+            <End Role="DeliveryTypes" EntitySet="DeliveryTypes" />
             <End Role="ReportSchedules" EntitySet="ReportSchedules" />
           </AssociationSet>
           <AssociationSet Name="FK_ReportSchedules_ToReports" Association="Self.FK_ReportSchedules_ToReports">
@@ -581,9 +581,9 @@
             <End Role="Report" EntitySet="Reports" />
             <End Role="ReportSchedule" EntitySet="ReportSchedules" />
           </AssociationSet>
-          <EntitySet Name="FileDeliveryTypes" EntityType="FFCModel.FileDeliveryType" />
-          <AssociationSet Name="FK_ReportSchedules_ToFileDeliveryType" Association="FFCModel.FK_ReportSchedules_ToFileDeliveryType">
-            <End Role="FileDeliveryType" EntitySet="FileDeliveryTypes" />
+          <EntitySet Name="DeliveryTypes" EntityType="FFCModel.DeliveryType" />
+          <AssociationSet Name="FK_ReportSchedules_ToFileDeliveryType1" Association="FFCModel.FK_ReportSchedules_ToFileDeliveryType1">
+            <End Role="DeliveryType" EntitySet="DeliveryTypes" />
             <End Role="ReportSchedule" EntitySet="ReportSchedules" />
           </AssociationSet>
         </EntityContainer>
@@ -648,7 +648,7 @@
           <Property Name="ReportSubscriptionId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DeliveryTypeId" Type="Int32" Nullable="false" />
           <Property Name="SchedulePeriod" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="FileDeliveryType" Relationship="FFCModel.FK_ReportSchedules_ToFileDeliveryType" FromRole="ReportSchedule" ToRole="FileDeliveryType" />
+          <NavigationProperty Name="DeliveryType" Relationship="FFCModel.FK_ReportSchedules_ToFileDeliveryType1" FromRole="ReportSchedule" ToRole="DeliveryType" />
         </EntityType>
         <Association Name="FK_ReportSchedules_Reports">
           <End Type="FFCModel.Report" Role="Report" Multiplicity="1" />
@@ -662,19 +662,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="FileDeliveryType">
+        <EntityType Name="DeliveryType">
           <Key>
             <PropertyRef Name="DeliveryTypeId" />
           </Key>
           <Property Name="DeliveryTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeliveryMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ReportSchedules" Relationship="FFCModel.FK_ReportSchedules_ToFileDeliveryType" FromRole="FileDeliveryType" ToRole="ReportSchedule" />
+          <NavigationProperty Name="ReportSchedules" Relationship="FFCModel.FK_ReportSchedules_ToFileDeliveryType1" FromRole="DeliveryType" ToRole="ReportSchedule" />
         </EntityType>
-        <Association Name="FK_ReportSchedules_ToFileDeliveryType">
-          <End Type="FFCModel.FileDeliveryType" Role="FileDeliveryType" Multiplicity="1" />
+        <Association Name="FK_ReportSchedules_ToFileDeliveryType1">
+          <End Type="FFCModel.DeliveryType" Role="DeliveryType" Multiplicity="1" />
           <End Type="FFCModel.ReportSchedule" Role="ReportSchedule" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FileDeliveryType">
+            <Principal Role="DeliveryType">
               <PropertyRef Name="DeliveryTypeId" />
             </Principal>
             <Dependent Role="ReportSchedule">
@@ -894,9 +894,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FileDeliveryTypes">
-            <EntityTypeMapping TypeName="FFCModel.FileDeliveryType">
-              <MappingFragment StoreEntitySet="FileDeliveryTypes">
+          <EntitySetMapping Name="DeliveryTypes">
+            <EntityTypeMapping TypeName="FFCModel.DeliveryType">
+              <MappingFragment StoreEntitySet="DeliveryTypes">
                 <ScalarProperty Name="DeliveryMethod" ColumnName="DeliveryMethod" />
                 <ScalarProperty Name="DeliveryTypeId" ColumnName="DeliveryTypeId" />
               </MappingFragment>

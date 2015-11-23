@@ -72,7 +72,7 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
 
             ViewBag.SchedulePeriod = GetDropdownDataByName("SchedulePeriod");
             ViewBag.ScheduleDay = GetDropdownDataByName("ScheduleDay");
-            ViewBag.DeliveryTypeId = new SelectList(db.FileDeliveryTypes, "DeliveryTypeId", "DeliveryMethod");
+            ViewBag.DeliveryTypeId = new SelectList(db.DeliveryTypes, "DeliveryTypeId", "DeliveryMethod");
 
             return View();
         }
@@ -113,7 +113,7 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
 
             ViewBag.SchedulePeriod = new SelectList(GetDropdownDataByName("SchedulePeriod"), "Value", "Text", reportschedule.SchedulePeriod);
             ViewBag.ScheduleDay = new SelectList(GetDropdownDataByName("ScheduleDay"), "Value", "Text", reportschedule.ScheduleDay);
-            ViewBag.DeliveryTypeId = new SelectList(db.FileDeliveryTypes, "DeliveryTypeId", "DeliveryMethod", reportschedule.DeliveryTypeId);
+            ViewBag.DeliveryTypeId = new SelectList(db.DeliveryTypes, "DeliveryTypeId", "DeliveryMethod", reportschedule.DeliveryTypeId);
             return View(reportschedule);
         }
 

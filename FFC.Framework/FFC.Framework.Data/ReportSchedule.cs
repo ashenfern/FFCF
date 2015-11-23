@@ -24,6 +24,6 @@ namespace FFC.Framework.Data
         public string SchedulePeriod { get; set; }
     
         public virtual Report Report { get; set; }
-        public virtual FileDeliveryType FileDeliveryType { get; set; }
+        public virtual DeliveryType DeliveryType { get; set; }
     }
 }

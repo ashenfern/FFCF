@@ -64,6 +64,9 @@
     <Compile Include="C__RefactorLog.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
+    <Compile Include="DeliveryType.cs">
+      <DependentUpon>FFC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
@@ -81,9 +84,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FFC.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="FileDeliveryType.cs">
-      <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
     <Compile Include="ForecastResult.cs" />
     <Compile Include="ForecastSearchCriteria.cs" />

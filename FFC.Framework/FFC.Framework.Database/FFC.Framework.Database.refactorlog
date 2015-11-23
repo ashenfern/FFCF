@@ -126,4 +126,11 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[FileDeliveryTypes]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="5086adce-e079-41f0-b7c4-f9db06e60030" ChangeDateTime="11/23/2015 12:18:31">
+    <Property Name="ElementName" Value="[dbo].[FileDeliveryTypes]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[DeliveryTypes]" />
+  </Operation>
 </Operations>

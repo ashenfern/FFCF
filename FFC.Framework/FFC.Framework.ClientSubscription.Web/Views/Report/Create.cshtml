@@ -6,7 +6,8 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -41,7 +42,7 @@
             @Html.LabelFor(model => model.ScheduleDay)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ScheduleDay",  string.Empty)
+            @Html.DropDownList("ScheduleDay", string.Empty)
             @Html.ValidationMessageFor(model => model.ScheduleDay)
         </div>
 
@@ -62,22 +63,22 @@
         </div>
 
         <div id="Email">
-            
-            <div class="editor-label">
-            @Html.LabelFor(model => model.EmailTo)
-        </div>
-            <div class="editor-field">
-            @Html.EditorFor(model => model.EmailTo)
-            @Html.ValidationMessageFor(model => model.EmailTo)
-        </div>
 
-             <div class="editor-label">
-            @Html.LabelFor(model => model.EmailComment)
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EmailTo)
             </div>
             <div class="editor-field">
-            @Html.EditorFor(model => model.EmailComment)
-            @Html.ValidationMessageFor(model => model.EmailComment)
-        </div>
+                @Html.EditorFor(model => model.EmailTo)
+                @Html.ValidationMessageFor(model => model.EmailTo)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EmailComment)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.EmailComment)
+                @Html.ValidationMessageFor(model => model.EmailComment)
+            </div>
 
         </div>
 
@@ -95,7 +96,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             alert("Inside create");
         });
 

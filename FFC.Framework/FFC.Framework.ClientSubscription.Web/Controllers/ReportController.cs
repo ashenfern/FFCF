@@ -114,6 +114,7 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
             ViewBag.SchedulePeriod = new SelectList(GetDropdownDataByName("SchedulePeriod"), "Value", "Text", reportschedule.SchedulePeriod);
             ViewBag.ScheduleDay = new SelectList(GetDropdownDataByName("ScheduleDay"), "Value", "Text", reportschedule.ScheduleDay);
             ViewBag.DeliveryTypeId = new SelectList(db.DeliveryTypes, "DeliveryTypeId", "DeliveryMethod", reportschedule.DeliveryTypeId);
+
             return View(reportschedule);
         }
 

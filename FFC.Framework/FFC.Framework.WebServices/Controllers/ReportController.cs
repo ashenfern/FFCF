@@ -53,7 +53,7 @@ namespace FFC.Framework.WebServices.Controllers
             //var result = reportManager.CreateSubscription(reportSchedule, @"\\CMLASHFERNANDO\Shared");
             if (reportSchedule.DeliveryTypeId == (int)DeliveryTypes.File)
             {
-                var result = reportManager.CreateSubscription(reportSchedule, @"\\CMLASHFERNANDO\Shared");
+                var result = reportManager.CreateFileSubscription(reportSchedule, @"\\CMLASHFERNANDO\Shared");
             }
             else if (reportSchedule.DeliveryTypeId == (int)DeliveryTypes.Email)
             {

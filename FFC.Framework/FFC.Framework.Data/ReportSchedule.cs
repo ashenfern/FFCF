@@ -22,6 +22,8 @@ namespace FFC.Framework.Data
         public string ReportSubscriptionId { get; set; }
         public int DeliveryTypeId { get; set; }
         public string SchedulePeriod { get; set; }
+        public string EmailTo { get; set; }
+        public string EmailComment { get; set; }
     
         public virtual Report Report { get; set; }
         public virtual DeliveryType DeliveryType { get; set; }

@@ -120,6 +120,8 @@
           <Property Name="ScheduleDay" Type="int" Nullable="false" />
           <Property Name="ScheduleTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="ScheduleDescription" Type="nvarchar(max)" />
+          <Property Name="EmailTo" Type="nvarchar(max)" />
+          <Property Name="EmailComment" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TransactionDetails">
           <Key>
@@ -649,6 +651,8 @@
           <Property Name="DeliveryTypeId" Type="Int32" Nullable="false" />
           <Property Name="SchedulePeriod" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DeliveryType" Relationship="FFCModel.FK_ReportSchedules_ToFileDeliveryType1" FromRole="ReportSchedule" ToRole="DeliveryType" />
+          <Property Name="EmailTo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ReportSchedules_Reports">
           <End Type="FFCModel.Report" Role="Report" Multiplicity="1" />
@@ -883,6 +887,8 @@
           <EntitySetMapping Name="ReportSchedules">
             <EntityTypeMapping TypeName="FFCModel.ReportSchedule">
               <MappingFragment StoreEntitySet="ReportSchedules">
+                <ScalarProperty Name="EmailComment" ColumnName="EmailComment" />
+                <ScalarProperty Name="EmailTo" ColumnName="EmailTo" />
                 <ScalarProperty Name="SchedulePeriod" ColumnName="SchedulePeriod" />
                 <ScalarProperty Name="DeliveryTypeId" ColumnName="DeliveryTypeId" />
                 <ScalarProperty Name="ReportSubscriptionId" ColumnName="ReportSubscriptionId" />

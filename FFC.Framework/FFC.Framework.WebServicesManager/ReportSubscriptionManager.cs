@@ -57,7 +57,7 @@ namespace FFC.Framework.WebServicesManager
         /// <param name="reportSchedule">Name of the Report</param>
         /// <param name="parametersDictionary">Report Parameters</param>
         /// <returns></returns>
-        public bool CreateSubscription(ReportSchedule reportSchedule, string sharedSubscriptionFolderPath)
+        public bool CreateFileSubscription(ReportSchedule reportSchedule, string sharedSubscriptionFolderPath)
         {
             //Getting the shared folder path from the config file
             //string shareFolderPath = ConfigurationManager.AppSettings[ReportSubscirptionSharedPath];
@@ -147,7 +147,7 @@ namespace FFC.Framework.WebServicesManager
 
             extensionParams[0] = new ParameterValue();
             extensionParams[0].Name = "TO";
-            extensionParams[0].Value = "dank@adventure-works.com";
+            extensionParams[0].Value = reportSchedule.EmailTo;//"dank@adventure-works.com";
 
             extensionParams[1] = new ParameterValue();
             extensionParams[1].Name = "ReplyTo";
@@ -167,7 +167,7 @@ namespace FFC.Framework.WebServicesManager
 
             extensionParams[5] = new ParameterValue();
             extensionParams[5].Name = "Comment";
-            extensionParams[5].Value = "Here is your daily sales report for Michael.";
+            extensionParams[5].Value = reportSchedule.EmailComment;//"Here is your daily sales report for Michael.";
 
             extensionParams[6] = new ParameterValue();
             extensionParams[6].Name = "IncludeLink";

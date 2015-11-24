@@ -9,6 +9,8 @@
     [ScheduleTime] TIME NOT NULL, 
     [ScheduleDescription] NVARCHAR(MAX) NULL, 
    
+    [EmailTo] NVARCHAR(MAX) NULL, 
+    [EmailComment] NVARCHAR(MAX) NULL, 
     CONSTRAINT [FK_ReportSchedules_ToReports] FOREIGN KEY (ReportId) REFERENCES Reports(ReportId), 
     CONSTRAINT [FK_ReportSchedules_ToFileDeliveryType] FOREIGN KEY (DeliveryTypeId) REFERENCES [DeliveryTypes](DeliveryTypeId)
 )

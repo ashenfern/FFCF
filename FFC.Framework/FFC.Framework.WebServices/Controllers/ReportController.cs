@@ -1,4 +1,5 @@
-﻿using FFC.Framework.Data;
+﻿using FFC.Framework.Common;
+using FFC.Framework.Data;
 using FFC.Framework.WebServicesManager;
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,15 @@ namespace FFC.Framework.WebServices.Controllers
         [ActionName("CreateSubscriptions")]
         public void Post(ReportSchedule reportSchedule)
         {
-            var result = reportManager.CreateSubscription(reportSchedule, @"\\CMLASHFERNANDO\Shared");
+            //var result = reportManager.CreateSubscription(reportSchedule, @"\\CMLASHFERNANDO\Shared");
+            if (reportSchedule.DeliveryTypeId == (int)DeliveryTypes.File)
+            {
+                var result = reportManager.CreateSubscription(reportSchedule, @"\\CMLASHFERNANDO\Shared");
+            }
+            else if (reportSchedule.DeliveryTypeId == (int)DeliveryTypes.Email)
+            {
+                var result = reportManager.CreateEmailSubscription(reportSchedule);
+            }
         }
 
         // PUT api/report/5

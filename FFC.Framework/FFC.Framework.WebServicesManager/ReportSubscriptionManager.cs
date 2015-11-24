@@ -115,7 +115,7 @@ namespace FFC.Framework.WebServicesManager
                 db.SaveChanges();
 
                 //Add the subscription to the Schedule table
-                
+
 
                 //Console.WriteLine("Report subscription successFully created");
             }
@@ -127,6 +127,86 @@ namespace FFC.Framework.WebServicesManager
 
             return isSuccessful;
 
+        }
+
+        public bool CreateEmailSubscription(ReportSchedule reportSchedule)
+        {
+            string report = reportSchedule.Report.ReportPath;
+            string desc = reportSchedule.Report.ReportDescription;
+            string eventType = TimedSubscription;
+            bool isSuccessful = false;
+
+            //Getting the schedule data
+            string scheduleXml = new ReportScheduleFormatter().GetMatchData(reportSchedule);
+            //string scheduleXml = @"<ScheduleDefinition>";
+            //scheduleXml += @"<StartDateTime>2003-02-24T09:00:00-08:00</StartDateTime><WeeklyRecurrence><WeeksInterval>1</WeeksInterval>";
+            //scheduleXml += @"<DaysOfWeek><Monday>True</Monday></DaysOfWeek>";
+            //scheduleXml += @"</WeeklyRecurrence></ScheduleDefinition>";
+
+            ParameterValue[] extensionParams = new ParameterValue[8];
+
+            extensionParams[0] = new ParameterValue();
+            extensionParams[0].Name = "TO";
+            extensionParams[0].Value = "dank@adventure-works.com";
+
+            extensionParams[1] = new ParameterValue();
+            extensionParams[1].Name = "ReplyTo";
+            extensionParams[1].Value = "reporting@adventure-works.com";
+
+            extensionParams[2] = new ParameterValue();
+            extensionParams[2].Name = "IncludeReport";
+            extensionParams[2].Value = "True";
+
+            extensionParams[3] = new ParameterValue();
+            extensionParams[3].Name = "RenderFormat";
+            extensionParams[3].Value = "MHTML";
+
+            extensionParams[4] = new ParameterValue();
+            extensionParams[4].Name = "Subject";
+            extensionParams[4].Value = "@ReportName was executed at @ExecutionTime";
+
+            extensionParams[5] = new ParameterValue();
+            extensionParams[5].Name = "Comment";
+            extensionParams[5].Value = "Here is your daily sales report for Michael.";
+
+            extensionParams[6] = new ParameterValue();
+            extensionParams[6].Name = "IncludeLink";
+            extensionParams[6].Value = "True";
+
+            extensionParams[7] = new ParameterValue();
+            extensionParams[7].Name = "Priority";
+            extensionParams[7].Value = "NORMAL";
+
+            ParameterValue parameter = new ParameterValue();
+            parameter.Name = "Id";
+            parameter.Value = "1";
+
+            ParameterValue[] parameters = new ParameterValue[1];
+            parameters[0] = parameter;
+
+            string matchData = scheduleXml;
+            ExtensionSettings extSettings = new ExtensionSettings();
+            extSettings.ParameterValues = extensionParams;
+            extSettings.Extension = "Report Server Email";
+
+            try
+            {
+                var subscriptionId = rs.CreateSubscription(report, extSettings, desc, eventType, matchData, parameters);
+
+                isSuccessful = true;
+
+                reportSchedule.ReportSubscriptionId = subscriptionId;
+                reportSchedule.Report = null;
+
+                db.ReportSchedules.Add(reportSchedule);
+                db.SaveChanges();
+            }
+
+            catch (SoapException e)
+            {
+                Console.WriteLine(e.Detail.InnerXml.ToString());
+            }
+            return isSuccessful;
         }
 
         /// <summary>
@@ -161,7 +241,7 @@ namespace FFC.Framework.WebServicesManager
             //    ReportSchedule reportSchedule = new ReportSchedule();
             //    //var isExist = ;
 
-             
+
             //}
             //int reportId = 1;
 

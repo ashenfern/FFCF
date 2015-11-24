@@ -54,4 +54,10 @@ namespace FFC.Framework.Common
         Overwrite,
         AutoIncrement
     }
+
+    public enum DeliveryTypes
+    {
+        Email = 1,
+        File
+    }
 }

@@ -57,11 +57,11 @@ namespace FFC.Framework.WebServicesManager
         /// <param name="reportSchedule">Name of the Report</param>
         /// <param name="parametersDictionary">Report Parameters</param>
         /// <returns></returns>
-        public bool CreateFileSubscription(ReportSchedule reportSchedule, string sharedSubscriptionFolderPath)
+        public bool CreateFileSubscription(ReportSchedule reportSchedule)
         {
             //Getting the shared folder path from the config file
-            //string shareFolderPath = ConfigurationManager.AppSettings[ReportSubscirptionSharedPath];
-            string shareFolderPath = sharedSubscriptionFolderPath;
+            string shareFolderPath = ConfigurationManager.AppSettings[ReportSubscirptionSharedPath];
+            //string shareFolderPath = sharedSubscriptionFolderPath;
 
             bool isSuccessful = false;
 

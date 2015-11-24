@@ -12,7 +12,6 @@ namespace FFC.Framework.WebServices.Controllers
 {
     public class ReportController : ApiController
     {
-
         private ReportSubscriptionManager  reportManager = new ReportSubscriptionManager();
 
         [ActionName("GetByName")]
@@ -53,7 +52,7 @@ namespace FFC.Framework.WebServices.Controllers
             //var result = reportManager.CreateSubscription(reportSchedule, @"\\CMLASHFERNANDO\Shared");
             if (reportSchedule.DeliveryTypeId == (int)DeliveryTypes.File)
             {
-                var result = reportManager.CreateFileSubscription(reportSchedule, @"\\CMLASHFERNANDO\Shared");
+                var result = reportManager.CreateFileSubscription(reportSchedule);
             }
             else if (reportSchedule.DeliveryTypeId == (int)DeliveryTypes.Email)
             {

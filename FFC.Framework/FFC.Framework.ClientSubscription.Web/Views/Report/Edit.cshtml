@@ -20,7 +20,7 @@
             @Html.LabelFor(model => model.ReportId, "Report")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ReportId", String.Empty)
+            @Html.DropDownList("ReportId", "--- Select a Report ---")
             @Html.ValidationMessageFor(model => model.ReportId)
         </div>
 
@@ -29,7 +29,7 @@
             @Html.LabelFor(model => model.DeliveryTypeId, "Delivery Type")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("DeliveryTypeId", String.Empty)
+            @Html.DropDownList("DeliveryTypeId", "--- Select a Delivery Type ---")
             @Html.ValidationMessageFor(model => model.DeliveryTypeId)
         </div>
 
@@ -38,7 +38,7 @@
             @Html.LabelFor(model => model.SchedulePeriod)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("SchedulePeriod", string.Empty)
+            @Html.DropDownList("SchedulePeriod", "--- Select Schedule Period ---")
             @Html.ValidationMessageFor(model => model.SchedulePeriod)
         </div>
 
@@ -46,7 +46,7 @@
             @Html.LabelFor(model => model.ScheduleDay)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ScheduleDay", string.Empty)
+            @Html.DropDownList("ScheduleDay", "--- Select Schedule Day ---")
             @Html.ValidationMessageFor(model => model.ScheduleDay)
         </div>
 
@@ -101,14 +101,14 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            alert("Inside create");
+            //alert("Inside create");
         });
 
         $("#DeliveryTypeId").change(function () {
             var item = $(this);
             var selectedValue = item.val()
 
-            alert("Selected Item" + selectedValue)
+            //alert("Selected Item" + selectedValue)
 
             if (selectedValue == 1) {
                 $("#Email").show();

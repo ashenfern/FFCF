@@ -207,7 +207,7 @@ namespace FFC.Framework.WebServicesManager
         public string Plot(REngine engine, string method)
         {
             //string imagePath = @"C:\\Users\\ashfernando\\Desktop\\Test\\";
-            string imagePath = @"C:\\Ashen\\Development\\GitHub\\FFCF\\FFC.Framework\\FFC.Framework.ClientSubscription.Web\\Content\\Images";
+            string imagePath = @"D:\\Ashen\\Development\\GitHub\\FFCF\\FFC.Framework\\FFC.Framework.ClientSubscription.Web\\Content\\Images";
             //string imagePath = @"~\\Content\\Images";
 
             string fileName = String.Format("{0}_image.png", method);

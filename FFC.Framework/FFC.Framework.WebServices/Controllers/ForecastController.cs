@@ -17,12 +17,12 @@ namespace FFC.Framework.WebServices.Controllers
 
         // GET 
         //[Route("Forecast/{customerId}/orders/{orderId}")]
-        [ActionName("ByProductDayTime")]
-        public List<sp_Forecast_GetDailyTimeSpecificAvereageProductTransactions_Result> GetProducts(int day, int productId, int start, int end)
-        {
-            var result = forecastManager.GetDailyTimeSpecificAvereageProductTransactions().Where(r => r.Day == day).ToList();
-            return result;
-        }
+        //[ActionName("ByProductDayTime")]
+        //public List<sp_Forecast_GetDailyTimeSpecificAvereageProductTransactions_Result> GetProducts(int day, int productId, int start, int end)
+        //{
+        //    var result = forecastManager.GetDailyTimeSpecificAvereageProductTransactions().Where(r => r.Day == day).ToList();
+        //    return result;
+        //}
 
 
         //[ActionName("TestForecast")]

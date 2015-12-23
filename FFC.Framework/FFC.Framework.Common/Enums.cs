@@ -17,6 +17,7 @@ namespace FFC.Framework.Common
     }
     public enum DataPeriod
     {
+        Hourly,
         Daily,          //Every day
         Day,            //All given day (sunday data)
         MonthDay,       //All Month day (April sunday)

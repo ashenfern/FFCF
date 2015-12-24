@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFC.Framework.Common", "FFC.Framework.Common\FFC.Framework.Common.csproj", "{7C598820-1E4E-4291-9CEC-CBBBDB760D94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFC.Framework.Data", "FFC.Framework.Data\FFC.Framework.Data.csproj", "{71E5D0AC-B2E9-44EB-907A-BD51933E3842}"

@@ -13,7 +13,7 @@ using System.Web.Services.Protocols;
 
 namespace FFC.Framework.WebServicesManager
 {
-    public class ReportSubscriptionManager
+    public class ReportSubscriptionManager : IReportSubscriptionManager
     {
         #region Constants
         // Report Subsription constants

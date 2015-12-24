@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FFC.Framework.WebServicesManager
 {
-    public class ForecastManager
+    public class ForecastManager : IForecastManager
     {
         FFCEntities db = new FFCEntities();
 

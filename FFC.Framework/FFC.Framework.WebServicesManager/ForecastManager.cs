@@ -294,17 +294,17 @@ namespace FFC.Framework.WebServicesManager
         //    engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method.ToString())); // Fit <- Arima(tsValue)
         //}
 
-        public List<double> GetCorrespondingDataByPeriod(DataPeriod data, int productId)
+        public List<double> GetCorrespondingDataByPeriod(DataPeriod period, int productId)
         {
             //FFCEntities db = new FFCEntities();
             List<double> values = new List<double>();
 
-            if (data == DataPeriod.Daily)
+            if (period == DataPeriod.Daily)
             {
                 var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
                 values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
             }
-            else if (data == DataPeriod.Day)
+            else if (period == DataPeriod.Day)
             {
                 var list = db.sp_Forecast_GetProductCountDayByProductId(productId).ToList();
                 values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();

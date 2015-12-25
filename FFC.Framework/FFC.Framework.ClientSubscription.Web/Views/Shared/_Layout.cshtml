@@ -12,7 +12,10 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                    @*<img src="~/Images/FFCF.png" height="75" width="125" />*@
+                    <img src="~/Images/FastFood.png" height="75" width="125" />
+                    @*<h3>FFCF Client</h3>*@
+                    @*<p class="site-title">@Html.ActionLink("FFCF Client", "Index", "Home")</p>*@
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -21,6 +24,10 @@
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Forecast", "Index", "Forecast")</li>
+                            <li>@Html.ActionLink("ForecastFailover", "Index", "ForecastFailover")</li>
+                            <li>@Html.ActionLink("Reports", "Index", "Report")</li>
+                            <li>@Html.ActionLink("DataTransfer", "Index", "DataTransfer")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>

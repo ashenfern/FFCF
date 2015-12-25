@@ -178,7 +178,7 @@ namespace FFC.Framework.WebServicesManager
             extensionParams[7].Value = "NORMAL";
 
             ParameterValue parameter = new ParameterValue();
-            parameter.Name = "Id";
+            parameter.Name = "BranchID";
             parameter.Value = "1";
 
             ParameterValue[] parameters = new ParameterValue[1];
@@ -349,7 +349,7 @@ namespace FFC.Framework.WebServicesManager
                         ParameterValue param = new ParameterValue();
                         param.Name = parameter.Name;
 
-                        if (parameter.Name == "Id")
+                        if (parameter.Name == "BranchID")
                         {
                             param.Value = "1";
                         }

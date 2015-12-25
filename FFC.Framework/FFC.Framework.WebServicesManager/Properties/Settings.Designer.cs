@@ -12,7 +12,7 @@ namespace FFC.Framework.WebServicesManager.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,7 +26,7 @@ namespace FFC.Framework.WebServicesManager.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://cmlashfernando:80/ReportServer/ReportService2010.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://AshenPC:80/ReportServer/ReportService2010.asmx")]
         public string FFC_Framework_WebServicesManager_RS2010_ReportingService2010 {
             get {
                 return ((string)(this["FFC_Framework_WebServicesManager_RS2010_ReportingService2010"]));

@@ -58,6 +58,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FFC.Framework.ClientSubscription.ServiceFacade\FFC.Framework.ClientSubscription.ServiceFacade.csproj">
+      <Project>{b73cbf0f-30c6-494b-b449-3f9dd0735eb6}</Project>
+      <Name>FFC.Framework.ClientSubscription.ServiceFacade</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FFC.Framework.Common\FFC.Framework.Common.csproj">
       <Project>{7c598820-1e4e-4291-9cec-cbbbdb760d94}</Project>
       <Name>FFC.Framework.Common</Name>

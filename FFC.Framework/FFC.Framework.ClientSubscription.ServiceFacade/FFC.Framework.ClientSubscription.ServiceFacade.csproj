@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ForecastServiceFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportServiceFacade.cs" />
     <Compile Include="WebServiceGenericConnector.cs" />
   </ItemGroup>
   <ItemGroup>

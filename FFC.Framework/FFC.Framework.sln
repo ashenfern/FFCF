@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFC.Framework.ClientSubscri
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "FFC.Framework.Reports", "FFC.Framework.Reports\FFC.Framework.Reports.rptproj", "{732540B5-FF40-4CD6-8326-C4D74A7ABDE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFC.Framework.ClientSubscription.ServiceFacade", "FFC.Framework.ClientSubscription.ServiceFacade\FFC.Framework.ClientSubscription.ServiceFacade.csproj", "{B73CBF0F-30C6-494B-B449-3F9DD0735EB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,12 @@ Global
 		{732540B5-FF40-4CD6-8326-C4D74A7ABDE3}.Release|Any CPU.ActiveCfg = Release
 		{732540B5-FF40-4CD6-8326-C4D74A7ABDE3}.Release|Any CPU.Build.0 = Release
 		{732540B5-FF40-4CD6-8326-C4D74A7ABDE3}.Release|Any CPU.Deploy.0 = Release
+		{B73CBF0F-30C6-494B-B449-3F9DD0735EB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B73CBF0F-30C6-494B-B449-3F9DD0735EB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B73CBF0F-30C6-494B-B449-3F9DD0735EB6}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{B73CBF0F-30C6-494B-B449-3F9DD0735EB6}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{B73CBF0F-30C6-494B-B449-3F9DD0735EB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B73CBF0F-30C6-494B-B449-3F9DD0735EB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

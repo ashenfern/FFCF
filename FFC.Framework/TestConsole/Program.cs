@@ -16,8 +16,8 @@ namespace TestConsole
 
         static void Main(string[] args)
         {
-            //AddTestDataInvoke();
-            RTest.Test();
+            AddTestDataInvoke();
+            //RTest.Test();
 
             Console.ReadLine();
         }
@@ -27,20 +27,20 @@ namespace TestConsole
             //Creating segment Data
             List<DaySegment> listDaySegment = new List<DaySegment>()
             {
-                new DaySegment(){StartTime = new TimeSpan(6,0,0), EndTime = new TimeSpan(8,0,0), SegmentRecordCount = 30},
-                new DaySegment(){StartTime = new TimeSpan(8,0,0), EndTime = new TimeSpan(10,0,0), SegmentRecordCount = 30},
+                new DaySegment(){StartTime = new TimeSpan(6,0,0), EndTime = new TimeSpan(8,0,0), SegmentRecordCount = 45},
+                new DaySegment(){StartTime = new TimeSpan(8,0,0), EndTime = new TimeSpan(10,0,0), SegmentRecordCount = 40},
                 new DaySegment(){StartTime = new TimeSpan(10,0,0), EndTime = new TimeSpan(12,0,0), SegmentRecordCount = 20},
-                new DaySegment(){StartTime = new TimeSpan(12,0,0), EndTime = new TimeSpan(14,0,0), SegmentRecordCount = 20},
+                new DaySegment(){StartTime = new TimeSpan(12,0,0), EndTime = new TimeSpan(14,0,0), SegmentRecordCount = 50},
                 new DaySegment(){StartTime = new TimeSpan(14,0,0), EndTime = new TimeSpan(16,0,0), SegmentRecordCount = 20},
-                new DaySegment(){StartTime = new TimeSpan(16,0,0), EndTime = new TimeSpan(18,0,0), SegmentRecordCount = 30},
+                new DaySegment(){StartTime = new TimeSpan(16,0,0), EndTime = new TimeSpan(18,0,0), SegmentRecordCount = 40},
                 new DaySegment(){StartTime = new TimeSpan(18,0,0), EndTime = new TimeSpan(20,0,0), SegmentRecordCount = 30}
             };
 
-            DateTime beginTest = DateTime.Now;
+            DateTime beginTest = DateTime.Now.AddDays(-64);
 
             DateTime begin = DateTime.Today.AddDays(-365);
             DateTime end = DateTime.Today;
-            AddTestData(1, listDaySegment, begin, end);
+            AddTestData(2, listDaySegment, begin, end);
 
             Console.WriteLine("Time Taken " + (DateTime.Now - beginTest).ToString());
 

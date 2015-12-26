@@ -40,14 +40,12 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         {
             try
             {
-                //ViewBag.ForecastMethods = new SelectList(model.ForecastMethods.Select(x => new { Value = x, Text = x }), "Value", "Text");
-                //ViewBag.DateTypes = new SelectList(model.DateTypes.Select(x => new { Value = x, Text = x }), "Value", "Text");
+                
                 ViewBag.Branches = new SelectList(db.Branches, "BranchID", "BranchName");
                 ViewBag.Products = new SelectList(db.Products, "ProductID", "ProductName");
                 ViewBag.ForecastMethods = new SelectList(db.Forecast_Methods, "ForecastIdentifier", "ForecastMethod");
                 ViewBag.DateTypes = new SelectList(db.Forecast_DatePeriods, "DatePeriod", "DatePeriod");
 
-                //TODO: Calling the web api and get the result
                 ForecastBusinessManger fcastManager = new ForecastBusinessManger();
 
                 ForecastSearchCriteria fcastSearchCriteria = new ForecastSearchCriteria();
@@ -59,10 +57,8 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
                 
                 var result = fcastManager.GetForecastResults(fcastSearchCriteria);
 
-                //ForecastResult forecastResult = new ForecastResult() { Method = Methods.Arima, results = new List<double>() { 1.0 } };
                 model.ForecastResult = result;
 
-                //return RedirectToAction("Index");
                 return View("Index", model);
             }
             catch

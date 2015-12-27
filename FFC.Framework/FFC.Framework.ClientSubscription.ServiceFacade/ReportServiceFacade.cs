@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FFC.Framework.ClientSubscription.ServiceFacade
 {
-    public static class ReportServiceFacade
+    public class ReportServiceFacade
     {
         WebServiceGenericConnector<ReportSchedule> service = new WebServiceGenericConnector<ReportSchedule>();
 

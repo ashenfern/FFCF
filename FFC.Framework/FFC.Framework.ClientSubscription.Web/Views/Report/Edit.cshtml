@@ -102,6 +102,17 @@
     <script type="text/javascript">
         $(document).ready(function () {
             //alert("Inside create");
+            var item = $("#DeliveryTypeId");
+            var selectedValue = item.val()
+
+            //alert("Selected Item" + selectedValue)
+
+            if (selectedValue == 1) {
+                $("#Email").show();
+            }
+            else if (selectedValue == 2) {
+                $("#Email").hide();
+            }
         });
 
         $("#DeliveryTypeId").change(function () {

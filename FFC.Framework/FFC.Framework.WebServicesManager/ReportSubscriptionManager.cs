@@ -293,10 +293,10 @@ namespace FFC.Framework.WebServicesManager
             //TODO: Below code is needed because for the password. Giving an error with out the password
             ParameterValue[] extensionParamsTemp = new ParameterValue[extSettings.ParameterValues.Count() + 1];
 
-            extSettings.ParameterValues.CopyTo(extensionParamsTemp, 0);
-            extensionParamsTemp[extSettings.ParameterValues.Count()] = new ParameterValue { Name = Password, Value = ConfigurationManager.AppSettings[ReportPassword] };
+            //extSettings.ParameterValues.CopyTo(extensionParamsTemp, 0);
+            //extensionParamsTemp[extSettings.ParameterValues.Count()] = new ParameterValue { Name = Password, Value = ConfigurationManager.AppSettings[ReportPassword] };
 
-            extSettings.ParameterValues = extensionParamsTemp;
+            //extSettings.ParameterValues = extensionParamsTemp;
 
             rs.SetSubscriptionProperties(reportSchedule.ReportSubscriptionId, extSettings, desc, eventType, matchData, values);
 

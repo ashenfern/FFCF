@@ -95,7 +95,7 @@ namespace FFC.Framework.WebServicesManager
 
             engine.SetSymbol("data", data);
             //auto arima for monthly
-            engine.Evaluate("tsValue <- ts(data, frequency=160, start=c(2014,1))");
+            engine.Evaluate("tsValue <- ts(data, frequency=160, start=c(2013.5))");
             engine.Evaluate("library(forecast)");
             engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method.ToString())); // Fit <- Arima(tsValue)
             //MethodManipulation(engine, method);
@@ -163,7 +163,7 @@ namespace FFC.Framework.WebServicesManager
 
             engine.SetSymbol("data", data);
             //auto arima for monthly
-            engine.Evaluate("tsValue <- ts(data, frequency=160, start=c(2014,1))");
+            engine.Evaluate("tsValue <- ts(data, frequency=160, start=c(2012.8))");
             engine.Evaluate("library(forecast)");
             engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method.ToString())); // Fit <- Arima(tsValue)
             //MethodManipulation(engine, method);

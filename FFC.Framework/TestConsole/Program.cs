@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestConsole.FFAlgo;
 
 namespace TestConsole
 {
@@ -16,8 +17,10 @@ namespace TestConsole
 
         static void Main(string[] args)
         {
-            AddTestDataInvoke();
+            //AddTestDataInvoke();
             //RTest.Test();
+            ForecastFailover ff = new ForecastFailover();
+            ff.Algorithm();
 
             Console.ReadLine();
         }

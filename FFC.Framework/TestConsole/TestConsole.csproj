@@ -78,6 +78,9 @@
     <Compile Include="Employee.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
+    <Compile Include="FFAlgo\BranchDistributionData.cs" />
+    <Compile Include="FFAlgo\BranchItemData.cs" />
+    <Compile Include="FFAlgo\ForecastFailover.cs" />
     <Compile Include="FFC.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

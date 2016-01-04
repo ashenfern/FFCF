@@ -83,6 +83,8 @@
     <Build Include="dbo\Tables\Reports.sql" />
     <Build Include="dbo\Tables\ReportSchedules.sql" />
     <Build Include="dbo\Tables\DeliveryTypes.sql" />
+    <Build Include="dbo\Tables\BranchesCost.sql" />
+    <Build Include="dbo\Stored Procedures\sp_GetBranchesCostBySourceAndDestination.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FFC.Framework.Database.refactorlog" />

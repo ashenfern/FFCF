@@ -11,6 +11,7 @@ namespace TestConsole.FFAlgo
         List<BranchItemData> branchItemDataList;
         List<BranchDistributionData> surplusList = new List<BranchDistributionData>();
         List<BranchDistributionData> neededList = new List<BranchDistributionData>();
+        public FFCEntities context = new FFCEntities();
 
         public void Algorithm()
         {
@@ -88,10 +89,10 @@ namespace TestConsole.FFAlgo
 
                 while (surplusList.Count > 0 && currentNeeded > 0 && !isDistributedFinish)
                 {
-                    if (Cost(surplusList[0].BranchId, surplusList[1].BranchId) < Cost(surplusList[0].BranchId, neededList[0].BranchId) && currentNeeded > 0)
+                    if (surplusList.Count > 1 && Cost(surplusList[0].BranchId, surplusList[1].BranchId) < Cost(surplusList[0].BranchId, neededList[0].BranchId) && currentNeeded > 0)
                     {
                         //Loop thorugh the surplus set and collect if the cost is less
-                        while (Cost(surplusList[0].BranchId, surplusList[1].BranchId) < Cost(surplusList[0].BranchId, neededList[0].BranchId) && currentNeeded > 0 && !isCollectedFinish)
+                        while (surplusList.Count > 1 && Cost(surplusList[0].BranchId, surplusList[1].BranchId) < Cost(surplusList[0].BranchId, neededList[0].BranchId) && currentNeeded > 0 && !isCollectedFinish)
                         {
                             //Visit(SC,SNext)
                             if(currentNeeded >  surplusList[1].Amount )
@@ -116,7 +117,32 @@ namespace TestConsole.FFAlgo
                         }
                     }
                     //Distributing
-                    else if(true)
+                    
+                    //If collected all the items from the surplus branches
+                    if(totalCollected == totalSurplus)
+                    {
+                        //Visit each needed branch TODO Shortest path algorithm
+                        foreach (var branch in neededList)
+                        {
+                            if(branch.Amount > totalInHand)
+                            {
+                                //Distrbute to the branch
+                                Message = Message + String.Format("go to Branch {0}, and distribute {1}", branch.BranchId, totalInHand);
+                                totalInHand = 0;
+                                currentNeeded = currentNeeded - totalInHand;
+                                totalDistributed = totalDistributed + totalInHand;
+                                break;
+                            }
+                            else
+                            {
+                                totalInHand = totalInHand - branch.Amount;
+                                currentNeeded = currentNeeded - branch.Amount;
+                                totalDistributed = totalDistributed + branch.Amount;
+                                Message = Message + String.Format("go to Branch {0}, and distribute {1}", branch.BranchId, branch.Amount);
+                            }
+                        }
+                    }
+                    else
                     {
                         //Loop through the needed list and distribute if the cost is low
                         while (Cost(neededList[0].BranchId, neededList[1].BranchId) < Cost(neededList[0].BranchId, surplusList[0].BranchId) && totalInHand > currentNeeded && !isDistributedFinish)
@@ -126,7 +152,7 @@ namespace TestConsole.FFAlgo
                             {
                                 Message = Message + String.Format("Then go to Branch {0} and collect {1}", neededList[0].BranchId.ToString(), neededList[1].Amount.ToString());
                                 totalCollected = totalCollected + surplusList[1].Amount;
-                                totalInHand = totalInHand + surplusList[1].Amount;
+                                totalInHand = totalInHand - surplusList[1].Amount;
                                 currentNeeded = currentNeeded - surplusList[1].Amount;
                             }
                             else
@@ -150,11 +176,12 @@ namespace TestConsole.FFAlgo
                 //Distribute among the needed nodes
             }
 
+            Console.WriteLine(Message);
         }
 
-        private int Cost(int branch1, int branch2)
+        private decimal? Cost(int branch1, int branch2)
         {
-            return branch1 * 100 + branch2 * 100;
+            return context.sp_GetBranchesCostBySourceAndDestination(branch1, branch2).FirstOrDefault();
         }
     }
 }

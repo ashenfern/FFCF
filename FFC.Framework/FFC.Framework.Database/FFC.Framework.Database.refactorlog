@@ -133,4 +133,25 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[DeliveryTypes]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="b4d15b4e-915b-4788-a1f5-995bccedae0d" ChangeDateTime="01/04/2016 07:32:35">
+    <Property Name="ElementName" Value="[dbo].[BranchesCost].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BranchesCost]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SourceBranchId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d3242a6d-2ed6-4dbd-a717-362e040f3ab1" ChangeDateTime="01/04/2016 07:33:00">
+    <Property Name="ElementName" Value="[dbo].[BranchesCost].[SourceBranchId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BranchesCost]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SourceBranchID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ce671256-2eba-419f-9f5e-efd23e9a4619" ChangeDateTime="01/04/2016 07:33:06">
+    <Property Name="ElementName" Value="[dbo].[BranchesCost].[DestinationBranchId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BranchesCost]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DestinationBranchID" />
+  </Operation>
 </Operations>

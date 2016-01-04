@@ -4,4 +4,4 @@
 AS
 	SELECT Cost
 	FROM BranchesCost 
-	WHERE SourceBranchID = @sourceBranchID AND DestinationBranchID = @destinationBranchID
+	WHERE SourceBranchID = @sourceBranchID AND DestinationBranchID = @destinationBranchID OR SourceBranchID=@destinationBranchID AND DestinationBranchID = @sourceBranchID

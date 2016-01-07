@@ -34,11 +34,11 @@ namespace TestConsole.FFAlgo
                 BranchItemData branchItemData = null;
                 if (item.BranchID == 1)
                 {
-                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = 30 };
+                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = 20 };
                 }
                 else if (item.BranchID == 2)
                 {
-                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = 25 };
+                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = 10 };
                 }
                 else if (item.BranchID == 3)
                 {
@@ -96,21 +96,21 @@ namespace TestConsole.FFAlgo
             //    currentNeeded = 0;
             //    isCollectedFinish = true;
             //}
-            int i = 0; //Surplus index
-            int j = 0;
+            //int i = 0; //Surplus index
+            //int j = 0; //Needed Index
             while (surplusList.Count > 0 && currentNeeded > 0 && !isDistributedFinish && totalDistributed!=totalNeeded)
             {
                 //Go to the first surplus branch
-                if (currentNeeded > surplusList[i].Amount)
+                if (currentNeeded > surplusList[0].Amount)
                 {
-                    Message = Message + String.Format("Go to Branch {0} and collect {1}.", surplusList[i].BranchId.ToString(), surplusList[i].Amount.ToString());
-                    totalCollected = totalCollected + surplusList[i].Amount;
-                    totalInHand = totalInHand + surplusList[i].Amount;
-                    currentNeeded = currentNeeded - surplusList[i].Amount;
+                    Message = Message + String.Format("Go to Branch {0} and collect {1}.", surplusList[0].BranchId.ToString(), surplusList[0].Amount.ToString());
+                    totalCollected = totalCollected + surplusList[0].Amount;
+                    totalInHand = totalInHand + surplusList[0].Amount;
+                    currentNeeded = currentNeeded - surplusList[0].Amount;
                 }
                 else
                 {
-                    Message = Message + String.Format("Go to Branch {0} and collect {1}", surplusList[i].BranchId.ToString(), surplusList[i].Amount.ToString());
+                    Message = Message + String.Format("Go to Branch {0} and collect {1}", surplusList[0].BranchId.ToString(), currentNeeded.ToString());
                     totalCollected = totalCollected + currentNeeded;
                     totalInHand = totalInHand + currentNeeded;
                     currentNeeded = 0;
@@ -118,17 +118,17 @@ namespace TestConsole.FFAlgo
                 }
 
                 //Loop thorugh the surplus set and collect if the cost is less
-                if (surplusList.Count > 1 && Cost(surplusList[i].BranchId, surplusList[i+1].BranchId) <= Cost(surplusList[i].BranchId, neededList[j].BranchId) && currentNeeded > 0 && !isCollectedFinish)
+                if (surplusList.Count > 1 && Cost(surplusList[0].BranchId, surplusList[1].BranchId) <= Cost(surplusList[0].BranchId, neededList[0].BranchId) && currentNeeded > 0 && !isCollectedFinish)
                 {
-                    while (surplusList.Count > 1 && Cost(surplusList[i].BranchId, surplusList[i+1].BranchId) <= Cost(surplusList[i].BranchId, neededList[j].BranchId) && currentNeeded > 0 && !isCollectedFinish)
+                    while (surplusList.Count > 1 && Cost(surplusList[0].BranchId, surplusList[1].BranchId) <= Cost(surplusList[0].BranchId, neededList[0].BranchId) && currentNeeded > 0 && !isCollectedFinish)
                     {
                         //Visit(SC,SNext)
-                        if (currentNeeded > surplusList[i+1].Amount)
+                        if (currentNeeded > surplusList[1].Amount)
                         {
                             Message = Message + String.Format("Then go to Branch {0} and collect {1}", surplusList[1].BranchId.ToString(), surplusList[1].Amount.ToString());
-                            totalCollected = totalCollected + surplusList[1].Amount;
-                            totalInHand = totalInHand + surplusList[i+1].Amount;
-                            currentNeeded = currentNeeded - surplusList[i+1].Amount;
+                            totalCollected = totalCollected + surplusList[0].Amount;
+                            totalInHand = totalInHand + surplusList[1].Amount;
+                            currentNeeded = currentNeeded - surplusList[1].Amount;
                         }
                         else
                         {
@@ -140,26 +140,26 @@ namespace TestConsole.FFAlgo
                         }
 
                         //Removing firs surplus element
-                        //surplusList.RemoveAt(0);
-                        i = i + 1;
+                        surplusList.RemoveAt(0);
+                        //i = i + 1;
                     }
                 }
-                else if (surplusList.Count > 1 && Cost(surplusList[i].BranchId, surplusList[i+1].BranchId) > Cost(surplusList[i].BranchId, neededList[j].BranchId))
+                else if (surplusList.Count > 1 && Cost(surplusList[0].BranchId, surplusList[1].BranchId) > Cost(surplusList[0].BranchId, neededList[0].BranchId))
                 {
                     //Removing firs surplus element
-                    //surplusList.RemoveAt(0);
-                    i = i + 1;
+                    surplusList.RemoveAt(0);
+                    //i = i + 1;
                 }
                 
                 //Distributing
 
                 //If collected all from the surplus branches or collected total needed the items from the surplus branches
-                if (totalCollected == totalSurplus || totalCollected == totalNeeded)
+                 if (totalCollected == totalSurplus || totalCollected == totalNeeded)
                 {
                     //Visit each needed branch TODO Shortest path algorithm
                     foreach (var branch in neededList)
                     {
-                        if (branch.Amount > totalInHand)
+                        if (branch.Amount >= totalInHand)
                         {
                             //Distrbute to the branch
                             Message = Message + String.Format("go to Branch {0}, and distribute {1}", branch.BranchId, totalInHand);
@@ -178,19 +178,19 @@ namespace TestConsole.FFAlgo
                         }
                     }
                 }
-                else if (neededList[j].Amount <= totalInHand)
+                else if (neededList[0].Amount <= totalInHand)
                 {
                     //Distrbute to the branch
                     Message = Message + String.Format("go to Branch {0}, and distribute {1}", neededList[0].BranchId, neededList[0].Amount);
-                    totalInHand = totalInHand - neededList[j].Amount;
+                    totalInHand = totalInHand - neededList[0].Amount;
                     //currentNeeded = currentNeeded - neededList[0].Amount;
-                    totalDistributed = totalDistributed + neededList[j].Amount;
+                    totalDistributed = totalDistributed + neededList[0].Amount;
                     //isDistributedFinish = true;
                 }
                
-                if (neededList.Count > 1 && Cost(neededList[j].BranchId, neededList[j + 1].BranchId) <= Cost(neededList[j].BranchId, surplusList[j].BranchId) && totalInHand >= currentNeeded && !isDistributedFinish)
+                if (neededList.Count > 1 && Cost(neededList[0].BranchId, neededList[1].BranchId) <= Cost(neededList[0].BranchId, surplusList[0].BranchId) && totalInHand >= currentNeeded && !isDistributedFinish)
                 {
-                    while (neededList.Count > 1 && Cost(neededList[j].BranchId, neededList[j +1].BranchId) <= Cost(neededList[j].BranchId, surplusList[j].BranchId) && totalInHand >= currentNeeded && !isDistributedFinish)
+                    while (neededList.Count > 1 && Cost(neededList[0].BranchId, neededList[1].BranchId) <= Cost(neededList[0].BranchId, surplusList[0].BranchId) && totalInHand >= currentNeeded && !isDistributedFinish)
                     {
                         //if (neededList[0].Amount >= totalInHand)
                         //{
@@ -203,12 +203,12 @@ namespace TestConsole.FFAlgo
                         //}
                         //else
                         //{
-                        totalInHand = totalInHand - neededList[j+1].Amount;
-                        currentNeeded = currentNeeded - neededList[j+1].Amount;
-                        totalDistributed = totalDistributed + neededList[j+1].Amount;
-                        Message = Message + String.Format("go to Branch {0}, and distribute {1}", neededList[1].BranchId, neededList[j+1].Amount);
-                        j = j + 1;
-                        //neededList.RemoveAt(0);
+                        totalInHand = totalInHand - neededList[1].Amount;
+                        currentNeeded = currentNeeded - neededList[1].Amount;
+                        totalDistributed = totalDistributed + neededList[1].Amount;
+                        Message = Message + String.Format("go to Branch {0}, and distribute {1}", neededList[1].BranchId, neededList[1].Amount);
+                        //j = j + 1;
+                        neededList.RemoveAt(0);
                         //}
 
                         //foreach (var branch in neededList)
@@ -236,8 +236,8 @@ namespace TestConsole.FFAlgo
                 }
                 else //if (Cost(neededList[0].BranchId, neededList[1].BranchId) > Cost(neededList[0].BranchId, surplusList[0].BranchId) || totalInHand < currentNeeded)
                 {
-                   // neededList.RemoveAt(0);
-                    j = j + 1;
+                   neededList.RemoveAt(0);
+                    //j = j + 1;
                 }
                
             }

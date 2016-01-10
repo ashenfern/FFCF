@@ -27,6 +27,9 @@
         <AssociationConnector Association="FFCModel.FK_ReportSchedules_Reports" />
         <EntityTypeShape EntityType="FFCModel.DeliveryType" Width="1.5" PointX="3.375" PointY="9.875" />
         <AssociationConnector Association="FFCModel.FK_ReportSchedules_ToFileDeliveryType1" />
+        <EntityTypeShape EntityType="FFCModel.BranchesCost" Width="1.5" PointX="3" PointY="12.5" />
+        <AssociationConnector Association="FFCModel.FK_BranchesCost_Branches1" />
+        <AssociationConnector Association="FFCModel.FK_BranchesCost_Branches2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

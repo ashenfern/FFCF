@@ -17,6 +17,8 @@ namespace FFC.Framework.Data
         public Branch()
         {
             this.Transactions = new HashSet<Transaction>();
+            this.BranchesCosts = new HashSet<BranchesCost>();
+            this.BranchesCosts1 = new HashSet<BranchesCost>();
         }
     
         public int BranchID { get; set; }
@@ -26,5 +28,7 @@ namespace FFC.Framework.Data
         public Nullable<System.DateTime> EndTime { get; set; }
     
         public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<BranchesCost> BranchesCosts { get; set; }
+        public virtual ICollection<BranchesCost> BranchesCosts1 { get; set; }
     }
 }

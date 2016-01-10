@@ -19,7 +19,6 @@ namespace TestConsole.FFAlgo
             FFCEntities db = new FFCEntities();
             int totalNeeded = 0;
             int totalSurplus = 0;
-            int maxCollection = 0;
             int currentNeeded = 0;
             int totalCollected = 0;
             int totalDistributed = 0;
@@ -34,11 +33,11 @@ namespace TestConsole.FFAlgo
                 BranchItemData branchItemData = null;
                 if (item.BranchID == 1)
                 {
-                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = 30 };
+                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = -10 };
                 }
                 else if (item.BranchID == 2)
                 {
-                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = 20 };
+                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = -10 };
                 }
                 else if (item.BranchID == 3)
                 {
@@ -46,11 +45,11 @@ namespace TestConsole.FFAlgo
                 }
                 else if (item.BranchID == 4)
                 {
-                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = -100 };
+                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = 10 };
                 }
                 else if (item.BranchID == 5)
                 {
-                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = -75 };
+                    branchItemData = new BranchItemData() { branch = item, ExpectedBalance = -10 };
                 }
                 else
                 {
@@ -144,7 +143,7 @@ namespace TestConsole.FFAlgo
                         //i = i + 1;
                     }
                 }
-                else if (surplusList.Count > 1 && Cost(surplusList[0].BranchId, surplusList[1].BranchId) > Cost(surplusList[0].BranchId, neededList[0].BranchId))
+                else if (surplusList.Count > 1 && Cost(surplusList[0].BranchId, surplusList[1].BranchId) > Cost(surplusList[0].BranchId, neededList[0].BranchId) && !isCollectedFinish)
                 {
                     //Removing firs surplus element
                     surplusList.RemoveAt(0);
@@ -233,9 +232,13 @@ namespace TestConsole.FFAlgo
                         //    }
                         //}
                     }
-                    neededList.RemoveAt(0);
+
+                    if(neededList.Count > 0)
+                    {
+                        neededList.RemoveAt(0);
+                    }
                 }
-                else if (totalInHand >= neededList[0].Amount)//if (Cost(neededList[0].BranchId, neededList[1].BranchId) > Cost(neededList[0].BranchId, surplusList[0].BranchId) || totalInHand < currentNeeded)
+                else if (neededList.Count > 0 && totalInHand >= neededList[0].Amount)//if (Cost(neededList[0].BranchId, neededList[1].BranchId) > Cost(neededList[0].BranchId, surplusList[0].BranchId) || totalInHand < currentNeeded)
                 {
                     neededList.RemoveAt(0);
                     //j = j + 1;

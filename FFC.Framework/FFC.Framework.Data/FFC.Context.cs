@@ -41,6 +41,7 @@ namespace FFC.Framework.Data
         public DbSet<Report> Reports { get; set; }
         public DbSet<ReportSchedule> ReportSchedules { get; set; }
         public DbSet<DeliveryType> DeliveryTypes { get; set; }
+        public DbSet<BranchesCost> BranchesCosts { get; set; }
     
         public virtual ObjectResult<sp_Forecast_GetDailyAvereageProductTransactions_Result> sp_Forecast_GetDailyAvereageProductTransactions()
         {
@@ -87,6 +88,19 @@ namespace FFC.Framework.Data
         public virtual ObjectResult<sp_Forecast_GetWeeklyAvereageProductTransactions_Result> sp_Forecast_GetWeeklyAvereageProductTransactions()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Forecast_GetWeeklyAvereageProductTransactions_Result>("sp_Forecast_GetWeeklyAvereageProductTransactions");
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_GetBranchesCostBySourceAndDestination(Nullable<int> sourceBranchID, Nullable<int> destinationBranchID)
+        {
+            var sourceBranchIDParameter = sourceBranchID.HasValue ?
+                new ObjectParameter("sourceBranchID", sourceBranchID) :
+                new ObjectParameter("sourceBranchID", typeof(int));
+    
+            var destinationBranchIDParameter = destinationBranchID.HasValue ?
+                new ObjectParameter("destinationBranchID", destinationBranchID) :
+                new ObjectParameter("destinationBranchID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_GetBranchesCostBySourceAndDestination", sourceBranchIDParameter, destinationBranchIDParameter);
         }
     }
 }

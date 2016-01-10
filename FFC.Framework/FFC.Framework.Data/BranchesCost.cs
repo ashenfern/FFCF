@@ -12,19 +12,13 @@ namespace FFC.Framework.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Report
+    public partial class BranchesCost
     {
-        public Report()
-        {
-            this.ReportSchedules = new HashSet<ReportSchedule>();
-        }
+        public int SourceBranchID { get; set; }
+        public int DestinationBranchID { get; set; }
+        public decimal Cost { get; set; }
     
-        public int ReportId { get; set; }
-        public string ReportName { get; set; }
-        public string ReportDescription { get; set; }
-        public string ReportPath { get; set; }
-        public string ReportFileName { get; set; }
-    
-        public virtual ICollection<ReportSchedule> ReportSchedules { get; set; }
+        public virtual Branch Branch { get; set; }
+        public virtual Branch Branch1 { get; set; }
     }
 }

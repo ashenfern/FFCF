@@ -196,6 +196,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\ForecastController.cs" />
+    <Compile Include="Controllers\ForecastFailoverController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
@@ -367,6 +368,11 @@
     <Content Include="Views\Report\Delete.cshtml" />
     <Content Include="Views\Report\_ReportResultPartial.cshtml" />
     <Content Include="Views\Report\Create.cshtml" />
+    <Content Include="Views\ForecastFailover\Index.cshtml" />
+    <Content Include="Views\ForecastFailover\Details.cshtml" />
+    <Content Include="Views\ForecastFailover\Create.cshtml" />
+    <Content Include="Views\ForecastFailover\Edit.cshtml" />
+    <Content Include="Views\ForecastFailover\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

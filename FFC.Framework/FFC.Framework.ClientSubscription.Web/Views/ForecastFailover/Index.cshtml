@@ -34,6 +34,7 @@
             </tr>
             @for (int i = 0; i < Model.BranchItemDataList.Count(); ++i)
                 {
+                 @Html.HiddenFor(m => Model.BranchItemDataList[i].Branch.BranchName)
                  @Html.HiddenFor(m => Model.BranchItemDataList[i].Branch.BranchID)
                 <tr>
                     <td>

@@ -32,18 +32,18 @@
         </th>*@
                 <th></th>
             </tr>
-
-            @foreach (var item in Model.BranchItemDataList)
-            {
+            @for (int i = 0; i < Model.BranchItemDataList.Count(); ++i)
+                {
+                 @Html.HiddenFor(m => Model.BranchItemDataList[i].Branch.BranchID)
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Branch.BranchName)
+                        @Html.DisplayFor(m => Model.BranchItemDataList[i].Branch.BranchName)
                     </td>
                     <td>
-                        @Html.EditorFor(model => item.Now)
+                        @Html.EditorFor( m => Model.BranchItemDataList[i].Now)
                     </td>
                     <td>
-                        @Html.EditorFor(model => item.Forecasted)
+                        @Html.EditorFor(m => Model.BranchItemDataList[i].Forecasted)
                     </td>
                     @*<td>
             @Html.DisplayFor(modelItem => item.EndTime)
@@ -53,8 +53,9 @@
             @Html.ActionLink("Details", "Details", new { id=item.BranchID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.BranchID })*@
                     </td>
-                </tr>
+                </tr> 
             }
+            
         </table>
 
         <p>

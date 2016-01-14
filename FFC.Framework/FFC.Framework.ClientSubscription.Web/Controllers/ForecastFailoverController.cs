@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FFC.Framework.Data;
+using FFC.Framework.ClientSubscription.Web.Models;
 
 namespace FFC.Framework.ClientSubscription.Web.Controllers
 {
@@ -18,7 +19,28 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Branches.ToList());
+
+            ForecastFailoverModel ffModel = new ForecastFailoverModel();
+            List<BranchItemData> branchItemDataList = new List<BranchItemData>();
+
+            foreach (var branch in db.Branches.ToList())
+            {
+                BranchItemData branchItemData = new BranchItemData();
+                branchItemData.Branch = branch;
+                branchItemDataList.Add(branchItemData);
+            }
+
+            ffModel.BranchItemDataList = branchItemDataList;
+            return View(ffModel);
+        }
+
+        [HttpPost]
+        public ActionResult Index(ForecastFailoverModel model)
+        {
+
+            model.ForecastFailoverResult = "This is the forecast failover result";
+
+            return View("Index", model);
         }
 
         //

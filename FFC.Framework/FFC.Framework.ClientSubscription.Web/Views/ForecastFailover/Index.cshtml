@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FFC.Framework.Data.Branch>
+﻿@model FFC.Framework.ClientSubscription.Web.Models.ForecastFailoverModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,46 +6,67 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BranchName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BranchAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndTime)
-        </th>
-        <th></th>
-    </tr>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BranchName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BranchAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-        </td>
-        <td>
+    <fieldset>
+        <legend>ForecastModel</legend>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayName("Branch Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Current Balance")
+                </th>
+                <th>
+                    @Html.DisplayName("ForecastedBalance")
+                </th>
+                @* <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>*@
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.BranchItemDataList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Branch.BranchName)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => item.Now)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => item.Forecasted)
+                    </td>
+                    @*<td>
             @Html.DisplayFor(modelItem => item.EndTime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BranchID }) |
+        </td>*@
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id=item.BranchID }) |
             @Html.ActionLink("Details", "Details", new { id=item.BranchID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BranchID })
-        </td>
-    </tr>
+            @Html.ActionLink("Delete", "Delete", new { id=item.BranchID })*@
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <p>
+            <button type="submit" id="search">Forecast Failover</button>
+        </p>
+    </fieldset>
 }
 
-</table>
+<h1>Forecast Failover Results </h1>
+@if (Model != null && Model.ForecastFailoverResult != null)
+{
+    Html.RenderPartial("_ForecastFailoverResultPartial", Model.ForecastFailoverResult);
+}
+
+

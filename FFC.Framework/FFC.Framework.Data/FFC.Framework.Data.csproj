@@ -58,6 +58,7 @@
     <Compile Include="BranchesCost.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
+    <Compile Include="BranchItemData.cs" />
     <Compile Include="Category.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>

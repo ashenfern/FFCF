@@ -207,6 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ForecastFailoverModel.cs" />
     <Compile Include="Models\ForecastModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -373,6 +374,7 @@
     <Content Include="Views\ForecastFailover\Create.cshtml" />
     <Content Include="Views\ForecastFailover\Edit.cshtml" />
     <Content Include="Views\ForecastFailover\Delete.cshtml" />
+    <Content Include="Views\ForecastFailover\_ForecastFailoverResultPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -132,7 +132,7 @@ namespace FFC.Framework.ClientSubscription.ServiceFacade
             //.ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
         }
 
-        public void PostFFData(T data)
+        public string PostFFData(T data)
         {
             string uri = baseURL + Resource;
             HttpClient client = new HttpClient();
@@ -141,7 +141,8 @@ namespace FFC.Framework.ClientSubscription.ServiceFacade
 
             var response = client.PostAsync(new Uri(uri), contentPost).Result;
 
-            var value = response.Content.ReadAsStringAsync().Result; 
+            var value = response.Content.ReadAsStringAsync().Result;
+            return value;
 
             //.ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
         }

@@ -1,4 +1,5 @@
 ﻿using FFC.Framework.Data;
+using FFC.Framework.WebServicesManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,14 @@ namespace FFC.Framework.WebServices.Controllers
 {
     public class ForecastFailoverController : ApiController
     {
+        private ForecastFailoverManager ffManager = new ForecastFailoverManager();
 
         // POST api/<controller>
         [HttpPost]
         public HttpResponseMessage Post(List<BranchItemData> branchItemDataList)
         {
-            var response = Request.CreateResponse(HttpStatusCode.Created, "Forecast Failover Result");
+            string ffResult = ffManager.GetForecastFailoverResultsFromAlgorithm(branchItemDataList);
+            var response = Request.CreateResponse(HttpStatusCode.Created, ffResult);
             return response;
         }
 

@@ -38,9 +38,9 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         [HttpPost]
         public ActionResult Index(ForecastFailoverModel model)
         {
-            ForecastFailoverBusinessManger fManager = new ForecastFailoverBusinessManger();
-            model.ForecastFailoverResult = "This is the forecast failover result";
-            model.ForecastFailoverResult = fManager.GetForecastResults(model.BranchItemDataList);
+            ForecastFailoverBusinessManger ffManager = new ForecastFailoverBusinessManger();
+            //model.ForecastFailoverResult = "This is the forecast failover result";
+            model.ForecastFailoverResult = ffManager.GetForecastResults(model.BranchItemDataList);
 
             return View("Index", model);
         }

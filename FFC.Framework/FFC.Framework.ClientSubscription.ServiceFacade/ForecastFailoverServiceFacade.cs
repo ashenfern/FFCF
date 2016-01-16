@@ -13,9 +13,9 @@ namespace FFC.Framework.ClientSubscription.ServiceFacade
         public string GetForecastFailoverResults(List<BranchItemData> listBranchItemData)
         {
             service.Resource = "api/ForecastFailover/";
-            service.PostFFData(listBranchItemData);
+            string result = service.PostFFData(listBranchItemData);
 
-            return String.Empty;
+            return result;
         }
     }
 }

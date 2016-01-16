@@ -64,6 +64,7 @@ namespace FFC.Framework.WebServicesManager
 
             foreach (var branchItemData in branchItemDataList)
             {
+                branchItemData.ExpectedBalance = branchItemData.Now - branchItemData.Forecasted;
                 if (branchItemData.ExpectedBalance > 0)
                 {
                     surplusList.Add(new BranchDistributionData() { BranchId = branchItemData.Branch.BranchID, Amount = branchItemData.ExpectedBalance });

@@ -132,6 +132,20 @@ namespace FFC.Framework.ClientSubscription.ServiceFacade
             //.ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
         }
 
+        public void PostFFData(T data)
+        {
+            string uri = baseURL + Resource;
+            HttpClient client = new HttpClient();
+            HttpContent contentPost = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8,
+            "application/json");
+
+            var response = client.PostAsync(new Uri(uri), contentPost).Result;
+
+            var value = response.Content.ReadAsStringAsync().Result; 
+
+            //.ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
+        }
+
         public void PutData(T data)
         {
             string uri = baseURL + Resource;

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using FFC.Framework.Data;
 using FFC.Framework.ClientSubscription.Web.Models;
+using FFC.Framework.ClientSubscription.Business;
 
 namespace FFC.Framework.ClientSubscription.Web.Controllers
 {
@@ -37,8 +38,9 @@ namespace FFC.Framework.ClientSubscription.Web.Controllers
         [HttpPost]
         public ActionResult Index(ForecastFailoverModel model)
         {
-
+            ForecastFailoverBusinessManger fManager = new ForecastFailoverBusinessManger();
             model.ForecastFailoverResult = "This is the forecast failover result";
+            model.ForecastFailoverResult = fManager.GetForecastResults(model.BranchItemDataList);
 
             return View("Index", model);
         }

@@ -9,11 +9,11 @@ namespace FFC.Framework.ClientSubscription.ServiceFacade
 {
     public class ForecastFailoverServiceFacade
     {
-        WebServiceGenericConnector<String> service = new WebServiceGenericConnector<String>();
+        WebServiceGenericConnector<List<BranchItemData>> service = new WebServiceGenericConnector<List<BranchItemData>>();
         public string GetForecastFailoverResults(List<BranchItemData> listBranchItemData)
         {
             service.Resource = "api/ForecastFailover/";
-            //service.PostData(listBranchItemData);
+            service.PostFFData(listBranchItemData);
 
             return String.Empty;
         }

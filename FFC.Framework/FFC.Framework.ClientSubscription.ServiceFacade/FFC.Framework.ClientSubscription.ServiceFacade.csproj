@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ForecastFailoverServiceFacade.cs" />
     <Compile Include="ForecastServiceFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportServiceFacade.cs" />

@@ -73,6 +73,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ReportSubscriptionManager.cs" />
+    <Compile Include="Utility\BranchDistributionData.cs" />
     <Compile Include="Utility\ReportScheduleFormatter.cs" />
     <Compile Include="Web References\RS2010\Reference.cs">
       <AutoGen>True</AutoGen>

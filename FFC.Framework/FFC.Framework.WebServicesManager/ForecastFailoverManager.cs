@@ -17,6 +17,11 @@ namespace FFC.Framework.WebServicesManager
 
         public string GetForecastFailoverResultsFromAlgorithm(List<BranchItemData> branchItemDataList)
         {
+            return ForecastFailoverAlgorithm(branchItemDataList);
+        }
+
+        public string ForecastFailoverAlgorithm(List<BranchItemData> branchItemDataList)
+        {
             //branchItemDataList = new List<BranchItemData>();
             FFCEntities db = new FFCEntities();
             int totalNeeded = 0;
@@ -105,14 +110,14 @@ namespace FFC.Framework.WebServicesManager
                 //Go to the first surplus branch
                 if (currentNeeded > surplusList[0].Amount)
                 {
-                    Message = Message + String.Format("Go to Branch {0} and collect {1}.", surplusList[0].BranchId.ToString(), surplusList[0].Amount.ToString());
+                    Message = Message + String.Format("Go to Branch {0} and collect {1}. ", surplusList[0].BranchId.ToString(), surplusList[0].Amount.ToString());
                     totalCollected = totalCollected + surplusList[0].Amount;
                     totalInHand = totalInHand + surplusList[0].Amount;
                     currentNeeded = currentNeeded - surplusList[0].Amount;
                 }
                 else
                 {
-                    Message = Message + String.Format("Go to Branch {0} and collect {1}", surplusList[0].BranchId.ToString(), currentNeeded.ToString());
+                    Message = Message + String.Format("Go to Branch {0} and collect {1}. ", surplusList[0].BranchId.ToString(), currentNeeded.ToString());
                     totalCollected = totalCollected + currentNeeded;
                     totalInHand = totalInHand + currentNeeded;
                     currentNeeded = 0;
@@ -127,14 +132,14 @@ namespace FFC.Framework.WebServicesManager
                         //Visit(SC,SNext)
                         if (currentNeeded > surplusList[1].Amount)
                         {
-                            Message = Message + String.Format("Then go to Branch {0} and collect {1}", surplusList[1].BranchId.ToString(), surplusList[1].Amount.ToString());
+                            Message = Message + String.Format("Then go to Branch {0} and collect {1}. ", surplusList[1].BranchId.ToString(), surplusList[1].Amount.ToString());
                             totalCollected = totalCollected + surplusList[0].Amount;
                             totalInHand = totalInHand + surplusList[1].Amount;
                             currentNeeded = currentNeeded - surplusList[1].Amount;
                         }
                         else
                         {
-                            Message = Message + String.Format("Then go to Branch {0} and collect {1}", surplusList[1].BranchId.ToString(), surplusList[1].Amount.ToString());
+                            Message = Message + String.Format("Then go to Branch {0} and collect {1}. ", surplusList[1].BranchId.ToString(), surplusList[1].Amount.ToString());
                             totalCollected = totalCollected + currentNeeded;
                             totalInHand = totalInHand + currentNeeded;
                             currentNeeded = 0;
@@ -164,7 +169,7 @@ namespace FFC.Framework.WebServicesManager
                         if (branch.Amount >= totalInHand)
                         {
                             //Distrbute to the branch
-                            Message = Message + String.Format("go to Branch {0}, and distribute {1}", branch.BranchId, totalInHand);
+                            Message = Message + String.Format("Go to Branch {0}, and distribute {1}. ", branch.BranchId, totalInHand);
                             totalInHand = 0;
                             //currentNeeded = currentNeeded - totalInHand;
                             totalDistributed = totalDistributed + totalInHand;
@@ -176,14 +181,14 @@ namespace FFC.Framework.WebServicesManager
                             totalInHand = totalInHand - branch.Amount;
                             //currentNeeded = currentNeeded - Math.Abs(branch.Amount);
                             totalDistributed = totalDistributed + branch.Amount;
-                            Message = Message + String.Format("go to Branch {0}, and distribute {1}", branch.BranchId, branch.Amount);
+                            Message = Message + String.Format("Go to Branch {0}, and distribute {1}. ", branch.BranchId, branch.Amount);
                         }
                     }
                 }
                 else if (neededList[0].Amount <= totalInHand)
                 {
                     //Distrbute to the branch
-                    Message = Message + String.Format("go to Branch {0}, and distribute {1}", neededList[0].BranchId, neededList[0].Amount);
+                    Message = Message + String.Format("Go to Branch {0}, and distribute {1}.", neededList[0].BranchId, neededList[0].Amount);
                     totalInHand = totalInHand - neededList[0].Amount;
                     //currentNeeded = currentNeeded - neededList[0].Amount;
                     totalDistributed = totalDistributed + neededList[0].Amount;
@@ -208,7 +213,7 @@ namespace FFC.Framework.WebServicesManager
                         totalInHand = totalInHand - neededList[1].Amount;
                         //currentNeeded = currentNeeded - neededList[1].Amount;
                         totalDistributed = totalDistributed + neededList[1].Amount;
-                        Message = Message + String.Format("go to Branch {0}, and distribute {1}", neededList[1].BranchId, neededList[1].Amount);
+                        Message = Message + String.Format("Go to Branch {0}, and distribute {1}. ", neededList[1].BranchId, neededList[1].Amount);
                         //j = j + 1;
                         neededList.RemoveAt(0);
                         //}

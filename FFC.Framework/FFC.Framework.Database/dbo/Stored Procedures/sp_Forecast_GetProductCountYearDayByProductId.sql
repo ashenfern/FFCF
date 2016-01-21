@@ -6,6 +6,6 @@ AS
 	INNER JOIN TransactionDetails TD on T.TransactionID = TD.TransactionID
 	INNER JOIN Products P ON TD.ProductID = P.ProductID
 	INNER JOIN Categories C ON P.CategoryID = C.CategoryID
-	WHERE P.ProductID = @ProductId
+	WHERE P.ProductID = @ProductId AND T.BranchID = 1
 	Group BY DATEPART(Year, TransactionDate),DATEPART(MONTH, TransactionDate),DATEPART(Day, TransactionDate), P.ProductID
 	Order By DATEPART(Year, TransactionDate),DATEPART(MONTH, TransactionDate),DATEPART(Day, TransactionDate)

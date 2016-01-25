@@ -34,6 +34,13 @@ namespace FFC.Framework.WebServicesManager
             bool isDistributedFinish = false;
             string Message = String.Empty;
 
+            //Efficiency related params
+            int averageItemCost = 50;
+            int previousWastageCost = 0;
+            int costForTransport = 0;
+            int algorithmTotalGain = 0;
+            List<int> visitedBranches = new List<int>();
+
             #region Input Data List For Forecast
             //foreach (var item in db.Branches)
             //{
@@ -96,6 +103,7 @@ namespace FFC.Framework.WebServicesManager
                     totalCollected = totalCollected + surplusList[0].Amount;
                     totalInHand = totalInHand + surplusList[0].Amount;
                     currentNeeded = currentNeeded - surplusList[0].Amount;
+                    visitedBranches.Add(surplusList[0].BranchId);
                 }
                 else
                 {
@@ -104,6 +112,7 @@ namespace FFC.Framework.WebServicesManager
                     totalInHand = totalInHand + currentNeeded;
                     currentNeeded = 0;
                     isCollectedFinish = true;
+                    visitedBranches.Add(surplusList[0].BranchId);
                 }
 
                 //Loop thorugh the surplus set and collect if the cost is less
@@ -114,18 +123,20 @@ namespace FFC.Framework.WebServicesManager
                         //Visit(SC,SNext)
                         if (currentNeeded > surplusList[1].Amount)
                         {
-                            Message = Message + String.Format("Then go to {0} Branch and collect {1}. ", surplusList[1].BranchName.ToString(), surplusList[1].Amount.ToString());
+                            Message = Message + String.Format("Go to {0} Branch and collect {1}. ", surplusList[1].BranchName.ToString(), surplusList[1].Amount.ToString());
                             totalCollected = totalCollected + surplusList[0].Amount;
                             totalInHand = totalInHand + surplusList[1].Amount;
                             currentNeeded = currentNeeded - surplusList[1].Amount;
+                            visitedBranches.Add(surplusList[1].BranchId);
                         }
                         else
                         {
-                            Message = Message + String.Format("Then go to {0} Branch and collect {1}. ", surplusList[1].BranchName.ToString(), surplusList[1].Amount.ToString());
+                            Message = Message + String.Format("Go to {0} Branch and collect {1}. ", surplusList[1].BranchName.ToString(), surplusList[1].Amount.ToString());
                             totalCollected = totalCollected + currentNeeded;
                             totalInHand = totalInHand + currentNeeded;
                             currentNeeded = 0;
                             isCollectedFinish = true;
+                            visitedBranches.Add(surplusList[1].BranchId);
                         }
 
                         //Removing firs surplus element
@@ -150,10 +161,11 @@ namespace FFC.Framework.WebServicesManager
                         {
                             //Distrbute to the branch
                             Message = Message + String.Format("Go to {0} Branch , and distribute {1}. ", branch.BranchName, totalInHand);
-                            totalInHand = 0;
                             //currentNeeded = currentNeeded - totalInHand;
                             totalDistributed = totalDistributed + totalInHand;
+                            totalInHand = 0;
                             isDistributedFinish = true;
+                            visitedBranches.Add(branch.BranchId);
                             break;
                         }
                         else
@@ -162,6 +174,7 @@ namespace FFC.Framework.WebServicesManager
                             //currentNeeded = currentNeeded - Math.Abs(branch.Amount);
                             totalDistributed = totalDistributed + branch.Amount;
                             Message = Message + String.Format("Go to {0} Branch , and distribute {1}. ", branch.BranchName, branch.Amount);
+                            visitedBranches.Add(branch.BranchId);
                         }
                     }
                 }
@@ -171,6 +184,7 @@ namespace FFC.Framework.WebServicesManager
                     Message = Message + String.Format("Go to {0} Branch , and distribute {1}.", neededList[0].BranchName, neededList[0].Amount);
                     totalInHand = totalInHand - neededList[0].Amount;
                     totalDistributed = totalDistributed + neededList[0].Amount;
+                    visitedBranches.Add(neededList[0].BranchId);
                 }
 
                 if (neededList.Count > 1 && Cost(neededList[0].BranchId, neededList[1].BranchId) <= Cost(neededList[0].BranchId, surplusList[0].BranchId) && totalInHand >= neededList[1].Amount && !isDistributedFinish)
@@ -183,6 +197,7 @@ namespace FFC.Framework.WebServicesManager
                         Message = Message + String.Format("Go to {0} Branch , and distribute {1}. ", neededList[1].BranchName, neededList[1].Amount);
                         //j = j + 1;
                         neededList.RemoveAt(0);
+                        visitedBranches.Add(neededList[1].BranchId);
                     }
 
                     if (neededList.Count > 0)
@@ -197,6 +212,23 @@ namespace FFC.Framework.WebServicesManager
                 }
 
             }
+
+            for (int i = 0; i < visitedBranches.Count - 1; i++)
+            {
+                if (i < visitedBranches.Count - 1)
+                {
+                    costForTransport = costForTransport + Convert.ToInt32(Cost(visitedBranches[i], visitedBranches[i + 1]));
+                }
+            }
+
+            previousWastageCost = -averageItemCost * totalSurplus;
+            algorithmTotalGain = averageItemCost * totalDistributed - costForTransport - (totalSurplus - totalDistributed) * averageItemCost;
+            int algorithmEffectiveGain = algorithmTotalGain - previousWastageCost;
+
+            //Adding the efficiency 
+            Message = Message + String.Format(" Previous wastage cost {0}", previousWastageCost.ToString());
+            Message = Message + String.Format("</br> Algorithm gain {0}", algorithmTotalGain.ToString());
+            Message = Message + String.Format("</br> Algorithm Effective gain {0}", algorithmEffectiveGain.ToString());
 
             return Message;
         }

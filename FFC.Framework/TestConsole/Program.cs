@@ -20,7 +20,7 @@ namespace TestConsole
             //AddTestDataInvoke();
             //RTest.Test();
             ForecastFailover ff = new ForecastFailover();
-            ff.Algorithm();
+            ff.ForecastFailoverAlgorithm();
 
             Console.ReadLine();
         }

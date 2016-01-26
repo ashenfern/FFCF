@@ -9,7 +9,8 @@ namespace TestConsole.FFAlgo
     public class BranchDistributionData
     {
         public int BranchId { get; set; }
-        public int Amount { get; set; }
 
+        public string BranchName { get; set; }
+        public int Amount { get; set; }
     }
 }

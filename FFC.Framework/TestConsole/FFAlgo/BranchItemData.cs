@@ -8,7 +8,7 @@ namespace TestConsole.FFAlgo
 {
     public class BranchItemData
     {
-        public Branch branch { get; set; }
+        public Branch Branch { get; set; }
         public int Now { get; set; }
         public int Forecasted { get; set; }
         public int ExpectedBalance { get; set; }

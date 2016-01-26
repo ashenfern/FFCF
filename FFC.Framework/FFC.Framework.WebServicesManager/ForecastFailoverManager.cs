@@ -124,7 +124,7 @@ namespace FFC.Framework.WebServicesManager
                         if (currentNeeded > surplusList[1].Amount)
                         {
                             Message = Message + String.Format("Go to {0} Branch and collect {1}. ", surplusList[1].BranchName.ToString(), surplusList[1].Amount.ToString());
-                            totalCollected = totalCollected + surplusList[0].Amount;
+                            totalCollected = totalCollected + surplusList[1].Amount;
                             totalInHand = totalInHand + surplusList[1].Amount;
                             currentNeeded = currentNeeded - surplusList[1].Amount;
                             visitedBranches.Add(surplusList[1].BranchId);

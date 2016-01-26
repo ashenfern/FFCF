@@ -1,10 +1,10 @@
 ﻿@model FFC.Framework.ClientSubscription.Web.Models.ForecastFailoverModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Failover Search";
 }
 
-<h2>Index</h2>
+<h2>Failover Search</h2>
 
 @using (Html.BeginForm())
 {
@@ -13,9 +13,9 @@
 
     <fieldset>
         <legend>ForecastModel</legend>
-        <p>
+        @*<p>
             @Html.ActionLink("Create New", "Create")
-        </p>
+        </p>*@
         <table>
             <tr>
                 <th>
@@ -25,7 +25,7 @@
                     @Html.DisplayName("Current Balance")
                 </th>
                 <th>
-                    @Html.DisplayName("ForecastedBalance")
+                    @Html.DisplayName("Forecasted Balance")
                 </th>
                 @* <th>
             @Html.DisplayNameFor(model => model.EndTime)

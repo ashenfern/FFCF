@@ -99,7 +99,7 @@ namespace FFC.Framework.WebServicesManager
                 //Go to the first surplus branch
                 if (currentNeeded > surplusList[0].Amount)
                 {
-                    Message = Message + String.Format("Go to {0} Branch and collect {1}. ", surplusList[0].BranchName.ToString(), surplusList[0].Amount.ToString());
+                    Message = Message + String.Format(" Go to {0} Branch and collect {1}. ", surplusList[0].BranchName.ToString(), surplusList[0].Amount.ToString());
                     totalCollected = totalCollected + surplusList[0].Amount;
                     totalInHand = totalInHand + surplusList[0].Amount;
                     currentNeeded = currentNeeded - surplusList[0].Amount;
@@ -107,7 +107,7 @@ namespace FFC.Framework.WebServicesManager
                 }
                 else
                 {
-                    Message = Message + String.Format("Go to {0} Branch and collect {1}. ", surplusList[0].BranchName.ToString(), currentNeeded.ToString());
+                    Message = Message + String.Format(" Go to {0} Branch and collect {1}. ", surplusList[0].BranchName.ToString(), currentNeeded.ToString());
                     totalCollected = totalCollected + currentNeeded;
                     totalInHand = totalInHand + currentNeeded;
                     currentNeeded = 0;
@@ -225,10 +225,11 @@ namespace FFC.Framework.WebServicesManager
             algorithmTotalGain = averageItemCost * totalDistributed - costForTransport - (totalSurplus - totalDistributed) * averageItemCost;
             int algorithmEffectiveGain = algorithmTotalGain - previousWastageCost;
 
-            //Adding the efficiency 
-            Message = Message + String.Format(" Previous wastage cost {0}", previousWastageCost.ToString());
-            Message = Message + String.Format("</br> Algorithm gain {0}", algorithmTotalGain.ToString());
-            Message = Message + String.Format("</br> Algorithm Effective gain {0}", algorithmEffectiveGain.ToString());
+            // Message Formatting
+            Message = "<b> Distribution Result:" + Message;
+            Message = Message + String.Format("</br> Previous Surplus wastage Cost: {0}", previousWastageCost.ToString());
+            Message = Message + String.Format("</br> After Algorithm Gain/Cost: {0}", algorithmTotalGain.ToString());
+            Message = Message + String.Format("</br> After Algorithm Effective Gain: {0}</b>", algorithmEffectiveGain.ToString());
 
             return Message;
         }

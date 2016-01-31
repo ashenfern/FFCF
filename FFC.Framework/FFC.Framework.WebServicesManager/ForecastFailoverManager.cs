@@ -131,7 +131,7 @@ namespace FFC.Framework.WebServicesManager
                         }
                         else
                         {
-                            Message = Message + String.Format("Go to {0} Branch and collect {1}. ", surplusList[1].BranchName.ToString(), surplusList[1].Amount.ToString());
+                            Message = Message + String.Format("Go to {0} Branch and collect {1}. ", surplusList[1].BranchName.ToString(), currentNeeded.ToString());
                             totalCollected = totalCollected + currentNeeded;
                             totalInHand = totalInHand + currentNeeded;
                             currentNeeded = 0;
@@ -150,7 +150,7 @@ namespace FFC.Framework.WebServicesManager
                 }
 
                 //Distributing
-
+                bool isFirstBranchDistributed = false;
                 //If collected all from the surplus branches or collected total needed the items from the surplus branches
                 if (totalCollected == totalSurplus || totalCollected == totalNeeded)
                 {
@@ -185,6 +185,7 @@ namespace FFC.Framework.WebServicesManager
                     totalInHand = totalInHand - neededList[0].Amount;
                     totalDistributed = totalDistributed + neededList[0].Amount;
                     visitedBranches.Add(neededList[0].BranchId);
+                    isFirstBranchDistributed = true;
                 }
 
                 if (neededList.Count > 1 && Cost(neededList[0].BranchId, neededList[1].BranchId) <= Cost(neededList[0].BranchId, surplusList[0].BranchId) && totalInHand >= neededList[1].Amount && !isDistributedFinish)
@@ -205,7 +206,7 @@ namespace FFC.Framework.WebServicesManager
                         neededList.RemoveAt(0);
                     }
                 }
-                else if (neededList.Count > 0 && totalInHand >= neededList[0].Amount)//if (Cost(neededList[0].BranchId, neededList[1].BranchId) > Cost(neededList[0].BranchId, surplusList[0].BranchId) || totalInHand < currentNeeded)
+                else if (neededList.Count > 0 && isFirstBranchDistributed)//if (Cost(neededList[0].BranchId, neededList[1].BranchId) > Cost(neededList[0].BranchId, surplusList[0].BranchId) || totalInHand < currentNeeded)
                 {
                     neededList.RemoveAt(0);
                     //j = j + 1;

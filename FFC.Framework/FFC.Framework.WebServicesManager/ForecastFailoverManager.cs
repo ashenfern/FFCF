@@ -228,9 +228,11 @@ namespace FFC.Framework.WebServicesManager
 
             // Message Formatting
             Message = "<b> Distribution Result:" + Message;
+            Message = Message + String.Format("</br> Net Item Cost: {0}", averageItemCost.ToString());
             Message = Message + String.Format("</br> Previous Surplus wastage Cost: {0}", previousWastageCost.ToString());
-            Message = Message + String.Format("</br> After Algorithm Gain/Cost: {0}", algorithmTotalGain.ToString());
-            Message = Message + String.Format("</br> After Algorithm Effective Gain: {0}</b>", algorithmEffectiveGain.ToString());
+            Message = Message + String.Format("</br> Alogrithm Transport Cost: {0}", costForTransport.ToString());
+            Message = Message + String.Format("</br> Algorithm Gain/Cost: {0}", algorithmTotalGain.ToString());
+            Message = Message + String.Format("</br> Algorithm Effective Gain: {0}</b>", algorithmEffectiveGain.ToString());
 
             return Message;
         }

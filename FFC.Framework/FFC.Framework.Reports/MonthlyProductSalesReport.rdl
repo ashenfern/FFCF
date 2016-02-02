@@ -58,7 +58,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FormatNumber(Avg(Fields!Count.Value),2)</Value>
+                              <Value>=FormatNumber(Avg(Fields!Count.Value),0)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -77,6 +77,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
